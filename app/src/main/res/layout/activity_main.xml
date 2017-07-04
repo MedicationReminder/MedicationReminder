@@ -4,11 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context="com.renqi.takemedicine.activity.MainActivity"
    >
 
     <Button
         android:id="@+id/button"
+=======
+    tools:context="com.renqi.takemedicine.activity.MainActivity">
+ <include
+     layout="@layout/base_toolbar"></include>
+    <TextView
+        android:id="@+id/text"
+>>>>>>> origin/xw
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="徐薇行不行？"
