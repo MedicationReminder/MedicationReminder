@@ -38,7 +38,11 @@ public  class XUtilHttpRequest {
 
     /**
      * 单例模式
+<<<<<<< a0a1bc93851706d8117da5eb567ed188d164a0fc
      *这里封装了xutils的http
+=======
+     *
+>>>>>>> 加入基础xutils配置和helper
      * @return
      */
     public static XUtilHttpRequest getInstance() {
