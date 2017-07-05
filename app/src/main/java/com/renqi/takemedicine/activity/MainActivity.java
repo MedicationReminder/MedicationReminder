@@ -1,25 +1,31 @@
 package com.renqi.takemedicine.activity;
 
-import android.content.DialogInterface;
-import android.os.Bundle;
-<<<<<<< HEAD
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.os.Bundle;
+import android.widget.TextView;
 
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.presenter.IMainPresenter;
 import com.renqi.takemedicine.presenter.impl.MainPresenterImpl;
 import com.renqi.takemedicine.view.IMainView;
+import com.renqi.takemedicine.app.AppConstants;
+import com.renqi.takemedicine.base.BaseActivity;
 
 
 public class MainActivity extends AppCompatActivity implements IMainView {
     private IMainPresenter iMainPresenter;
 
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+@ContentView(R.layout.activity_main)
+public class MainActivity extends BaseActivity {
+    @ViewInject(R.id.text) private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        x.view().inject(this);
+        setToolBarTitle(AppConstants.ToolBarTitle.addContacts);
         setContentView(R.layout.activity_main);
         iMainPresenter = new MainPresenterImpl(this);
 
