@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
+import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.BaseActivity;
-
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
