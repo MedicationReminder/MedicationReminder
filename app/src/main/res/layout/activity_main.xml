@@ -58,6 +58,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <TextView
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/appbar"
         android:layout_gravity="center"
         android:gravity="center"
@@ -93,51 +94,52 @@
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="53dp"
-                app:srcCompat="@mipmap/time_icon_night"
+                android:layout_alignParentStart="true"
                 android:layout_alignTop="@+id/imageView3"
-                android:layout_alignParentStart="true" />
+                android:layout_marginStart="53dp"
+                app:srcCompat="@mipmap/time_icon_night" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="50dp"
                 android:layout_marginLeft="70dp"
                 android:layout_marginRight="70dp"
                 android:layout_marginTop="70dp"
-                android:layout_marginBottom="50dp"
-                android:src="@mipmap/icon_time_bg3x"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:src="@mipmap/icon_time_bg3x" />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/imageView"
                 android:layout_marginEnd="44dp"
                 android:layout_marginTop="6dp"
-                app:srcCompat="@mipmap/time_icon_morning"
-                android:layout_alignTop="@+id/imageView"
-                android:layout_alignParentEnd="true" />
+                app:srcCompat="@mipmap/time_icon_morning" />
+
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="7dp"
-                app:srcCompat="@mipmap/time_icon_evening"
-                android:layout_marginEnd="7dp"
                 android:layout_alignBottom="@+id/imageView"
-                android:layout_alignEnd="@+id/imageView2" />
+                android:layout_alignEnd="@+id/imageView2"
+                android:layout_marginBottom="7dp"
+                android:layout_marginEnd="7dp"
+                app:srcCompat="@mipmap/time_icon_evening" />
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/time_icon_noon"
-                android:layout_marginStart="7dp"
-                android:layout_alignTop="@+id/imageView4"
+                android:layout_alignBottom="@+id/imageView"
                 android:layout_alignStart="@+id/imageView3"
-                android:layout_alignBottom="@+id/imageView" />
+                android:layout_alignTop="@+id/imageView4"
+                android:layout_marginStart="7dp"
+                app:srcCompat="@mipmap/time_icon_noon" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -165,7 +167,7 @@
             android:gravity="center"
             android:text="药品点评"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:layout_width="0dp"
@@ -183,7 +185,7 @@
             android:gravity="center"
             android:text="用药攻略"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:layout_width="0dp"
@@ -200,7 +202,7 @@
             android:gravity="center"
             android:text="相关药品"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:layout_width="0dp"

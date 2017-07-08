@@ -1,5 +1,6 @@
 package com.renqi.takemedicine.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
@@ -33,6 +35,7 @@ public class MainActivity extends BaseActivity {
     @ViewInject(R.id.text) private TextView textView;
     private PromptDialog promptDialog;
     private static final String TAG = "MainActivity";
+    PromptButton promptButton,promptButton1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +45,20 @@ public class MainActivity extends BaseActivity {
         promptDialog = new PromptDialog(this);
         //设置自定义属性
         promptDialog.getDefaultBuilder().touchAble(true).round(3).loadingDuration(3000);
-        PromptButton promptButton=new PromptButton("选项1", new PromptButtonListener() {
+        promptButton=new PromptButton("挂号提醒", new PromptButtonListener() {
+            @Override
+            public void onClick(PromptButton promptButton) {
+             startActivity(new Intent(MainActivity.this,RegisteredReminderActivity.class));
+            }
+        });
+        promptButton.setTextColor(Color.parseColor("#59acdf"));
+        promptButton1=  new PromptButton("用药提醒", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton promptButton) {
 
             }
         });
-        promptButton.setTextColor(Color.parseColor("#59acdf"));
+        promptButton1.setTextColor(Color.parseColor("#FF4081"));
     }
     @Event(R.id.button2)
     private void button2(View view){
@@ -66,24 +76,12 @@ public class MainActivity extends BaseActivity {
 //      promptDialog.getAlertDefaultBuilder().sheetCellPad(0).round(0);
         //设置按钮的特点，颜色大小什么的，具体看PromptButton的成员变量
         PromptButton cancle = new PromptButton("取消", null);
-        cancle.setTextColor(Color.parseColor("#5fb5e8"));
+        cancle.setTextColor(Color.parseColor("#59acdf"));
 
         //设置显示的文字大小及颜色
         promptDialog.getAlertDefaultBuilder().textSize(12).textColor(Color.GRAY);
         //默认两个按钮为Alert对话框，大于三个按钮的为底部SHeet形式展现
-        promptDialog.showAlertSheet("", true, cancle,
-             new PromptButton("选项2", new PromptButtonListener() {
-                    @Override
-                    public void onClick(PromptButton promptButton) {
-
-                    }
-                }),
-                new PromptButton("选项4", new PromptButtonListener() {
-                    @Override
-                    public void onClick(PromptButton promptButton) {
-
-                    }
-                })
+        promptDialog.showAlertSheet("", true, cancle, promptButton,promptButton1
         );
     }
 }

@@ -20,6 +20,12 @@
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
+            <ImageView
+                android:id="@+id/home"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/title_icon_back_n" />
+
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
@@ -37,9 +43,9 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="20dp"
                 android:gravity="center"
-                android:text=""
+                android:text="保存"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="25dp" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
