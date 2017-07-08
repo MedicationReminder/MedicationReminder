@@ -11,8 +11,10 @@
 
     <!--字体颜色-->
     <color name="textColor">#999999</color>
-
+    <color name="textColor2">#444444</color>
+    <color name="textBlue">#b</color>
     <!--按钮颜色-->
     <color name="buttonColor">#13b774</color>
     <color name="buttonOrange">#ff6d01</color>
+    <color name="buttonblue">#59acdf</color>
 </resources>

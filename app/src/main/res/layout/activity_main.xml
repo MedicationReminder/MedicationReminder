@@ -22,74 +22,199 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" >
 
             <LinearLayout
+                android:layout_marginRight="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <ImageButton
-                    android:layout_weight="0.3"
+
+                <ImageView
                     android:id="@+id/button1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/title_icon_user" />
+
                 <TextView
-                    android:gravity="center"
-                    android:layout_weight="1"
                     android:id="@+id/toolbar_title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:singleLine="true"
                     android:textColor="@color/white"
                     android:textSize="25dp" />
-                <ImageButton
-                    android:layout_weight="0.3"
+
+                <ImageView
+                    android:layout_marginLeft="-20dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/title_icon_add"
                     android:id="@+id/button2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <TextView
         android:layout_below="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
-        <TextView
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="27dp"
+        android:textColor="@color/textColor"
+        android:text="周四，9月 13"/>
 
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/appbar"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="6dp">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@+id/appbar"
-            android:layout_centerHorizontal="true"
-            android:textSize="27dp"
-            android:textColor="@color/textColor"
-            android:text="周四，9月 13"/>
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                app:srcCompat="@mipmap/time_icon_night"
+                android:layout_alignTop="@+id/imageView3"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="50dp"
+                android:src="@mipmap/icon_time_bg3x"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="44dp"
+                android:layout_marginTop="6dp"
+                app:srcCompat="@mipmap/time_icon_morning"
+                android:layout_alignTop="@+id/imageView"
+                android:layout_alignParentEnd="true" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                app:srcCompat="@mipmap/time_icon_evening"
+                android:layout_marginEnd="7dp"
+                android:layout_alignBottom="@+id/imageView"
+                android:layout_alignEnd="@+id/imageView2" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/time_icon_noon"
+                android:layout_marginStart="7dp"
+                android:layout_alignTop="@+id/imageView4"
+                android:layout_alignStart="@+id/imageView3"
+                android:layout_alignBottom="@+id/imageView" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" />
+
         <Button
-            android:layout_marginLeft="20dp"
+
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="left"
+
+            android:background="@mipmap/button_evaluate_n"
             android:gravity="center"
             android:text="药品点评"
-            android:textSize="20dp"
             android:textColor="@color/white"
-            android:background="@drawable/round_corner_bg"
-            android:layout_width="150dp"
-            android:layout_height="35dp" />
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" />
+
         <Button
-            android:layout_marginRight="20dp"
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+
+
+            android:background="@mipmap/button_raiders_n"
+            android:gravity="center"
+            android:text="用药攻略"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="right"
+
+            android:background="@mipmap/button_drug_n"
             android:gravity="center"
             android:text="相关药品"
-            android:textSize="20dp"
             android:textColor="@color/white"
-            android:background="@drawable/round_corner_bg_orange"
-            android:layout_width="150dp"
-            android:layout_height="35dp" />
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" />
     </LinearLayout>
+</LinearLayout>
+
 
 
 </RelativeLayout>
+
+
+
+
+
+
