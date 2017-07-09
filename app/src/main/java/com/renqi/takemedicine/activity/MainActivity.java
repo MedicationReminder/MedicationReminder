@@ -34,6 +34,7 @@ import me.leefeng.promptlibrary.PromptDialog;
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
     @ViewInject(R.id.text) private TextView textView;
+    @ViewInject(R.id.dateText)private TextView dateText;
     private PromptDialog promptDialog;
     private static final String TAG = "MainActivity";
     PromptButton promptButton,promptButton1;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
         setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
+        dateText.setText(MedicationHelper.getTime());
         //创建对象
         promptDialog = new PromptDialog(this);
         //设置自定义属性
