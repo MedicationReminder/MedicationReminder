@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -22,7 +22,7 @@
 
             <ImageView
                 android:id="@+id/home"
-                android:layout_width="15dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@mipmap/title_icon_back_n" />
 
@@ -34,7 +34,7 @@
                 android:gravity="center"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/iption"
@@ -45,7 +45,7 @@
                 android:gravity="center"
                 android:text="保存"
                 android:textColor="@color/white"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

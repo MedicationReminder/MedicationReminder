@@ -8,15 +8,15 @@ import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
 
 import org.xutils.view.annotation.ContentView;
-import org.xutils.x;
-@ContentView(R.layout.activity_registered_reminder)
-public class RegisteredReminderActivity extends BaseActivity {
+
+@ContentView(R.layout.activity_add_contact)
+public class AddContactActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_registered_reminder);
-        x.view().inject(this);
-        setToolBarTitle(AppConstants.ToolBarTitle.registrationReminder);
+    //    setContentView(R.layout.activity_add_contact);
+        setIption(AppConstants.iption.complete);
+        setToolBarTitle(AppConstants.ToolBarTitle.addContacts);
     }
 }

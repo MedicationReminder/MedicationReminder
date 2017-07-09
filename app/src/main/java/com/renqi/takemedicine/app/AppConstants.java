@@ -11,5 +11,10 @@ public class AppConstants {
     {
         public static final String addContacts ="添加联系人";
         public static final String medicationReminder="吃药提醒";
+        public static final String  registrationReminder="挂号提醒";
+    }
+    public static class  iption
+    {
+        public static final String complete="完成";
     }
 }

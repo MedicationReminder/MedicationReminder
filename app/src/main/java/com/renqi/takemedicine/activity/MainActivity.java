@@ -84,4 +84,20 @@ public class MainActivity extends BaseActivity {
         promptDialog.showAlertSheet("", true, cancle, promptButton,promptButton1
         );
     }
+    @Event(R.id.addContact)
+    private void addContact(View view)
+    {
+        startActivity(new Intent(MainActivity.this,AddContactActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!promptDialog.onBackPressed())
+        {
+            promptDialog.dismiss();
+        }else
+        {
+            finish();}
+
+    }
 }
