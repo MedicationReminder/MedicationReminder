@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //
         iMainPresenter = new MainPresenterImpl(this);
 
 
