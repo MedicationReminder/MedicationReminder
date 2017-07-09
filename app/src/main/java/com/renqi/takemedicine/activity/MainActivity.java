@@ -1,20 +1,15 @@
 package com.renqi.takemedicine.activity;
 
+
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
-import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.BaseActivity;
-import com.renqi.takemedicine.utils.TipDialog;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -25,17 +20,20 @@ import me.leefeng.promptlibrary.PromptButton;
 import me.leefeng.promptlibrary.PromptButtonListener;
 import me.leefeng.promptlibrary.PromptDialog;
 
+
 /**
- *吃药提醒
+ * 吃药提醒
  */
 
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
-    @ViewInject(R.id.text) private TextView textView;
+    @ViewInject(R.id.text)
+    private TextView textView;
     private PromptDialog promptDialog;
     private static final String TAG = "MainActivity";
-    PromptButton promptButton,promptButton1;
+    PromptButton promptButton, promptButton1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,21 +43,18 @@ public class MainActivity extends BaseActivity {
         promptDialog = new PromptDialog(this);
         //设置自定义属性
         promptDialog.getDefaultBuilder().touchAble(true).round(3).loadingDuration(3000);
-        promptButton=new PromptButton("挂号提醒", new PromptButtonListener() {
-        setContentView(R.layout.activity_main);
-        //
-        iMainPresenter = new MainPresenterImpl(this);
 
 
-        // 123
-        ((Button) findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
+        promptButton = new PromptButton("挂号提醒", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton promptButton) {
-             startActivity(new Intent(MainActivity.this,RegisteredReminderActivity.class));
+                startActivity(new Intent(MainActivity.this, RegisteredReminderActivity.class));
             }
+
+
         });
         promptButton.setTextColor(Color.parseColor("#59acdf"));
-        promptButton1=  new PromptButton("用药提醒", new PromptButtonListener() {
+        promptButton1 = new PromptButton("用药提醒", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton promptButton) {
 
@@ -67,8 +62,9 @@ public class MainActivity extends BaseActivity {
         });
         promptButton1.setTextColor(Color.parseColor("#FF4081"));
     }
+
     @Event(R.id.button2)
-    private void button2(View view){
+    private void button2(View view) {
       /* TipDialog tipDialog=new TipDialog(MainActivity.this);
         tipDialog.show();
         WindowManager windowManager = getWindowManager();
@@ -88,7 +84,6 @@ public class MainActivity extends BaseActivity {
         //设置显示的文字大小及颜色
         promptDialog.getAlertDefaultBuilder().textSize(12).textColor(Color.GRAY);
         //默认两个按钮为Alert对话框，大于三个按钮的为底部SHeet形式展现
-        promptDialog.showAlertSheet("", true, cancle, promptButton,promptButton1
-        );
+        promptDialog.showAlertSheet("", true, cancle, promptButton, promptButton1);
     }
 }
