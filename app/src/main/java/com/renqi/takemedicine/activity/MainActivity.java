@@ -14,6 +14,7 @@ import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.BaseActivity;
+import com.renqi.takemedicine.utils.MedicationHelper;
 import com.renqi.takemedicine.utils.TipDialog;
 
 import org.xutils.view.annotation.ContentView;
@@ -40,7 +41,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
-        setToolBarTitle(AppConstants.ToolBarTitle.medicationReminder);
+        setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
         //创建对象
         promptDialog = new PromptDialog(this);
         //设置自定义属性
@@ -55,7 +56,7 @@ public class MainActivity extends BaseActivity {
         promptButton1=  new PromptButton("用药提醒", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton promptButton) {
-
+                startActivity(new Intent(MainActivity.this,MedicationReminderActivity.class));
             }
         });
         promptButton1.setTextColor(Color.parseColor("#FF4081"));
@@ -89,6 +90,11 @@ public class MainActivity extends BaseActivity {
     {
         startActivity(new Intent(MainActivity.this,AddContactActivity.class));
     }
+    @Event(R.id.logistics)
+    private void logistics(View view){
+       startActivity(new Intent(MainActivity.this,LogisticsWebActivity.class));
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -100,4 +106,5 @@ public class MainActivity extends BaseActivity {
             finish();}
 
     }
+
 }

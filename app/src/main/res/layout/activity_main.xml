@@ -45,7 +45,12 @@
                     android:singleLine="true"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
-
+                <ImageView
+                    android:id="@+id/logistics"
+                    android:src="@mipmap/i"
+                    android:layout_marginRight="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
                 <ImageView
                     android:layout_marginLeft="-20dp"
                     android:layout_gravity="center"
