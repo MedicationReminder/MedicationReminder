@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.renqi.takemedicine.R;
 
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -28,6 +29,7 @@ import org.xutils.x;
 
 public class BaseActivity extends AppCompatActivity {
     @ViewInject(R.id.toolbar_title) private TextView toolbar_title;
+    @ViewInject(R.id.home) private ImageView home;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,5 +118,10 @@ public class BaseActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    @Event(R.id.home)
+    private void home(View view)
+    {
+        finish();
     }
 }
