@@ -89,7 +89,6 @@ public class AddContactActivity extends BaseActivity {
 
                     }
                 })
-
                 .isDialog(false)
                 .build();
 
