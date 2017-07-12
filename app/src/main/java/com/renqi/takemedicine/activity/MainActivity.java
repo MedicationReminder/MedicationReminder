@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity {
     private PromptDialog promptDialog;
     private static final String TAG = "MainActivity";
     PromptButton promptButton,promptButton1;
+    private long firstTime=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,17 +66,7 @@ public class MainActivity extends BaseActivity {
     }
     @Event(R.id.button2)
     private void button2(View view){
-      /* TipDialog tipDialog=new TipDialog(MainActivity.this);
-        tipDialog.show();
-        WindowManager windowManager = getWindowManager();
-        Display display = windowManager.getDefaultDisplay();
-        WindowManager.LayoutParams lp = tipDialog.getWindow().getAttributes();
-        lp.width = (int)(display.getWidth()); //设置宽度
-        lp.height=(int)(display.getHeight());//设置高度
-        tipDialog.getWindow().setAttributes(lp);
-        tipDialog.setCancelable(false);
-         //点击dialog以外的地方dialog不消失*/
-        //可创建android效果的底部Sheet选择，默认IOS效果，sheetCellPad=0为Android效果的Sheet
+
 //      promptDialog.getAlertDefaultBuilder().sheetCellPad(0).round(0);
         //设置按钮的特点，颜色大小什么的，具体看PromptButton的成员变量
         PromptButton cancle = new PromptButton("取消", null);
@@ -97,7 +88,9 @@ public class MainActivity extends BaseActivity {
        startActivity(new Intent(MainActivity.this,LogisticsWebActivity.class));
 
     }
-
+  /*
+  * 此方法是主界面出现promptDialog按返回键dialog dismis 没有promptDialog时 finish
+  */
     @Override
     public void onBackPressed() {
         if(!promptDialog.onBackPressed())
@@ -105,7 +98,16 @@ public class MainActivity extends BaseActivity {
             promptDialog.dismiss();
         }else
         {
-            finish();}
+            long secondTime=System.currentTimeMillis();
+            if(secondTime-firstTime>2000){
+                Toast.makeText(MainActivity.this,"再按一次退出APP",Toast.LENGTH_SHORT).show();
+                firstTime=secondTime;
+                return ;
+            }else{
+                System.exit(0);
+            }
+
+        }
 
     }
 

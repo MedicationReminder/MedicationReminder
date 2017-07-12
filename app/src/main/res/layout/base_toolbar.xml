@@ -11,20 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:theme="@style/AppTheme.AppBarOverlay"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp">
+     >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:weightSum="1">
 
-            <ImageView
+            <TextView
                 android:id="@+id/home"
-                android:layout_width="wrap_content"
+                android:drawableLeft="@mipmap/title_icon_back_n"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:src="@mipmap/title_icon_back_n" />
+                android:src="@mipmap/title_icon_back_n"
+                />
 
             <TextView
                 android:id="@+id/toolbar_title"

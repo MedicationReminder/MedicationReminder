@@ -140,17 +140,18 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 
-                <EditText
+                <TextView
                     android:layout_marginRight="20dp"
                     android:gravity="right"
-                    android:id="@+id/editText40"
+                    android:id="@+id/selectTime"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="请选择时间"
-                    android:textColorHint="@color/textColor" />
+                    android:textSize="17dp"
+                    android:text="请选择时间"
+                    android:textColor="@color/textColor" />
             </LinearLayout>
             <View
                 android:layout_marginLeft="20dp"
