@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
+import com.renqi.takemedicine.utils.MedicationHelper;
+import com.renqi.takemedicine.utils.TipDialog;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -22,14 +24,14 @@ import me.leefeng.promptlibrary.PromptDialog;
 
 
 /**
- * 吃药提醒
+ *吃药提醒
  */
 
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
-    @ViewInject(R.id.text)
-    private TextView textView;
+    @ViewInject(R.id.text) private TextView textView;
+    @ViewInject(R.id.dateText)private TextView dateText;
     private PromptDialog promptDialog;
     private static final String TAG = "MainActivity";
     PromptButton promptButton, promptButton1;
@@ -38,7 +40,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
-        setToolBarTitle(AppConstants.ToolBarTitle.medicationReminder);
+        setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
+        dateText.setText(MedicationHelper.getTime());
         //创建对象
         promptDialog = new PromptDialog(this);
         //设置自定义属性
@@ -57,7 +60,7 @@ public class MainActivity extends BaseActivity {
         promptButton1 = new PromptButton("用药提醒", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton promptButton) {
-
+                startActivity(new Intent(MainActivity.this,MedicationReminderActivity.class));
             }
         });
         promptButton1.setTextColor(Color.parseColor("#FF4081"));
@@ -86,4 +89,26 @@ public class MainActivity extends BaseActivity {
         //默认两个按钮为Alert对话框，大于三个按钮的为底部SHeet形式展现
         promptDialog.showAlertSheet("", true, cancle, promptButton, promptButton1);
     }
+    @Event(R.id.addContact)
+    private void addContact(View view)
+    {
+        startActivity(new Intent(MainActivity.this,AddContactActivity.class));
+    }
+    @Event(R.id.logistics)
+    private void logistics(View view){
+       startActivity(new Intent(MainActivity.this,LogisticsWebActivity.class));
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!promptDialog.onBackPressed())
+        {
+            promptDialog.dismiss();
+        }else
+        {
+            finish();}
+
+    }
+
 }
