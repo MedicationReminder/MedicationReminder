@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.renqi.takemedicine">
-<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:name=".app.TakeMedicinApplication"
         android:allowBackup="true"
@@ -23,7 +25,10 @@
         <activity
             android:name=".activity.RemarksActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".activity.LogisticsWebActivity"></activity>
+        <activity android:name=".activity.LogisticsWebActivity" />
+        <activity android:name=".activity.RelatedDrugsWebActivity" />
+        <activity android:name=".activity.NationalDrugstoreWebActivity" />
+        <activity android:name=".activity.MedicationIntroductionWebActivity"></activity>
     </application>
 
 </manifest>

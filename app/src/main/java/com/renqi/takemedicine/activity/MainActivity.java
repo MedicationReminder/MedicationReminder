@@ -11,7 +11,6 @@ import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.utils.MedicationHelper;
-import com.renqi.takemedicine.utils.TipDialog;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -97,7 +96,20 @@ public class MainActivity extends BaseActivity {
     @Event(R.id.logistics)
     private void logistics(View view){
        startActivity(new Intent(MainActivity.this,LogisticsWebActivity.class));
+    }
 
+    @Event(R.id.national_drugstore)
+    private void nationalDrugstore(View view){
+        startActivity(new Intent(MainActivity.this,NationalDrugstoreWebActivity.class));
+    }
+    @Event(R.id.medication_introduction)
+    private void medicationIntroduction(View view){
+        startActivity(new Intent(MainActivity.this,MedicationIntroductionWebActivity.class));
+    }
+
+    @Event(R.id.related_drugs)
+    private void relatedDrugs(View view){
+        startActivity(new Intent(MainActivity.this,RelatedDrugsWebActivity.class));
     }
 
     @Override
