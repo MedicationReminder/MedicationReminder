@@ -267,17 +267,18 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 
-                <EditText
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:id="@+id/editText9"
+                <TextView
+                    android:id="@+id/reminderMode"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="请选择"
-                    android:textColorHint="@color/textColor" />
+                    android:gravity="right"
+                    android:text="请选择"
+                    android:textColor="@color/textColor"
+                    android:textSize="18dp" />
             </LinearLayout>
         </LinearLayout>
 

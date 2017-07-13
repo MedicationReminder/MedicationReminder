@@ -1,7 +1,10 @@
 package com.renqi.takemedicine.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -42,7 +45,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        x.view().inject(this);
+        Toast.makeText(MainActivity.this,TakeMedicinApplication.wlan_mac,Toast.LENGTH_SHORT).show();
         setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
         dateText.setText(MedicationHelper.getTime());
         //创建对象
@@ -67,11 +70,10 @@ public class MainActivity extends BaseActivity {
     @Event(R.id.button2)
     private void button2(View view){
 
-//      promptDialog.getAlertDefaultBuilder().sheetCellPad(0).round(0);
+// promptDialog.getAlertDefaultBuilder().sheetCellPad(0).round(0);
         //设置按钮的特点，颜色大小什么的，具体看PromptButton的成员变量
         PromptButton cancle = new PromptButton("取消", null);
         cancle.setTextColor(Color.parseColor("#59acdf"));
-
         //设置显示的文字大小及颜色
         promptDialog.getAlertDefaultBuilder().textSize(12).textColor(Color.GRAY);
         //默认两个按钮为Alert对话框，大于三个按钮的为底部SHeet形式展现

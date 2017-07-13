@@ -1,7 +1,14 @@
 package com.renqi.takemedicine.activity;
 
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,8 +29,16 @@ import java.util.ArrayList;
 public class AddContactActivity extends BaseActivity {
     private OptionsPickerView  pvCustomOptions;
     private ArrayList<CardBean> cardItem = new ArrayList<>();
+
     @ViewInject(R.id.ContactType)
     private TextView ContactType;
+
+    @ViewInject(R.id.contactUserName)
+    private TextView contactUserName;
+
+    @ViewInject(R.id.phoneNumber)
+    private TextView phoneNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +54,50 @@ public class AddContactActivity extends BaseActivity {
    if(pvCustomOptions != null)
         pvCustomOptions.show();
 }
+@Event(R.id.importAddress)
+private void importAddress(View view)
+{
+    startActivityForResult(new Intent(
+            Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 0);
+}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == 0) {
+            // ContentProvider展示数据类似一个单个数据库表
+            // ContentResolver实例带的方法可实现找到指定的ContentProvider并获取到ContentProvider的数据
+            ContentResolver reContentResolverol = getContentResolver();
+            // URI,每个ContentProvider定义一个唯一的公开的URI,用于指定到它的数据集
+            Uri contactData = data.getData();
+            // 查询就是输入URI等参数,其中URI是必须的,其他是可选的,如果系统能找到URI对应的ContentProvider将返回一个Cursor对象.
+            Cursor cursor = reContentResolverol.query(contactData, null, null, null, null);
+            if (cursor.moveToFirst()) {
+                // 获得DATA表中的名字
+                String username = cursor.getString(cursor
+                        .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                // 条件为联系人ID
+                String contactId = cursor.getString(cursor
+                        .getColumnIndex(ContactsContract.Contacts._ID));
+                // 获得DATA表中的电话号码，条件为联系人ID,因为手机号码可能会有多个
+                cursor.close();
+                Cursor phone = reContentResolverol.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = "
+                                + contactId, null, null);
+                while (phone.moveToNext()) {
+                    String usernumber = phone
+                            .getString(phone
+                                    .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    phoneNumber.setText(usernumber);
+                    contactUserName.setText(username);
+                }
+                phone.close();
+            }
+
+        }
+    }
+
     private void initCustomOptionPicker() {
         //条件选择器初始化，自定义布局
         /**
@@ -79,16 +138,7 @@ public class AddContactActivity extends BaseActivity {
                             }
                         });
 
-                    /*    tvAdd.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                getCardData();
-                                pvCustomOptions.setPicker(cardItem);
-                            }
-                        });*/
-
-                    }
-                })
+                    }})
                 .isDialog(false)
                 .build();
 
@@ -101,5 +151,11 @@ public class AddContactActivity extends BaseActivity {
         cardItem.add(new CardBean(2, "袁本初"));
         cardItem.add(new CardBean(3, "谭总"));
         cardItem.add(new CardBean(4, "狗鹏"));
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
     }
 }
