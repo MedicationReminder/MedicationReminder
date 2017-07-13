@@ -69,9 +69,9 @@ private void importAddress(View view)
             // ContentResolver实例带的方法可实现找到指定的ContentProvider并获取到ContentProvider的数据
             ContentResolver reContentResolverol = getContentResolver();
             // URI,每个ContentProvider定义一个唯一的公开的URI,用于指定到它的数据集
-            Uri contactData = data.getData();
+            Uri uri = data.getData();
             // 查询就是输入URI等参数,其中URI是必须的,其他是可选的,如果系统能找到URI对应的ContentProvider将返回一个Cursor对象.
-            Cursor cursor = reContentResolverol.query(contactData, null, null, null, null);
+            Cursor cursor = reContentResolverol.query(uri, null, null, null, null);
             if (cursor.moveToFirst()) {
                 // 获得DATA表中的名字
                 String username = cursor.getString(cursor
