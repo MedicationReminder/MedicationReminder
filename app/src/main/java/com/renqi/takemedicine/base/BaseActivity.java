@@ -29,7 +29,7 @@ import org.xutils.x;
 
 public class BaseActivity extends AppCompatActivity {
     @ViewInject(R.id.toolbar_title) private TextView toolbar_title;
-    @ViewInject(R.id.home) private ImageView home;
+    @ViewInject(R.id.home) private TextView home;
     @ViewInject(R.id.iption)private TextView iption;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,4 +134,5 @@ public class BaseActivity extends AppCompatActivity {
     {
         finish();
     }
+
 }

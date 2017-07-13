@@ -41,13 +41,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="left" />
-
-            <Spinner
-
+            <TextView
+                android:textSize="18dp"
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:textColorHint="@color/textColor"
+                android:id="@+id/ContactType"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:hint="请选择" />
         </LinearLayout>
         <View
             android:layout_marginLeft="20dp"

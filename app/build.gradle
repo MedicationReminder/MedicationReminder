@@ -40,4 +40,6 @@ dependencies {
     compile 'com.lzy.widget:imagepicker:0.3.2'
     compile 'com.github.limxing:Android-PromptDialog:1.1.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.github.xuwei1995:PickTime-master:1.0.2'
+    compile 'com.contrarywind:Android-PickerView:3.2.5'
 }
