@@ -1,6 +1,5 @@
 package com.renqi.takemedicine.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -96,10 +95,9 @@ public class AddContactActivity extends BaseActivity {
 
     }
     private void getCardData() {
-        cardItem.add(new CardBean(0, "吴国佬"));
-        cardItem.add(new CardBean(1, "张雪滑"));
-        cardItem.add(new CardBean(2, "袁本初"));
-        cardItem.add(new CardBean(3, "谭总"));
-        cardItem.add(new CardBean(4, "狗鹏"));
+        cardItem.add(new CardBean(0, "个人使用"));
+        cardItem.add(new CardBean(1, "药店使用"));
+        cardItem.add(new CardBean(2, "护士使用"));
+        cardItem.add(new CardBean(3, "医生使用"));
     }
 }

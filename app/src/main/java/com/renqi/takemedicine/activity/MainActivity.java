@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
@@ -113,7 +114,7 @@ public class MainActivity extends BaseActivity {
         {
             long secondTime=System.currentTimeMillis();
             if(secondTime-firstTime>2000){
-                Toast.makeText(MainActivity.this,"再按一次退出APP",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"再按一次退出APP", Toast.LENGTH_SHORT).show();
                 firstTime=secondTime;
                 return ;
             }else{
