@@ -1,8 +1,10 @@
 package com.renqi.takemedicine.app;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.net.wifi.WifiManager;
 
 import com.blankj.utilcode.util.Utils;
 
@@ -24,7 +26,7 @@ public class TakeMedicinApplication extends Application {
     private List<Activity> activityList = new LinkedList<>();
 
     private static TakeMedicinApplication instance;
-
+    public  static    String wlan_mac;
     //单例获取app对象
     public synchronized static TakeMedicinApplication getInstance() {
         return instance;
@@ -41,6 +43,10 @@ public class TakeMedicinApplication extends Application {
         context = getApplicationContext();
 
         Utils.init(context);
+
+        @SuppressLint("WifiManagerLeak")
+        WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        wlan_mac = wm.getConnectionInfo().getMacAddress();
     }
 
     //添加Activity到list里
