@@ -1,19 +1,22 @@
 package com.renqi.takemedicine.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.ContactsContract;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.blankj.utilcode.util.ToastUtils;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 
 @ContentView(R.layout.activity_add_contact)
 public class AddContactActivity extends BaseActivity {
-    private OptionsPickerView  pvCustomOptions;
+    private OptionsPickerView pvCustomOptions;
     private ArrayList<CardBean> cardItem = new ArrayList<>();
 
     @ViewInject(R.id.ContactType)
@@ -42,24 +45,39 @@ public class AddContactActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    //    setContentView(R.layout.activity_add_contact);
+        //    setContentView(R.layout.activity_add_contact);
         getCardData();
         initCustomOptionPicker();//初始化底部选择窗口
         setIption(AppConstants.iption.complete);
         setToolBarTitle(AppConstants.ToolBarTitle.addContacts);
     }
-@Event(R.id.ContactType)
-    private void ContactType(View view)
-{
-   if(pvCustomOptions != null)
-        pvCustomOptions.show();
-}
-@Event(R.id.importAddress)
-private void importAddress(View view)
-{
-    startActivityForResult(new Intent(
-            Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 0);
-}
+
+    @Event(R.id.ContactType)
+    private void ContactType(View view) {
+        if (pvCustomOptions != null)
+            pvCustomOptions.show();
+    }
+
+    @Event(R.id.importAddress)
+    private void importAddress(View view) {
+
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            //获取权限
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+                startActivityForResult(new Intent(
+                        Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 0);
+            } else {
+                ToastUtils.showLongToast("您已拒绝读取联系人权限，请前往设置开通或者重新安装！");
+            }
+        } else {
+            startActivityForResult(new Intent(
+                    Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 0);
+        }
+
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -118,7 +136,7 @@ private void importAddress(View view)
                 .setLayoutRes(R.layout.pickerview_custom_options, new CustomListener() {
                     @Override
                     public void customLayout(View v) {
-                        TextView pickerTitle= (TextView) v.findViewById(R.id.pickerTitle);
+                        TextView pickerTitle = (TextView) v.findViewById(R.id.pickerTitle);
                         final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
                         //   final TextView tvAdd = (TextView) v.findViewById(R.id.tv_add);
                         TextView ivCancel = (TextView) v.findViewById(R.id.iv_cancel);
@@ -138,13 +156,15 @@ private void importAddress(View view)
                             }
                         });
 
-                    }})
+                    }
+                })
                 .isDialog(false)
                 .build();
 
         pvCustomOptions.setPicker(cardItem);//添加数据
 
     }
+
     private void getCardData() {
         cardItem.add(new CardBean(0, "个人使用"));
         cardItem.add(new CardBean(1, "药店使用"));
