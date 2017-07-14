@@ -42,6 +42,9 @@ public class AddContactActivity extends BaseActivity {
     @ViewInject(R.id.phoneNumber)
     private TextView phoneNumber;
 
+    @ViewInject(R.id.editTextguanxi)
+    private TextView editTextguanxi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,12 @@ public class AddContactActivity extends BaseActivity {
         initCustomOptionPicker();//初始化底部选择窗口
         setIption(AppConstants.iption.complete);
         setToolBarTitle(AppConstants.ToolBarTitle.addContacts);
+    }
+
+    @Event(R.id.iption)
+    private void Iption(View view) {
+if(ContactType!=null&&ContactType.equals("")){}else {}
+
     }
 
     @Event(R.id.ContactType)
