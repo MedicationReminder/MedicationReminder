@@ -9,6 +9,15 @@ import com.bigkoo.pickerview.model.IPickerViewData;
 public class CardBean implements IPickerViewData {
     int id;
     String cardNo;
+    boolean isSetPicker=false;
+
+    public boolean isSetPicker() {
+        return isSetPicker;
+    }
+
+    public void setSetPicker(boolean setPicker) {
+        isSetPicker = setPicker;
+    }
 
     public CardBean(int id, String cardNo) {
         this.id = id;
