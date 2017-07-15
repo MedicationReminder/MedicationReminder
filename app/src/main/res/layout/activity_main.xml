@@ -107,7 +107,7 @@
                 app:srcCompat="@mipmap/time_icon_night" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/im_clock"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
@@ -165,49 +165,45 @@
 
         <Button
 
-            android:id="@+id/button4"
+            android:id="@+id/related_drugs"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="left"
-
-            android:background="@mipmap/button_evaluate_n"
-            android:gravity="center"
-            android:text="药品点评"
-            android:textColor="@color/white"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="left"
-
-
-            android:background="@mipmap/button_raiders_n"
-            android:gravity="center"
-            android:text="用药攻略"
-            android:textColor="@color/white"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-
             android:background="@mipmap/button_drug_n"
             android:gravity="center"
             android:text="相关药品"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" />
+
+        <Button
+            android:id="@+id/national_drugstore"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:background="@mipmap/button_evaluate_n"
+            android:gravity="center"
+            android:text="全国药店"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" />
+
+        <Button
+            android:id="@+id/medication_introduction"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:background="@mipmap/button_raiders_n"
+            android:gravity="center"
+            android:text="用药攻略"
             android:textColor="@color/white"
             android:textSize="15dp" />
 

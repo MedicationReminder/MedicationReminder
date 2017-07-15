@@ -5,15 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.renqi.takemedicine.activity.LogisticsWebActivity">
-<include
-    layout="@layout/base_toolbar"></include>
+    tools:context="com.renqi.takemedicine.activity.MedicationIntroductionWebActivity">
+    <include
+        layout="@layout/base_toolbar"></include>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <WebView
-            android:id="@+id/logisticsWebView"
+            android:id="@+id/medicationIntroductionWebView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

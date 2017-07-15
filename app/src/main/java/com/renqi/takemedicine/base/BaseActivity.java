@@ -4,15 +4,12 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +26,7 @@ import org.xutils.x;
 
 public class BaseActivity extends AppCompatActivity {
     @ViewInject(R.id.toolbar_title) private TextView toolbar_title;
-    @ViewInject(R.id.home) private ImageView home;
+    @ViewInject(R.id.home) private TextView home;
     @ViewInject(R.id.iption)private TextView iption;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +38,11 @@ public class BaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         initSystemBarTint();
+
     }
+
+
+
     /**子类修改Toolbartitle**/
     protected void  setToolBarTitle(String tiele)
     {
@@ -126,4 +127,5 @@ public class BaseActivity extends AppCompatActivity {
     {
         finish();
     }
+
 }

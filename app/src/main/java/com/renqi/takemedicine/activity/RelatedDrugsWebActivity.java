@@ -19,18 +19,18 @@ import org.xutils.view.annotation.ViewInject;
 
 import static android.webkit.WebSettings.LOAD_NO_CACHE;
 
-@ContentView(R.layout.activity_logistics_web)
-public class LogisticsWebActivity extends BaseActivity {
-    @ViewInject(R.id.logisticsWebView)
-    private WebView logisticsWebView;
+@ContentView(R.layout.activity_related_drugs_web)
+public class RelatedDrugsWebActivity extends BaseActivity {
+    @ViewInject(R.id.relatedDrugsWebView)
+    private WebView relatedDrugsWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolBarTitle(AppConstants.ToolBarTitle.deliveryLogistics);
+        setToolBarTitle(AppConstants.ToolBarTitle.relatedDrugs);
         initData();
-        logisticsWebView.loadUrl("https://m.kuaidi100.com/");
-        logisticsWebView.setWebViewClient(new WebViewClient() {
+        relatedDrugsWebView.loadUrl("http://www.yiliaode.com/");
+        relatedDrugsWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -39,7 +39,7 @@ public class LogisticsWebActivity extends BaseActivity {
 
 
         });
-        logisticsWebView.setWebChromeClient(new WebChromeClient() {
+        relatedDrugsWebView.setWebChromeClient(new WebChromeClient() {
 
             //配置权限（同样在WebChromeClient中实现）
             @Override
@@ -54,7 +54,7 @@ public class LogisticsWebActivity extends BaseActivity {
     }
 
     private void initData() {
-        WebSettings settings = logisticsWebView.getSettings();
+        WebSettings settings = relatedDrugsWebView.getSettings();
         settings.setJavaScriptEnabled(true);//开启webview支持JS
         settings.setDatabaseEnabled(true);
         String dir = this.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
@@ -69,8 +69,8 @@ public class LogisticsWebActivity extends BaseActivity {
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && logisticsWebView.canGoBack()) {
-            logisticsWebView.goBack();
+        if (keyCode == KeyEvent.KEYCODE_BACK && relatedDrugsWebView.canGoBack()) {
+            relatedDrugsWebView.goBack();
             return true;
         }
 
@@ -80,12 +80,12 @@ public class LogisticsWebActivity extends BaseActivity {
     //销毁Webview
     @Override
     protected void onDestroy() {
-        if (logisticsWebView != null) {
-            logisticsWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-            logisticsWebView.clearHistory();
-            ((ViewGroup) logisticsWebView.getParent()).removeView(logisticsWebView);
-            logisticsWebView.destroy();
-            logisticsWebView = null;
+        if (relatedDrugsWebView != null) {
+            relatedDrugsWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            relatedDrugsWebView.clearHistory();
+            ((ViewGroup) relatedDrugsWebView.getParent()).removeView(relatedDrugsWebView);
+            relatedDrugsWebView.destroy();
+            relatedDrugsWebView = null;
         }
         super.onDestroy();
     }
