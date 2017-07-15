@@ -30,6 +30,7 @@ import org.xutils.x;
 public class BaseActivity extends AppCompatActivity {
     @ViewInject(R.id.toolbar_title) private TextView toolbar_title;
     @ViewInject(R.id.home) private ImageView home;
+    @ViewInject(R.id.iption)private TextView iption;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class BaseActivity extends AppCompatActivity {
     {
         toolbar_title.setText(tiele);
     }
+    protected void  setIption(String iption1){iption.setText(iption1);}
     /** 子类可以重写改变状态栏颜色 */
     protected int setStatusBarColor() {
         return getColorPrimary();

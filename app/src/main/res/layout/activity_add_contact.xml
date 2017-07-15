@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/backgroundgrey"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.renqi.takemedicine.activity.AddContactActivity">
+<include
+    layout="@layout/base_toolbar" >
+
+</include>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:layout_weight="0.1"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"></LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="25dp"
+                android:text="类型"
+                android:id="@+id/textView5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left" />
+
+            <Spinner
+
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#999999" />
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="25dp"
+                android:text="联系人"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <EditText
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:textColorHint="@color/textColor"
+                android:id="@+id/editTextcontacts"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:hint="请输入联系人" />
+        </LinearLayout>
+        <View
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#999999" />
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="25dp"
+                android:text="关系"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <EditText
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:textColorHint="@color/textColor"
+                android:id="@+id/editTextguanxi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:hint="请输入关系" />
+
+        </LinearLayout>
+        <View
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#999999" />
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="25dp"
+                android:text="电话"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <EditText
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:textColorHint="@color/textColor"
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:hint="请输入电话号码" />
+        </LinearLayout>
+        <View
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#999999" />
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:layout_weight="2.2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+          <Button
+              android:layout_marginTop="20dp"
+              android:textSize="18dp"
+              android:layout_marginLeft="30dp"
+              android:layout_marginRight="30dp"
+              android:textColor="@color/white"
+              android:text="从电话本导入"
+              android:background="@drawable/round_corner_bg"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
