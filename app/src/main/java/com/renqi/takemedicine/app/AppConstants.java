@@ -23,6 +23,9 @@ public class AppConstants {
         public static final String  nationalDrugstore="全国药店";
         public static final String  medicationIntroduction="用药攻略";
 
+        public static final String  kitDetials="药品盒详情";
+
+
     }
     public static class  iption
     {

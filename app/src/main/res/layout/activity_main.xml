@@ -107,7 +107,7 @@
                 app:srcCompat="@mipmap/time_icon_night" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/im_clock"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"

@@ -48,7 +48,6 @@ public class AddContactActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //    setContentView(R.layout.activity_add_contact);
         getCardData();
         initCustomOptionPicker();//初始化底部选择窗口
         setIption(AppConstants.iption.complete);

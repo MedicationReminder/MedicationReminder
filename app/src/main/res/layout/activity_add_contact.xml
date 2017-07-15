@@ -10,7 +10,6 @@
     tools:context="com.renqi.takemedicine.activity.AddContactActivity">
 <include
     layout="@layout/base_toolbar" >
-
 </include>
 
     <LinearLayout
