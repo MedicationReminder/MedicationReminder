@@ -17,6 +17,7 @@ public class AppConstants {
         public static final String remarks="备注";
         public static final String medicationReminder="用药提醒";
         public static final String addContacts ="添加联系人";
+        public static final String Contacts ="联系人";
         public static final String takemedicationReminder="吃药提醒";
         public static final String  registrationReminder="挂号提醒";
         public static final String  relatedDrugs="相关药品";

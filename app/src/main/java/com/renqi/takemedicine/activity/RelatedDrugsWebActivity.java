@@ -29,7 +29,7 @@ public class RelatedDrugsWebActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolBarTitle(AppConstants.ToolBarTitle.relatedDrugs);
         initData();
-        relatedDrugsWebView.loadUrl("http://www.yiliaode.com/");
+        relatedDrugsWebView.loadUrl("http://www.yiliaode.com/drug_names");
         relatedDrugsWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
