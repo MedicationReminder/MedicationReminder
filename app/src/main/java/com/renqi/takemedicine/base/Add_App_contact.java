@@ -34,7 +34,7 @@ public class Add_App_contact {
 
     public static class app_drugremind {
 
-        public app_drugremind(String token, String name, String count, String alert_mode, String eat_count, String eat_time, String time_to, String app_contact_id) {
+        public app_drugremind(String token, String name, String count, int alert_mode, String eat_count, String eat_time, String time_to, String app_contact_id) {
             this.token = token;
             this.name = name;
             this.count = count;
@@ -56,7 +56,7 @@ public class Add_App_contact {
         public String token;
         public String name;
         public String count;
-        public String alert_mode;
+        public int alert_mode;
         public String eat_count;
         public String eat_time;
         public String time_to;

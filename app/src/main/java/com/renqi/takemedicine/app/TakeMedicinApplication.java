@@ -104,7 +104,7 @@ public class TakeMedicinApplication extends Application {
         sp2 = getSharedPreferences("is_mac", Context.MODE_PRIVATE);
         if(sp2.getBoolean("state",false))
         {
-            macAdress=   sp2.getString("mac","");
+            macAdress=sp2.getString("mac","");
         }else  getLocalMacAddress();
     }
 
