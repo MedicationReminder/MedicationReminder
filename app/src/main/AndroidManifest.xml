@@ -31,7 +31,8 @@
         <activity android:name=".activity.RelatedDrugsWebActivity" />
         <activity android:name=".activity.NationalDrugstoreWebActivity" />
         <activity android:name=".activity.MedicationIntroductionWebActivity" />
-        <activity android:name=".activity.KitDetailsActivity"></activity>
+        <activity android:name=".activity.KitDetailsActivity" />
+        <activity android:name=".activity.ContactActivity"></activity>
     </application>
 
 </manifest>

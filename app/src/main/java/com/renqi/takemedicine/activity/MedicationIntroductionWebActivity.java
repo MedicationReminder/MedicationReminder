@@ -26,7 +26,7 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolBarTitle(AppConstants.ToolBarTitle.medicationIntroduction);
         initData();
-        medicationIntroductionWebView.loadUrl("http://www.yiliaode.com/");
+        medicationIntroductionWebView.loadUrl("http://www.yiliaode.com/strategy_categories/576b48c2391af0550c6798f8/sub_strategy_categories");
         medicationIntroductionWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -28,7 +28,7 @@ public class NationalDrugstoreWebActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolBarTitle(AppConstants.ToolBarTitle.nationalDrugstore);
         initData();
-        nationalDrugstoreWebView.loadUrl("http://www.yiliaode.com/ ");
+        nationalDrugstoreWebView.loadUrl("http://www.yiliaode.com/drug_stores");
         nationalDrugstoreWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
