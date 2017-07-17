@@ -215,7 +215,7 @@ public class AddContactActivity extends BaseActivity {
                 new Add_App_contact(
                new Add_App_contact.app_contact(
                 contactUserName.getText().toString().trim(),
-                TakeMedicinApplication.macAdress,
+                TakeMedicinApplication.testMacAdress,
                 inputRelation.getText().toString().trim(),
                 phoneNumber.getText().toString().trim(),
                 user_type))

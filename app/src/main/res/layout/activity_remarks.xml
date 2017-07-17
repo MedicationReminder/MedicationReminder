@@ -60,8 +60,9 @@
                     android:text="服药时间提醒"
                     android:textSize="20dp" />
 
-                <EditText
-                    android:id="@+id/editText"
+                <TextView
+                    android:textSize="18dp"
+                    android:id="@+id/takeMedRemind"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="20dp"
@@ -93,17 +94,18 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 
-                <EditText
-                    android:gravity="right"
-                    android:layout_marginRight="20dp"
-                    android:id="@+id/editText2"
+                <TextView
+                    android:id="@+id/WaterMedRemind"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:gravity="right"
                     android:hint="请选择"
-                    android:textColorHint="@color/textColor" />
+                    android:textColorHint="@color/textColor"
+                    android:textSize="18dp" />
             </LinearLayout>
             <View
                 android:layout_marginLeft="20dp"
@@ -118,6 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
                 <TextView
+
                     android:textSize="20dp"
                     android:layout_marginTop="20dp"
                     android:text="服药饮食提醒"
@@ -126,10 +129,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 
-                <EditText
+                <TextView
+                    android:textSize="18dp"
                     android:gravity="right"
                     android:layout_marginRight="20dp"
-                    android:id="@+id/editText3"
+                    android:id="@+id/EatRemind"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp"
@@ -159,10 +163,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 
-                <EditText
+                <TextView
+                    android:textSize="18dp"
                     android:gravity="right"
                     android:layout_marginRight="20dp"
-                    android:id="@+id/editText4"
+                    android:id="@+id/SpecialReminder"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp"

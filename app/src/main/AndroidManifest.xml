@@ -28,6 +28,7 @@
             android:name=".activity.RemarksActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".activity.LogisticsWebActivity"></activity>
+        <activity android:name=".activity.RemakesRecyclerViewActivity"></activity>
     </application>
 
 </manifest>

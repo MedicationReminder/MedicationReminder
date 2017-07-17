@@ -34,7 +34,7 @@ public class TakeMedicinApplication extends Application {
     private List<Activity> activityList = new LinkedList<>();
 
     private static TakeMedicinApplication instance;
-    public static String macAdress;
+    public static String macAdress,testMacAdress="426426426";
 
     private SharedPreferences sp,sp2;
 
