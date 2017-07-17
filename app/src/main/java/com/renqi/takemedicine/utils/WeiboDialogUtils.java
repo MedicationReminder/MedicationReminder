@@ -7,32 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.renqi.takemedicine.R;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.text.SimpleDateFormat;
 
-/**
- * Created by Xu Wei on 2017/7/4.
- * 共有方法工具类
- */
+public class WeiboDialogUtils {
 
-public class MedicationHelper {
-    private static Logger log = LoggerFactory.getLogger(MedicationHelper.class);
-    public static MedicationHelper mh = new MedicationHelper();
-    public static final Gson gson = new Gson(); // gson是线程安全的，可以使用单例避免重复创建
-    public static String getTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        return sdf.format(System.currentTimeMillis()).toString().trim();
-    }
     public static Dialog createLoadingDialog(Context context, String msg) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.dialog_loading, null);// 得到加载view
@@ -61,30 +44,18 @@ public class MedicationHelper {
 
         return loadingDialog;
     }
-    /**
-     * 方法名：isNullOrEmpty
-     * 功    能：判断字符框是否为空或者null
-     *
-     * @param ：String value
-     * @return ：boolean
-     */
-    public static boolean isNullOrEmpty(String value) {
-        if (value == null) { //正确的写法
-            return true;
-        } else if ("null".equals(value)) { //正确的写法
-            return true;
-        } else if ("".equals(value.trim())) { //正确的写法
-            return true;
-        } else {
-            return false;
-        }
-    }
-    //endregion
-    /*        //隐藏软键盘点击某个动作（view：v 触发 让软盘缩回）*/
-    public static void hideInputMethod(View view) {
 
-        InputMethodManager imm = ( InputMethodManager ) view.getContext( ).getSystemService( Context.INPUT_METHOD_SERVICE );
-        imm.hideSoftInputFromWindow( view.getApplicationWindowToken( ) , 0 );
+    /**
+     * 关闭dialog
+     *
+     * http://blog.csdn.net/qq_21376985
+     *
+     * @param mDialogUtils
+     */
+    public static void closeDialog(Dialog mDialogUtils) {
+        if (mDialogUtils != null && mDialogUtils.isShowing()) {
+            mDialogUtils.dismiss();
+        }
     }
 
 }
