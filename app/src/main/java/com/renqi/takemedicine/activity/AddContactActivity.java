@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -14,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -64,7 +66,7 @@ public class AddContactActivity extends BaseActivity {
     private TextView iption;
 
     private int user_type=5;
-    private Gson gson=new Gson();
+
 
     Dialog contactUpload;
 
@@ -82,8 +84,14 @@ public class AddContactActivity extends BaseActivity {
 
     @Event(R.id.ContactType)
     private void ContactType(View view) {
-        if (pvCustomOptions != null)
+
+        if (pvCustomOptions != null) {
             pvCustomOptions.show();
+            MedicationHelper.hideInputMethod(view);
+
+        }else {
+            ToastUtils.showShortToast("选择框尚未初始化");
+        }
     }
 
     @Event(R.id.importAddress)
@@ -214,12 +222,12 @@ public class AddContactActivity extends BaseActivity {
         );
 
         try {
-            return new JSONArray(gson.toJson(addApp_contactList)).get(0).toString().trim();
+            return new JSONArray(MedicationHelper.gson.toJson(addApp_contactList)).get(0).toString().trim();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-return "";
+     return "";
     }
     @Event(R.id.iption)
     private void iption(View view){
@@ -245,8 +253,8 @@ return "";
         RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.app_contacts);
         params.setBodyContent(getApp_contactJsonParam());
         params.setAsJsonContent(true);
-    /*    Log.e("params",params.toString());
-        Log.e("content",getApp_contactJsonParam());*/
+      Log.e("params",params.toString());
+      //  Log.e("content",getApp_contactJsonParam());
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

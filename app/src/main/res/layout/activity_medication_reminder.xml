@@ -9,6 +9,10 @@
     android:layout_height="match_parent"
     tools:context="com.renqi.takemedicine.activity.MedicationReminderActivity">
 
+    <include
+        layout="@layout/base_toolbar"
+        ></include>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,17 +38,17 @@
                 android:showDividers="end">
 
                 <TextView
-                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:text="药品名称"
+                    android:textColor="@color/textColor2"
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/medName"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="20dp"
@@ -70,37 +74,39 @@
 
                 <TextView
 
-                    android:textColor="@color/textColor2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:text="药品用量"
+                    android:textColor="@color/textColor2"
                     android:textSize="20dp" />
+
                 <ImageView
                     android:id="@+id/reduce"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/list_icon_reduce"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp" />
-<TextView
-    android:layout_weight="0.15"
-    android:layout_width="0dp"
-    android:layout_height="match_parent" />
+                    android:src="@mipmap/list_icon_reduce" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.15" />
+
                 <TextView
 
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="0.2"
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="1"
-                     />
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.2"
+                    android:text="1" />
 
                 <ImageView
                     android:id="@+id/add"
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
 
@@ -113,18 +119,18 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="20dp"
-                   android:layout_weight="0.2"
+                    android:layout_weight="0.2"
                     android:background="@null"
                     android:gravity="right"
-                    android:hint="颗"
-                   />
+                    android:hint="颗" />
+
                 <TextView
                     android:id="@+id/editText5"
-                    android:layout_marginTop="-5dp"
-                    android:layout_marginRight="20dp"
-                    android:drawableLeft="@mipmap/list_icon_triangle"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="-5dp"
+                    android:drawableLeft="@mipmap/list_icon_triangle" />
             </LinearLayout>
 
             <View
@@ -140,17 +146,16 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:text="服用次数"
+                    android:textColor="@color/textColor2"
                     android:textSize="20dp" />
 
                 <TextView
-                    android:textSize="17dp"
                     android:id="@+id/editText4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -160,7 +165,8 @@
                     android:background="@null"
                     android:gravity="right"
                     android:hint="请选择"
-                    android:textColorHint="@color/textColor" />
+                    android:textColorHint="@color/textColor"
+                    android:textSize="17dp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -179,13 +185,13 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="服药起始时间"
+                    android:textColor="@color/textColor2"
                     android:textSize="20dp" />
 
                 <TextView
@@ -197,7 +203,7 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="right"
-                    android:text="请选择时间"
+                    android:hint="请选择时间"
                     android:textColor="@color/textColor"
                     android:textSize="17dp" />
             </LinearLayout>
@@ -215,7 +221,6 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:textColor="@color/textColor2"
                     android:id="@+id/textView"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -223,10 +228,10 @@
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
                     android:text="服药间隔时间"
+                    android:textColor="@color/textColor2"
                     android:textSize="20dp" />
 
                 <TextView
-                    android:textSize="17dp"
                     android:id="@+id/editText41"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -236,7 +241,8 @@
                     android:background="@null"
                     android:gravity="right"
                     android:hint="请选择"
-                    android:textColorHint="@color/textColor" />
+                    android:textColorHint="@color/textColor"
+                    android:textSize="17dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -254,17 +260,16 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="被提醒人"
+                    android:textColor="@color/textColor2"
                     android:textSize="20dp" />
 
                 <TextView
-                    android:textSize="17dp"
                     android:id="@+id/Reminder"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -274,7 +279,8 @@
                     android:background="@null"
                     android:gravity="right"
                     android:hint="请选择"
-                    android:textColorHint="@color/textColor" />
+                    android:textColorHint="@color/textColor"
+                    android:textSize="17dp" />
             </LinearLayout>
 
             <View
@@ -290,25 +296,25 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="提醒开启"
+                    android:textColor="@color/textColor2"
                     android:textSize="20dp" />
 
                 <ImageView
-                    android:src="@drawable/slider_open"
                     android:id="@+id/offorno"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
+                    android:layout_marginRight="20dp"
 
                     android:layout_marginTop="10dp"
-                   android:layout_marginRight="20dp"
                     android:background="@null"
-                    android:gravity="right" />
+                    android:gravity="right"
+                    android:src="@drawable/slider_open" />
             </LinearLayout>
 
             <View
@@ -324,13 +330,13 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="提醒方式"
+                    android:textColor="@color/textColor2"
                     android:textSize="20dp" />
 
                 <TextView
@@ -381,8 +387,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include
-    layout="@layout/base_toolbar"
- ></include>
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,7 +27,7 @@ import java.text.SimpleDateFormat;
 public class MedicationHelper {
     private static Logger log = LoggerFactory.getLogger(MedicationHelper.class);
     public static MedicationHelper mh = new MedicationHelper();
-    private static final Gson gson = new Gson(); // gson是线程安全的，可以使用单例避免重复创建
+    public static final Gson gson = new Gson(); // gson是线程安全的，可以使用单例避免重复创建
     public static String getTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -79,4 +80,11 @@ public class MedicationHelper {
         }
     }
     //endregion
+    /*        //隐藏软键盘点击某个动作（view：v 触发 让软盘缩回）*/
+    public static void hideInputMethod(View view) {
+
+        InputMethodManager imm = ( InputMethodManager ) view.getContext( ).getSystemService( Context.INPUT_METHOD_SERVICE );
+        imm.hideSoftInputFromWindow( view.getApplicationWindowToken( ) , 0 );
+    }
+
 }
