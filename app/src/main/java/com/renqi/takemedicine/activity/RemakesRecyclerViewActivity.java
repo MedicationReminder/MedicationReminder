@@ -1,5 +1,6 @@
 package com.renqi.takemedicine.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +15,10 @@ import com.renqi.takemedicine.adapter.CommonAdapter;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.bean.Remarks;
+import com.renqi.takemedicine.event.BaseEvents;
 import com.renqi.takemedicine.view.ViewHolder;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -118,12 +121,10 @@ public class RemakesRecyclerViewActivity extends BaseActivity {
     }
     @Event(R.id.query)
     private void query(View view){
-        for (Remarks r:remarksList) {
-            if(r.isSelect)
-            {
-                Log.e("选中",r.data+"  id是  "+r.id);
-            }
-        }
 
-    }
+        BaseEvents. CommonEvent event = BaseEvents.CommonEvent.SENDREMARKS;
+        event.setObject(remarksList);
+        EventBus.getDefault().postSticky(event);
+       finish();
+    }//确认按钮事件
 }

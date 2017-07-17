@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.renqi.takemedicine.R;
 
+import org.greenrobot.eventbus.EventBus;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -39,6 +40,7 @@ public class BaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         initSystemBarTint();
+
     }
     /**子类修改Toolbartitle**/
     protected void  setToolBarTitle(String tiele)
@@ -119,10 +121,9 @@ public class BaseActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    @Event(R.id.home)
-    private void home(View view)
-    {
-        finish();
-    }
-
+@Event(R.id.home)
+        private void home(View view)
+{
+    finish();
+}
 }

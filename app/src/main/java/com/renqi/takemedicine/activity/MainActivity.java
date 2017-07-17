@@ -14,9 +14,12 @@ import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.BaseActivity;
+import com.renqi.takemedicine.event.BaseEvents;
 import com.renqi.takemedicine.utils.MedicationHelper;
 import com.renqi.takemedicine.utils.TipDialog;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -112,5 +115,6 @@ public class MainActivity extends BaseActivity {
 
 
     }
+
 
 }
