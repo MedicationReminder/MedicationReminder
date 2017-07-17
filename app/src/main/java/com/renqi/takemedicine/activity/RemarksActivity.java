@@ -42,6 +42,7 @@ public class RemarksActivity extends EventbusActivity {
     @ViewInject(R.id.textRemarks)
     private EditText textRemarks;
     private String textRemarksString="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
