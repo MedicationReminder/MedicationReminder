@@ -118,10 +118,10 @@ public class RemakesRecyclerViewActivity extends BaseActivity {
     }
     @Event(R.id.query)
     private void query(View view){
-        for (int i = 0; i <remarksList.size() ; i++) {
-            if(remarksList.get(i).isSelect)
+        for (Remarks r:remarksList) {
+            if(r.isSelect)
             {
-                Log.e("选中",remarksList.get(i).data+"  "+remarksList.get(i).id);
+                Log.e("选中",r.data+"  id是  "+r.id);
             }
         }
 
