@@ -1,4 +1,4 @@
-package com.zl.list.listviewdelete.swipemenulistview;
+package com.renqi.takemedicine.swipemenulistview;
 
 import android.content.Context;
 import android.support.v4.view.GestureDetectorCompat;
@@ -53,7 +53,7 @@ public class SwipeMenuLayout extends FrameLayout {
 	}
 
 	public SwipeMenuLayout(View contentView, SwipeMenuView menuView,
-			Interpolator closeInterpolator, Interpolator openInterpolator) {
+                           Interpolator closeInterpolator, Interpolator openInterpolator) {
 		super(contentView.getContext());
 		mCloseInterpolator = closeInterpolator;
 		mOpenInterpolator = openInterpolator;
@@ -101,7 +101,7 @@ public class SwipeMenuLayout extends FrameLayout {
 
 			@Override
 			public boolean onFling(MotionEvent e1, MotionEvent e2,
-					float velocityX, float velocityY) {
+                                   float velocityX, float velocityY) {
 				// TODO
 				if (Math.abs(e1.getX() - e2.getX()) > MIN_FLING
 						&& velocityX < MAX_VELOCITYX) {

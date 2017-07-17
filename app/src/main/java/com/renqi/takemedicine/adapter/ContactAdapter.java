@@ -4,32 +4,33 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import com.renqi.takemedicine.R;
+import com.renqi.takemedicine.bean.response.ContactResponseBean;
 
 /**
  * Created by Z on 2017/7/15.
  */
 
-public class ContactAdapter extends BaseSwipeAdapter {
-    private Context mContext;
-
-    public ContactAdapter(Context mContext) {
+public class ContactAdapter extends BaseAdapter {
+    Context mContext;
+    ContactResponseBean contactResponseBean;
+    LayoutInflater layoutInflater;
+    public ContactAdapter( Context mContext,ContactResponseBean contactResponseBean){
         this.mContext = mContext;
+        this.contactResponseBean = contactResponseBean;
+        this.layoutInflater=LayoutInflater.from(mContext);
     }
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        return 6;
+        return contactResponseBean.getApp_contact().size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
-        return null;
+        return contactResponseBean.getApp_contact().get(position);
     }
 
     @Override
@@ -38,33 +39,26 @@ public class ContactAdapter extends BaseSwipeAdapter {
     }
 
     @Override
-    public void fillValues(int position, View convertView) {
-        // TODO Auto-generated method stub
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if(convertView==null){
+            viewHolder = new ViewHolder();
+            //获得组件，实例化组件
+            convertView=layoutInflater.inflate(R.layout.item_contact, null);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.item_contact_name);
+            viewHolder.phone = (TextView) convertView.findViewById(R.id.item_contact_phone);
 
-        TextView message_center_item_sk_tv = (TextView)convertView.findViewById(R.id.tv1);
-        TextView message_center_item_sksj_tv = (TextView)convertView.findViewById(R.id.tv2);
+            viewHolder.name.setText(contactResponseBean.getApp_contact().get(position).getName());
+            viewHolder.phone.setText(contactResponseBean.getApp_contact().get(position).getPhone());
+
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder=(ViewHolder) convertView.getTag();
+        }
+        return convertView;
     }
-
-    @Override
-    public View generateView(int position, ViewGroup parent) {
-        // TODO Auto-generated method stub
-        View v = LayoutInflater.from(mContext).inflate(R.layout.item_contact, null);
-        //SwipeLayout swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
-
-
-        v.findViewById(R.id.message_center_item_delete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, "click delete", Toast.LENGTH_SHORT).show();
-            }
-        });
-        return v;
+    class ViewHolder{
+        TextView name;
+        TextView phone;
     }
-
-    @Override
-    public int getSwipeLayoutResourceId(int position) {
-        // TODO Auto-generated method stub
-        return R.id.message_center_item_swipe;
-    }
-
 }

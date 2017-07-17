@@ -6,6 +6,4 @@ package com.renqi.takemedicine.bean;
 
 public class KitDetialsBean {
 
-
-
 }

@@ -1,6 +1,4 @@
-package com.zl.list.listviewdelete.swipemenulistview;
-
-import java.util.List;
+package com.renqi.takemedicine.swipemenulistview;
 
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -9,6 +7,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * 

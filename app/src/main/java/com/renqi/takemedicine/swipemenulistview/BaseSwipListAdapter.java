@@ -21,7 +21,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-package com.zl.list.listviewdelete.swipemenulistview;
+package com.renqi.takemedicine.swipemenulistview;
 
 import android.widget.BaseAdapter;
 
