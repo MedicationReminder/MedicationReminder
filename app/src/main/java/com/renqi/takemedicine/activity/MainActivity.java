@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity {
         {
             finish();}
 
->>>>>>> Temporary merge branch 2
+
     }
 
 }
