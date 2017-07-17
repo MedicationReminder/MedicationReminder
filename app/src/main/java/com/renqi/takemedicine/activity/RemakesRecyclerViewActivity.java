@@ -65,6 +65,7 @@ public class RemakesRecyclerViewActivity extends BaseActivity {
 
 
                 } catch (JSONException e) {
+                    ToastUtils.showShortToast("json数据解析异常了");
                     e.printStackTrace();
                 }
             }
