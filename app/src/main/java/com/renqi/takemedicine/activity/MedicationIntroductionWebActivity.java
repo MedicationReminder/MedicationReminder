@@ -15,11 +15,13 @@ import com.renqi.takemedicine.base.BaseActivity;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import static android.webkit.WebSettings.LOAD_NO_CACHE;
+import com.renqi.takemedicine.base.BaseActivity;
 
 @ContentView(R.layout.activity_medication_introduction_web)
 public class MedicationIntroductionWebActivity extends BaseActivity {
     @ViewInject(R.id.medicationIntroductionWebView)
     private WebView medicationIntroductionWebView;
+public class MedicationIntroductionWebActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

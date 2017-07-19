@@ -31,7 +31,7 @@ public class TakeMedicinApplication extends Application {
     private List<Activity> activityList = new LinkedList<>();
 
     private static TakeMedicinApplication instance;
-    public static String macAdress;
+    public static String macAdress,testMacAdress="426426426";
 
     private SharedPreferences sp,sp2;
 
@@ -97,6 +97,12 @@ public class TakeMedicinApplication extends Application {
             });
         }
       //  Log.e("m_szDevIDShort", getLocalMacAddress());
+        //  Log.e("m_szDevIDShort", getLocalMacAddress());
+        sp2 = getSharedPreferences("is_mac", Context.MODE_PRIVATE);
+        if(sp2.getBoolean("state",false))
+        {
+            macAdress=sp2.getString("mac","");
+        }else  getLocalMacAddress();
     }
 
     public String getLocalMacAddress() {

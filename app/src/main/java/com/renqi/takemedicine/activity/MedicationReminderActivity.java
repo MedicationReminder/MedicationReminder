@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,9 +29,12 @@ import com.renqi.takemedicine.utils.WeiboDialogUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,7 +53,7 @@ public class MedicationReminderActivity extends BaseActivity {
     @ViewInject(R.id.iption)
     private TextView iption;
     int a=1;
-
+    int reminderModeTyep;
     @ViewInject(R.id.medName)
     private EditText medName;
 
@@ -178,7 +182,7 @@ public class MedicationReminderActivity extends BaseActivity {
                 if(cardItem5.get(0).isSetPicker())
                 {
                     String num=cardItem5.get(options1).getPickerViewText();
-
+                    reminderModeTyep=cardItem5.get(options1).getId();
                     reminderMode.setText(num);
                     cardItem5.get(0).setSetPicker(false);
                     return;
@@ -365,7 +369,10 @@ public class MedicationReminderActivity extends BaseActivity {
         List<Add_App_contact> addApp_contactList =new ArrayList<>();
         addApp_contactList.add(
                 new Add_App_contact(
-                        new Add_App_contact.app_drugremind(TakeMedicinApplication.macAdress,"","","","","","",""))
+                        new Add_App_contact.app_drugremind(TakeMedicinApplication.macAdress,
+                                 medName.getText().toString().trim(),
+                                textView4.getText().toString().trim()+editText3.getText().toString().trim(),
+       reminderModeTyep,editText4.getText().toString(),selectTime.getText().toString().trim(),editText41.getText().toString().trim(),"58118895bc54f41aa766cce3"))
         );
 
         try {
@@ -414,5 +421,32 @@ public class MedicationReminderActivity extends BaseActivity {
         }
         medicationUpload = WeiboDialogUtils.createLoadingDialog(MedicationReminderActivity.this, "上传用药信息中...");
         medicationUpload.show();
+        RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.app_drugreminds);
+        params.setAsJsonContent(true);
+        params.setBodyContent(getApp_contactJsonParam());
+        Log.e("json",getApp_contactJsonParam());
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                ToastUtils.showShortToast(result);
+              WeiboDialogUtils.closeDialog(medicationUpload);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                ToastUtils.showShortToast(ex.getMessage().toString().trim());
+                WeiboDialogUtils.closeDialog(medicationUpload);
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 }
