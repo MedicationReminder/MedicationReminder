@@ -13,12 +13,16 @@ import com.google.gson.JsonArray;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.adapter.CommonAdapter;
 import com.renqi.takemedicine.app.AppConstants;
+import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.BaseActivity;
+import com.renqi.takemedicine.base.EventbusActivity;
 import com.renqi.takemedicine.bean.Remarks;
 import com.renqi.takemedicine.event.BaseEvents;
 import com.renqi.takemedicine.view.ViewHolder;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +33,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,95 +41,240 @@ import java.util.List;
  * Created by Xu Wei on 2017/7/17.
  */
 @ContentView(R.layout.recyclerview_dialog)
-public class RemakesRecyclerViewActivity extends BaseActivity {
+public class RemakesRecyclerViewActivity extends EventbusActivity {
     @ViewInject(R.id.recyclerViewDialog)
     private RecyclerView recyclerViewDialog;
     private CommonAdapter commonAdapter;
-    private List<Remarks> remarksList=new ArrayList<>(),remarksListResult=new ArrayList<>();
-
+  //  private List<Remarks> remarksList = new ArrayList<>(), remarksListResult = new ArrayList<>();
+    private List<Remarks> remarksSpecialList=new ArrayList<>();
+    private List<Remarks> remarkseFoodList=new ArrayList<>();
+    private List<Remarks> remarksTimeList=new ArrayList<>();
+    private List<Remarks> remarksWaterList=new ArrayList<>();
+    String param;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        param=  getIntent().getStringExtra("type");
+        if ( (TakeMedicinApplication.isFirstTiem == 0&&param.equals("time")) ||
+           (TakeMedicinApplication.isFirstSpecial == 0&&param.equals("special")) ||
+                (TakeMedicinApplication.isFirstWater == 0&&param.equals("water"))   ||
+                ( TakeMedicinApplication.isFisterFood == 0&&param.equals("food"))) {
 
-        RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.app_drugreminds+AppConstants.APP_CHOICE_NAME);
-        params.addBodyParameter("name","water");
-        Log.e("params",params.toString());
-        recyclerViewDialog.setLayoutManager(new LinearLayoutManager(this));
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
+            final RequestParams params = new RequestParams(AppConstants.BASE_ACTION + AppConstants.app_drugreminds + AppConstants.APP_CHOICE_NAME);
 
-               // ToastUtils.showShortToast(result);
-                try {
-                    Log.e("result",result);
-                    JSONArray names=new JSONObject(result).getJSONArray("names");
-                    for (int i = 0; i <names.length() ; i++) {
-                        remarksList.add(new Remarks(
-                                ((JSONObject)names.get(i)).getString("id"),//params1
-                                ((JSONObject)names.get(i)).getString("name"),//params2
-                                false//params3
-                                ) );
-                    }
+            params.addBodyParameter("name", param);
+            Log.e("params", params.toString());
 
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
 
-                } catch (JSONException e) {
-                    ToastUtils.showShortToast("json数据解析异常了");
-                    e.printStackTrace();
-                }
-            }
+                    // ToastUtils.showShortToast(result);
+                    try {
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
+                        JSONArray names = new JSONObject(result).getJSONArray("names");
+                        if(param.equals("food")){
+                        for (int i = 0; i < names.length(); i++) {
+                            remarkseFoodList.add(new Remarks(
+                                    ((JSONObject) names.get(i)).getString("id"),//params1
+                                    ((JSONObject) names.get(i)).getString("name"),//params2
+                                    false//params3
+                            ));
+                        }
 
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-                commonAdapter=new CommonAdapter<Remarks>(RemakesRecyclerViewActivity.this,
-                        R.layout.recyclerview_dialog_item,remarksList) {
-                    @Override
-                    public void convert(ViewHolder holder, final Remarks remarks, final int position) {
-                        final CheckBox checkBox= holder.getView(R.id.select_checkbox);
-                        holder.setOnClickListener(R.id.contentView, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                if(remarks.isSelect ) //如果是选中的取消选中
-                                {
-                                    checkBox.setChecked(false);
-                                   remarksList.get(position).isSelect=false;
-
-                                }
-                                else //如果是没选中的 点击是选中
-                                {
-                                    checkBox.setChecked(true);
-                                    remarksList.get(position).isSelect=true;
-
-                                }
-                             //   ToastUtils.showShortToast(remarks.id+"");
+                        TakeMedicinApplication.isFisterFood=1;
+                            setMyAdapter(remarkseFoodList);
+                        }
+                      else  if(param.equals("water")){
+                            for (int i = 0; i < names.length(); i++) {
+                                remarksWaterList.add(new Remarks(
+                                        ((JSONObject) names.get(i)).getString("id"),//params1
+                                        ((JSONObject) names.get(i)).getString("name"),//params2
+                                        false//params3
+                                ));
                             }
+                            TakeMedicinApplication.isFirstWater=1;
+                            setMyAdapter(remarksWaterList);
+                      }
+                        else  if(param.equals("special")){
+                            for (int i = 0; i < names.length(); i++) {
+                                remarksSpecialList.add(new Remarks(
+                                        ((JSONObject) names.get(i)).getString("id"),//params1
+                                        ((JSONObject) names.get(i)).getString("name"),//params2
+                                        false//params3
+                                ));
+                            }
+                            TakeMedicinApplication.isFirstSpecial=1;
+                            setMyAdapter(remarksSpecialList);
+                        }
+                        else  if(param.equals("time")){
+                            for (int i = 0; i < names.length(); i++) {
+                                remarksTimeList.add(new Remarks(
+                                        ((JSONObject) names.get(i)).getString("id"),//params1
+                                        ((JSONObject) names.get(i)).getString("name"),//params2
+                                        false//params3
+                                ));
+                            }
+                            TakeMedicinApplication.isFirstTiem=1;
+                            setMyAdapter(remarksTimeList);
+                        }
 
-                        });
-                        holder.setText(R.id.text,remarks.data);
 
+                    } catch (JSONException e) {
+                        ToastUtils.showShortToast("json数据解析异常了");
+                        e.printStackTrace();
                     }
-                };
-                recyclerViewDialog.setAdapter(commonAdapter);
-            }
-        });
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+
+
+
+                }
+            });
+        }
 
     }
-    @Event(R.id.query)
-    private void query(View view){
 
-        BaseEvents. CommonEvent event = BaseEvents.CommonEvent.SENDREMARKS;
-        event.setObject(remarksList);
-        EventBus.getDefault().postSticky(event);
-       finish();
+    private void setMyAdapter(final List<Remarks> remarksList) {
+        recyclerViewDialog.setLayoutManager(new LinearLayoutManager(this));
+        commonAdapter = new CommonAdapter<Remarks>(RemakesRecyclerViewActivity.this,
+                R.layout.recyclerview_dialog_item, remarksList) {
+            @Override
+            public void convert(ViewHolder holder, final Remarks remarks, final int position) {
+                final CheckBox checkBox = holder.getView(R.id.select_checkbox);
+                       if(remarks.isSelect) checkBox.setChecked(true);else checkBox.setChecked(false);
+                holder.setOnClickListener(R.id.contentView, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (remarks.isSelect) //如果是选中的取消选中
+                        {
+                            checkBox.setChecked(false);
+                            remarksList.get(position).isSelect = false;
+
+                        } else //如果是没选中的 点击是选中
+                        {
+                            checkBox.setChecked(true);
+                            remarksList.get(position).isSelect = true;
+
+                        }
+                        //   ToastUtils.showShortToast(remarks.id+"");
+                    }
+
+                });
+                holder.setText(R.id.text, remarks.data);
+
+            }
+        };
+        recyclerViewDialog.setAdapter(commonAdapter);
+        commonAdapter.notifyDataSetChanged();
+    }
+
+    @Event(R.id.query)
+    private void query(View view) {
+
+        if(param.equals("food"))
+        {
+        BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSFOODLIST;
+        event.setObject(remarkseFoodList);
+            EventBus.getDefault().postSticky(event);
+        }
+        if(param.equals("time")){
+            BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSTIMELIST;
+            event.setObject(remarksTimeList);
+            EventBus.getDefault().postSticky(event);
+        }
+        if(param.equals("water")){
+            BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSWATERLIST;
+            event.setObject(remarksWaterList);
+            EventBus.getDefault().postSticky(event);
+           }
+        if(param.equals("special")){
+            BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSPEICALLIST;
+            event.setObject(remarksSpecialList);
+            EventBus.getDefault().postSticky(event);
+
+        }
+
+
+        finish();
     }//确认按钮事件
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onEvent(BaseEvents.myEvent event) {
+        // UI updates must run on MainThread
+
+        if (event == BaseEvents.myEvent.SENDREMARKSFOODLIST) {
+
+            ToastUtils.showShortToast(param);
+            if(param.equals("food")&&TakeMedicinApplication.isFisterFood==1){
+                remarkseFoodList = (List<Remarks>) event.getObject();
+
+                setMyAdapter(remarkseFoodList);
+                Log.e("remarkseFoodList",remarkseFoodList.get(0).data);
+            }
+        }
+        if(event==BaseEvents.myEvent.SENDREMARKSWATERLIST)
+        {
+            if(param.equals("water")&&TakeMedicinApplication.isFirstWater==1){
+                remarksWaterList = (List<Remarks>) event.getObject();
+                setMyAdapter(remarksWaterList);
+            }
+
+
+        }
+        if(event==BaseEvents.myEvent.SENDREMARKSTIMELIST) {
+            if (param.equals("time") && TakeMedicinApplication.isFirstTiem == 1) {
+                remarksTimeList = (List<Remarks>) event.getObject();
+                setMyAdapter(remarksTimeList);
+            }
+        }
+        if(event== BaseEvents.myEvent.SENDREMARKSPEICALLIST)
+        {
+            if (param.equals("special") && TakeMedicinApplication.isFirstSpecial == 1) {
+                remarksSpecialList = (List<Remarks>) event.getObject();
+                setMyAdapter(remarksSpecialList);
+            }
+        }
+    }
+    @Event(R.id.home)
+    private void home(View view){
+        if(param.equals("food"))
+        {
+            BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSFOODLIST;
+            event.setObject(remarkseFoodList);
+            EventBus.getDefault().postSticky(event);
+        }
+        if(param.equals("time")){
+            BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSTIMELIST;
+            event.setObject(remarksTimeList);
+            EventBus.getDefault().postSticky(event);
+        }
+        if(param.equals("water")){
+            BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSWATERLIST;
+            event.setObject(remarksWaterList);
+            EventBus.getDefault().postSticky(event);
+        }
+        if(param.equals("special")){
+            BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSPEICALLIST;
+            event.setObject(remarksSpecialList);
+            EventBus.getDefault().postSticky(event);
+
+        }
+
+
+        finish();
+    }
 }

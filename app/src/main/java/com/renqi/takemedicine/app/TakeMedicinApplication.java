@@ -38,6 +38,8 @@ public class TakeMedicinApplication extends Application {
 
     private SharedPreferences sp,sp2;
 
+    public static int isFirstTiem=0,isFirstWater=0,isFisterFood=0,isFirstSpecial=0;
+
     //单例获取app对象
     public synchronized static TakeMedicinApplication getInstance() {
         return instance;

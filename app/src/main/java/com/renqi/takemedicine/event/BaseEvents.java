@@ -9,8 +9,11 @@ public interface BaseEvents {
     Object getObject();
     //事件定义
     enum CommonEvent implements BaseEvents {
-        SENDREMARKS, //登录
-        LOGOUT, //登出
+        SENDREMARKS,
+        SENDREMARKSFOODLIST,
+        SENDREMARKSWATERLIST
+        ,SENDREMARKSPEICALLIST
+        ,SENDREMARKSTIMELIST,
         BACK;
         private Object obj;
         @Override
@@ -23,5 +26,21 @@ public interface BaseEvents {
         }
     }
     // ... 其他事件定义
+    enum myEvent implements BaseEvents {
+        SENDREMARKSFORMYSELF
+        ,SENDREMARKSFOODLIST
+        ,SENDREMARKSWATERLIST
+        ,SENDREMARKSPEICALLIST
+        ,SENDREMARKSTIMELIST;
 
+        private Object obj;
+        @Override
+        public void setObject(Object obj) {
+            this.obj = obj;
+        }
+        @Override
+        public Object getObject() {
+            return obj;
+        }
+    }
 }
