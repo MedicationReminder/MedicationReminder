@@ -20,12 +20,9 @@ import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.utils.MedicationHelper;
 
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -170,38 +167,7 @@ public class MainActivity extends BaseActivity {
     }
     @Event(R.id.im_clock)
     private void imClock(View view) {
-//        startActivity(new Intent(MainActivity.this, KitDetailsActivity.class));
-
-        RequestParams params=new RequestParams("http://101.69.181.251/api/v1/app_registerreminds");
-        params.setAsJsonContent(true);
-        params.setBodyContent("{\"app_registerremind\":{\"token\":\"426426426\", \"hosptial_name\":\"jj" +
-                "j\", \"characteristic_name\":\"123\", \"alert_mode\":\"1\", \"doctor_name\":\"2dfd\", \"get" +
-                "_time\":\" 2017-07-19 15:54:53\", \"app_contact_id\":\"596c82bf391af04a66b5a3e7\"}}");
-        x.http().post(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-         Log.e("onSuccess",result);
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                Log.e("onError",ex.toString());
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-
-
-
-
+      startActivity(new Intent(MainActivity.this, KitDetailsActivity.class));
 
     }
 

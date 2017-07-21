@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.renqi.takemedicine.R;
 
-import org.greenrobot.eventbus.EventBus;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;

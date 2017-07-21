@@ -90,8 +90,8 @@ public class MedicationReminderActivity extends BaseActivity {
          timeInterval();
          getke();
          times();
-        Reminder();
-        rReminderType();
+         Reminder();
+         rReminderType();
     }
     @Event(R.id.Remarks)
     private void  Remarks(View view)
@@ -102,8 +102,8 @@ public class MedicationReminderActivity extends BaseActivity {
     private void selectTime(View view){
 
         MedicationHelper.hideInputMethod(view);
-
         showDatePickDialog(DateType.TYPE_YMDHMS);
+
     }
     private void showDatePickDialog(DateType type) {
         DatePickDialog dialog = new DatePickDialog(this);
@@ -170,7 +170,9 @@ public class MedicationReminderActivity extends BaseActivity {
                 {
                     if(cardItem4.get(options1).getId()==0)
                     {
-                        ToastUtils.showShortToast("跳转");
+
+                        startActivityForResult(new Intent(MedicationReminderActivity.this,ContactActivity.class),1);
+
                         return;
                     }
                     String num=cardItem4.get(options1).getPickerViewText();
@@ -220,6 +222,20 @@ public class MedicationReminderActivity extends BaseActivity {
 
 
     }
+
+
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                Reminder.setText(data.getStringExtra("1"));
+                break;
+        }
+    }
+
     private void getke() {
 
         cardItem.add(new CardBean(0, "颗"));

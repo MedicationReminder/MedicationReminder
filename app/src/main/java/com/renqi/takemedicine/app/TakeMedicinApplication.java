@@ -86,7 +86,7 @@ public class TakeMedicinApplication extends Application {
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
                     Log.e("m_szDevIDShort", ex.toString());
-                    ToastUtils.showShortToast("后台接口异常！");
+                  //  ToastUtils.showShortToast("后台接口异常！");
                   //  sp.edit().putBoolean("state", true).commit();
                 }
 

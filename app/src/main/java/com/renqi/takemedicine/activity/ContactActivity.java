@@ -1,5 +1,6 @@
 package com.renqi.takemedicine.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -109,7 +110,11 @@ public class ContactActivity extends BaseActivity {
         lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent();
 
+                intent.putExtra("1",contactResponseBean.getApp_contact().get(position).getName());
+                setResult(1,intent);
+                finish();
             }
         });
 
