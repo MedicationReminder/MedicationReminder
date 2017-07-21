@@ -37,6 +37,8 @@ public class TakeMedicinApplication extends Application {
 
     public static String wlan_mac;
 
+    public static int isFirstTiem=0,isFirstWater=0,isFisterFood=0,isFirstSpecial=0;
+
     //单例获取app对象
     public synchronized static TakeMedicinApplication getInstance() {
         return instance;
@@ -84,6 +86,8 @@ public class TakeMedicinApplication extends Application {
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
                     Log.e("m_szDevIDShort", ex.toString());
+                    ToastUtils.showShortToast("后台接口异常！");
+                  //  sp.edit().putBoolean("state", true).commit();
                 }
 
                 @Override
@@ -96,7 +100,6 @@ public class TakeMedicinApplication extends Application {
                 }
             });
         }
-      //  Log.e("m_szDevIDShort", getLocalMacAddress());
         //  Log.e("m_szDevIDShort", getLocalMacAddress());
         sp2 = getSharedPreferences("is_mac", Context.MODE_PRIVATE);
         if(sp2.getBoolean("state",false))

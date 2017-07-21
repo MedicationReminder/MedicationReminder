@@ -11,11 +11,13 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.adapter.CommonAdapter;
 import com.renqi.takemedicine.app.AppConstants;
+import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.base.EventbusActivity;
 import com.renqi.takemedicine.bean.Remarks;
@@ -24,6 +26,7 @@ import com.renqi.takemedicine.utils.TipDialog;
 import com.renqi.takemedicine.utils.ToastUtil;
 import com.renqi.takemedicine.view.ViewHolder;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.xutils.common.Callback;
@@ -38,7 +41,10 @@ import java.util.List;
 
 @ContentView(R.layout.activity_remarks)
 public class RemarksActivity extends EventbusActivity {
-    private List<Remarks> remarksList=new ArrayList<>();
+    private List<Remarks> remarksSpecialList=new ArrayList<>();
+    private List<Remarks> remarkseFoodList=new ArrayList<>();
+    private List<Remarks> remarksTimeList=new ArrayList<>();
+    private List<Remarks> remarksWaterList=new ArrayList<>();
     @ViewInject(R.id.textRemarks)
     private EditText textRemarks;
     private String textRemarksString="";
@@ -66,25 +72,122 @@ public class RemarksActivity extends EventbusActivity {
     @Event(R.id.takeMedRemind)
     private void takeMedRemind(View v)
     {
-          startActivity(new Intent(RemarksActivity.this,RemakesRecyclerViewActivity.class));
+        Intent intent=new Intent(RemarksActivity.this,RemakesRecyclerViewActivity.class);
+        intent.putExtra("type","time");
+        startActivityForResult(intent,1);
+        if(TakeMedicinApplication.isFirstTiem==1){
+        BaseEvents.myEvent event2 = BaseEvents.myEvent.SENDREMARKSTIMELIST;
+        event2.setObject(remarksTimeList);
+        EventBus.getDefault().postSticky(event2);
+        }
     }
-
+    @Event(R.id.WaterMedRemind)
+    private void WaterMedRemind(View view)
+    {
+        Intent intent=new Intent(RemarksActivity.this,RemakesRecyclerViewActivity.class);
+        intent.putExtra("type","water");
+        startActivityForResult(intent,1);
+        if(TakeMedicinApplication.isFirstWater==1)
+        {
+        BaseEvents.myEvent event2 = BaseEvents.myEvent.SENDREMARKSWATERLIST;
+        event2.setObject(remarksWaterList);
+        EventBus.getDefault().postSticky(event2);
+        }
+    }
+    @Event(R.id.EatRemind)
+    private void EatRemind(View view)
+    {
+        Intent intent=new Intent(RemarksActivity.this,RemakesRecyclerViewActivity.class);
+        intent.putExtra("type","food");
+        startActivityForResult(intent,1);
+        if(TakeMedicinApplication.isFisterFood==1){
+        BaseEvents.myEvent event2 = BaseEvents.myEvent.SENDREMARKSFOODLIST;
+        event2.setObject(remarkseFoodList);
+        EventBus.getDefault().postSticky(event2);}
+    }
+    @Event(R.id.SpecialReminder)
+    private void SpecialReminder(View view)
+    {
+        Intent intent=new Intent(RemarksActivity.this,RemakesRecyclerViewActivity.class);
+        intent.putExtra("type","special");
+        startActivityForResult(intent,1);
+        if(TakeMedicinApplication.isFirstSpecial==1)
+        {
+        BaseEvents.myEvent event2 = BaseEvents.myEvent.SENDREMARKSPEICALLIST;
+        event2.setObject(remarksSpecialList);
+        EventBus.getDefault().postSticky(event2);
+        }
+    }
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onEvent(BaseEvents.CommonEvent event) {
 
         // UI updates must run on MainThread
-        if(event==BaseEvents.CommonEvent.SENDREMARKS){
-         remarksList= (List<Remarks>) event.getObject();
-            for (Remarks r:remarksList) {
-                if(r.isSelect)
-                {
-                    Log.e("选中",r.data+"  id是  "+r.id);
-                    textRemarksString+=r.data;
+        if(event==BaseEvents.CommonEvent.SENDREMARKSFOODLIST) {
+            if (TakeMedicinApplication.isFisterFood == 1) {
+                remarkseFoodList = (List<Remarks>) event.getObject();
+                ToastUtils.showShortToast(remarkseFoodList.get(0).data);
+                for (Remarks r : remarkseFoodList) {
+                    if (r.isSelect) {
+                        Log.e("选中", r.data + "  id是  " + r.id);
+                        textRemarksString = r.data;
+                    }
                 }
+
+                textRemarks.setText(textRemarksString);
             }
-           textRemarks.setText(textRemarksString);
+        }
+        if(event==BaseEvents.CommonEvent.SENDREMARKSTIMELIST) {
+            if(TakeMedicinApplication.isFirstTiem==1) {
+                remarksTimeList = (List<Remarks>) event.getObject();
+                ToastUtils.showShortToast(remarksTimeList.get(0).data);
+                for (Remarks r : remarksTimeList) {
+                    if (r.isSelect) {
+                        Log.e("选中", r.data + "  id是  " + r.id);
+                        textRemarksString = r.data;
+                    }
+                }
+
+                textRemarks.setText(textRemarksString);
+            }
+        }
+        if(event==BaseEvents.CommonEvent.SENDREMARKSWATERLIST) {
+            if(TakeMedicinApplication.isFirstWater==1) {
+                remarksWaterList = (List<Remarks>) event.getObject();
+                for (Remarks r : remarksWaterList) {
+                    if (r.isSelect) {
+                        Log.e("选中", r.data + "  id是  " + r.id);
+                        textRemarksString = r.data;
+                    }
+                }
+
+                textRemarks.setText(textRemarksString);
+            }
+        }
+        if(event==BaseEvents.CommonEvent.SENDREMARKSPEICALLIST) {
+            if(TakeMedicinApplication.isFirstSpecial==1) {
+                remarksSpecialList = (List<Remarks>) event.getObject();
+                for (Remarks r : remarksSpecialList) {
+                    if (r.isSelect) {
+                        Log.e("选中", r.data + "  id是  " + r.id);
+                        textRemarksString = r.data;
+                    }
+                }
+
+                textRemarks.setText(textRemarksString);
+            }
 
         }
 
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1&&requestCode==RESULT_OK)
+        {
+
+        }
+    }
+
 }
