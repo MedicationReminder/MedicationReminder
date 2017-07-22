@@ -33,9 +33,6 @@ import java.util.Date;
 @ContentView(R.layout.activity_registered_reminder)
 public class RegisteredReminderActivity extends BaseActivity {
     private OptionsPickerView pvCustomOptions;
-    private ArrayList<CardBean> cardItem = new ArrayList<>();
-    private ArrayList<CardBean> cardItem2 = new ArrayList<>();
-    private ArrayList<CardBean> cardItem3 = new ArrayList<>();
     private ArrayList<CardBean> cardItem4 = new ArrayList<>();
     private ArrayList<CardBean> cardItem5 = new ArrayList<>();
     Dialog medicationUpload;
