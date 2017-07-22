@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Xu Wei on 2017/7/4.
@@ -29,9 +31,23 @@ public class MedicationHelper {
     public static MedicationHelper mh = new MedicationHelper();
     public static final Gson gson = new Gson(); // gson是线程安全的，可以使用单例避免重复创建
     public static String getTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
 
-        return sdf.format(System.currentTimeMillis()).toString().trim();
+        int dom = cal.get(Calendar.MONTH)+1;
+        int day = cal.get(Calendar.DATE);
+        return "    "+dom+"月"+day+"日";
+    }
+
+    //根据日期取得星期几
+    public static String getWeek(Date date){
+        String[] weeks = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int week_index = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if(week_index<0){
+            week_index = 0;
+        }
+        return weeks[week_index];
     }
     public static Dialog createLoadingDialog(Context context, String msg) {
         LayoutInflater inflater = LayoutInflater.from(context);
