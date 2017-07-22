@@ -24,17 +24,23 @@ public class AppConstants {
         public static final String  nationalDrugstore="全国药店";
         public static final String  medicationIntroduction="用药攻略";
 
-        public static final String  kitDetials="药品盒详情";
+        public static final String  kitDetials="用药详情";
+        public static final String  kitDetials2="挂号详情";
 
 
+
+        public static final String  kitDetialsRemind="切换提醒";
     }
     public static class  iption
     {
         public static final String complete="完成";
     }
+
     public static  String BASE_ACTION = "http://101.69.181.251/api/v1/";
     public static  String app_contacts="app_contacts";
+    public static  String app_drugreminds="app_drugreminds/";
     public static  String DEVICE_TOKENS = "device_tokens";
-
-
+    public static  String ALL_CONTACTS="app_contacts";
+    public static  String DELETE_CONTACTS="app_contacts/destory";
+    public static  String APP_CHOICE_NAME="app_choice_name";
 }

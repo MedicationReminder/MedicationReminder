@@ -33,6 +33,7 @@
         <activity android:name=".activity.MedicationIntroductionWebActivity" />
         <activity android:name=".activity.KitDetailsActivity" />
         <activity android:name=".activity.ContactActivity"></activity>
+        <activity android:name=".activity.RemakesRecyclerViewActivity"></activity>
     </application>
 
 </manifest>

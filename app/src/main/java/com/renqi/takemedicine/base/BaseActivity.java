@@ -122,10 +122,9 @@ public class BaseActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    @Event(R.id.home)
-    private void home(View view)
-    {
-        finish();
-    }
-
+@Event(R.id.home)
+        private void home(View view)
+{
+    finish();
+}
 }

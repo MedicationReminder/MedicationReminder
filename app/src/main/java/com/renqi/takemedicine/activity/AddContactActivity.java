@@ -9,12 +9,10 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Build;
-import android.provider.ContactsContract;
-import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,11 +20,8 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.blankj.utilcode.util.ToastUtils;
-import com.google.gson.Gson;
-import com.blankj.utilcode.util.ToastUtils;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
-import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.Add_App_contact;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.bean.CardBean;
@@ -67,12 +62,9 @@ public class AddContactActivity extends BaseActivity {
     private TextView iption;
 
     private int user_type=5;
-    private Gson gson=new Gson();
 
     Dialog contactUpload;
 
-    @ViewInject(R.id.editTextguanxi)
-    private TextView editTextguanxi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,43 +78,18 @@ public class AddContactActivity extends BaseActivity {
 
     }
 
-    @Event(R.id.iption)
-    private void Iption(View view) {
-if(ContactType!=null&&ContactType.equals("")){}else {}
 
-    }
 
     @Event(R.id.ContactType)
     private void ContactType(View view) {
-        if (pvCustomOptions != null)
+
+        if (pvCustomOptions != null) {
             pvCustomOptions.show();
-    }
+            MedicationHelper.hideInputMethod(view);
 
-    @Event(R.id.importAddress)
-    private void importAddress(View view) {
-
-
-        if (Build.VERSION.SDK_INT >= 23) {
-            //获取权限
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-                startActivityForResult(new Intent(
-                        Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 0);
-            } else {
-                ToastUtils.showLongToast("您已拒绝读取联系人权限，请前往设置开通或者重新安装！");
-            }
-        } else {
-            startActivityForResult(new Intent(
-                    Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 0);
+        }else {
+            ToastUtils.showShortToast("选择框尚未初始化");
         }
-
-
-    }
-
-    @Event(R.id.ContactType)
-    private void ContactType(View view) {
-        if (pvCustomOptions != null)
-            pvCustomOptions.show();
     }
 
     @Event(R.id.importAddress)
@@ -246,25 +213,24 @@ if(ContactType!=null&&ContactType.equals("")){}else {}
                 new Add_App_contact(
                new Add_App_contact.app_contact(
                 contactUserName.getText().toString().trim(),
-                TakeMedicinApplication.macAdress,
+               "426426426",
                 inputRelation.getText().toString().trim(),
                 phoneNumber.getText().toString().trim(),
                 user_type))
         );
 
         try {
-            return new JSONArray(gson.toJson(addApp_contactList)).get(0).toString().trim();
+            return new JSONArray(MedicationHelper.gson.toJson(addApp_contactList)).get(0).toString().trim();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-return "";
+     return "";
     }
     @Event(R.id.iption)
     private void iption(View view){
         if(user_type==5)
         {
-
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "联系人类型").show();
             return;
         }
@@ -284,8 +250,9 @@ return "";
         RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.app_contacts);
         params.setBodyContent(getApp_contactJsonParam());
         params.setAsJsonContent(true);
-    /*    Log.e("params",params.toString());
-        Log.e("content",getApp_contactJsonParam());*/
+      Log.e("params",params.toString());
+        Log.e("params",getApp_contactJsonParam());
+      //  Log.e("content",getApp_contactJsonParam());
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

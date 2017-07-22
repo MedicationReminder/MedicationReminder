@@ -9,11 +9,14 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
+
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+
 import static android.webkit.WebSettings.LOAD_NO_CACHE;
 
 @ContentView(R.layout.activity_medication_introduction_web)
