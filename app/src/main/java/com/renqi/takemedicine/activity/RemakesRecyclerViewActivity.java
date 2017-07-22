@@ -149,6 +149,11 @@ public class RemakesRecyclerViewActivity extends EventbusActivity {
     }
 
     private void setMyAdapter(final List<Remarks> remarksList) {
+        if(param.equals("time"))
+            setToolBarTitle("服药时间提醒"); if(param.equals("food"))
+            setToolBarTitle("服药饮食提醒"); if(param.equals("water"))
+            setToolBarTitle("服药用水提醒"); if(param.equals("special"))
+            setToolBarTitle("特殊服药提醒");
         recyclerViewDialog.setLayoutManager(new LinearLayoutManager(this));
         commonAdapter = new CommonAdapter<Remarks>(RemakesRecyclerViewActivity.this,
                 R.layout.recyclerview_dialog_item, remarksList) {
