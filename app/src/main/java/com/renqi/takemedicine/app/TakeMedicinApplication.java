@@ -1,17 +1,14 @@
 package com.renqi.takemedicine.app;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.wifi.WifiManager;
 import android.util.Log;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 import com.google.gson.Gson;
-import com.renqi.takemedicine.base.response.LoginResponseBean;
+import com.renqi.takemedicine.bean.response.LoginResponseBean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +35,8 @@ public class TakeMedicinApplication extends Application {
 
     private SharedPreferences sp,sp2;
 
+    public static String wlan_mac;
+
     public static int isFirstTiem=0,isFirstWater=0,isFisterFood=0,isFirstSpecial=0;
 
     //单例获取app对象
@@ -58,7 +57,7 @@ public class TakeMedicinApplication extends Application {
 
         Utils.init(context);
 
-         sp = getSharedPreferences("login_state", Context.MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("login_state", Context.MODE_PRIVATE);
 
         boolean name = sp.getBoolean("state",true);
 
@@ -66,7 +65,7 @@ public class TakeMedicinApplication extends Application {
             //{"status":200,"device_token":"qqwwrwet009"}
             RequestParams params = new RequestParams(AppConstants.BASE_ACTION+AppConstants.DEVICE_TOKENS);
             params.setAsJsonContent(true);
-            params.setBodyContent("{\"device_token\":{\"device_token\":" +147566+ "}}");
+            params.setBodyContent("{\"device_token\":{\"device_token\":" +426426426 + "}}");
             x.http().post(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String result) {
@@ -74,10 +73,9 @@ public class TakeMedicinApplication extends Application {
                     Log.e("m_szDevIDShort", result);
                     LoginResponseBean loginResponseBean = new Gson().fromJson(result, LoginResponseBean.class);
                     if (loginResponseBean.getStatus() == 200) {
-                         sp = getSharedPreferences("login_state", Context.MODE_PRIVATE);
-                         sp.edit().putBoolean("state", false).commit();
-                    } else
-                        {
+                        SharedPreferences sp = getSharedPreferences("login_state", Context.MODE_PRIVATE);
+                        sp.edit().putBoolean("state", false).commit();
+                    } else {
                         SharedPreferences sp = getSharedPreferences("login_state", Context.MODE_PRIVATE);
                         sp.edit().putBoolean("state", false).commit();
                     }
@@ -88,7 +86,7 @@ public class TakeMedicinApplication extends Application {
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
                     Log.e("m_szDevIDShort", ex.toString());
-                    ToastUtils.showShortToast("后台接口异常！");
+                  //  ToastUtils.showShortToast("后台接口异常！");
                   //  sp.edit().putBoolean("state", true).commit();
                 }
 
@@ -110,8 +108,7 @@ public class TakeMedicinApplication extends Application {
         }else  getLocalMacAddress();
     }
 
-
-    public void getLocalMacAddress() {
+    public String getLocalMacAddress() {
         String mac = null;
         try {
             String path = "sys/class/net/eth0/address";
@@ -125,7 +122,7 @@ public class TakeMedicinApplication extends Application {
 
             if (mac == null) {
                 fis_name.close();
-                return ;
+                return "";
             }
             fis_name.close();
         } catch (Exception io) {
@@ -147,13 +144,13 @@ public class TakeMedicinApplication extends Application {
 
 
         if (mac == null) {
-            return ;
+            return "";
         } else {
            // sp2 = getSharedPreferences("is_mac", Context.MODE_PRIVATE);
             sp2.edit().putBoolean("state", true).commit();
             sp2.edit().putString("mac", mac.trim()).commit();
             macAdress=mac.trim();
-            return ;
+            return mac.trim();
         }
 
     }

@@ -4,14 +4,12 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
@@ -91,7 +89,9 @@ public class MedicationReminderActivity extends BaseActivity {
          initCustomOptionPicker();
          timeInterval();
          getke();
-         times();Reminder();rReminderType();
+         times();
+         Reminder();
+         rReminderType();
     }
     @Event(R.id.Remarks)
     private void  Remarks(View view)
@@ -102,8 +102,8 @@ public class MedicationReminderActivity extends BaseActivity {
     private void selectTime(View view){
 
         MedicationHelper.hideInputMethod(view);
-
         showDatePickDialog(DateType.TYPE_YMDHMS);
+
     }
     private void showDatePickDialog(DateType type) {
         DatePickDialog dialog = new DatePickDialog(this);
@@ -170,7 +170,9 @@ public class MedicationReminderActivity extends BaseActivity {
                 {
                     if(cardItem4.get(options1).getId()==0)
                     {
-                        ToastUtils.showShortToast("跳转");
+
+                        startActivityForResult(new Intent(MedicationReminderActivity.this,ContactActivity.class),1);
+
                         return;
                     }
                     String num=cardItem4.get(options1).getPickerViewText();
@@ -220,6 +222,20 @@ public class MedicationReminderActivity extends BaseActivity {
 
 
     }
+
+
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                Reminder.setText(data.getStringExtra("1"));
+                break;
+        }
+    }
+
     private void getke() {
 
         cardItem.add(new CardBean(0, "颗"));

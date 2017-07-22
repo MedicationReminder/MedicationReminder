@@ -4,28 +4,24 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.blankj.utilcode.util.ToastUtils;
-import com.google.gson.Gson;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
-import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.Add_App_contact;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.bean.CardBean;
@@ -67,8 +63,8 @@ public class AddContactActivity extends BaseActivity {
 
     private int user_type=5;
 
-
     Dialog contactUpload;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +77,8 @@ public class AddContactActivity extends BaseActivity {
     // ToastUtils.showShortToast( TakeMedicinApplication.macAdress);
 
     }
+
+
 
     @Event(R.id.ContactType)
     private void ContactType(View view) {
@@ -215,7 +213,7 @@ public class AddContactActivity extends BaseActivity {
                 new Add_App_contact(
                new Add_App_contact.app_contact(
                 contactUserName.getText().toString().trim(),
-                TakeMedicinApplication.testMacAdress,
+               "426426426",
                 inputRelation.getText().toString().trim(),
                 phoneNumber.getText().toString().trim(),
                 user_type))
@@ -233,7 +231,6 @@ public class AddContactActivity extends BaseActivity {
     private void iption(View view){
         if(user_type==5)
         {
-
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "联系人类型").show();
             return;
         }
@@ -254,6 +251,7 @@ public class AddContactActivity extends BaseActivity {
         params.setBodyContent(getApp_contactJsonParam());
         params.setAsJsonContent(true);
       Log.e("params",params.toString());
+        Log.e("params",getApp_contactJsonParam());
       //  Log.e("content",getApp_contactJsonParam());
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override

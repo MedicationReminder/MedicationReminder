@@ -1,7 +1,5 @@
 package com.renqi.takemedicine.base;
 
-import java.util.List;
-
 /**
  * Created by Xu Wei on 2017/7/15.
  */

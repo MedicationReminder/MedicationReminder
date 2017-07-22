@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/backgroundgrey"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.renqi.takemedicine.activity.ContactActivity">
+    <include
+        layout="@layout/base_toolbar" >
+    </include>
+
+    <com.renqi.takemedicine.swipemenulistview.SwipeMenuListView
+        android:id="@+id/lv_contact"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.renqi.takemedicine.swipemenulistview.SwipeMenuListView>
+</LinearLayout>

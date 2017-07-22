@@ -10,14 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.renqi.takemedicine.R;
 
-import org.greenrobot.eventbus.EventBus;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -42,6 +40,9 @@ public class BaseActivity extends AppCompatActivity {
         initSystemBarTint();
 
     }
+
+
+
     /**子类修改Toolbartitle**/
     protected void  setToolBarTitle(String tiele)
     {
