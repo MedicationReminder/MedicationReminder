@@ -4,9 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.renqi.takemedicine.R;
-import com.renqi.takemedicine.base.BaseActivity;
 
-public class MedicationIntroductionWebActivity extends BaseActivity {
+public class MedicationIntroductionWebActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
