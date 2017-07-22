@@ -113,6 +113,8 @@ public class ContactActivity extends BaseActivity {
                 Intent intent=new Intent();
 
                 intent.putExtra("1",contactResponseBean.getApp_contact().get(position).getName());
+
+                intent.putExtra("2", contactResponseBean.getApp_contact().get(position).getId());
                 setResult(1,intent);
                 finish();
             }
