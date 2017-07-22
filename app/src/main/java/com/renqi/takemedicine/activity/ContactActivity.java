@@ -23,6 +23,7 @@ import com.renqi.takemedicine.swipemenulistview.SwipeMenuListView;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -111,7 +112,6 @@ public class ContactActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent();
-
                 intent.putExtra("1",contactResponseBean.getApp_contact().get(position).getName());
                 setResult(1,intent);
                 finish();
@@ -166,7 +166,13 @@ public class ContactActivity extends BaseActivity {
             }
         });
     }
-
+@Event(R.id.home)
+private void home(View view){
+    Intent intent=new Intent();
+    intent.putExtra("1","");
+    setResult(1,intent);
+    finish();
+}
     private int dp2px(int dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }

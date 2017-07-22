@@ -1,6 +1,7 @@
 package com.renqi.takemedicine.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -50,9 +51,11 @@ public class KitDetailsActivity extends BaseActivity {
 
         RequestParams params = new RequestParams(AppConstants.BASE_ACTION + AppConstants.app_drugreminds);
         params.addBodyParameter("token", "426426426");
+        Log.e("params",params.toString());
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                Log.e("result",result);
                 kitDetialsResponseBean = new Gson().fromJson(result, KitDetialsResponseBean.class);
                 KitDetialsAdapter kitDetialsAdapter = new KitDetialsAdapter(getApplicationContext(), kitDetialsResponseBean, flag);
                 lvKitDetials.setAdapter(kitDetialsAdapter);
@@ -107,6 +110,7 @@ public class KitDetailsActivity extends BaseActivity {
             lvKitDetials.setAdapter(kitDetialsAdapter);
             if (kitDetialsResponseBean.getApp_register_reminds().size() == 0) {
                 ToastUtils.showLongToast("今日暂无挂号提醒！");
+
             }
         } else {
             flag = true;

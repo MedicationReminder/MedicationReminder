@@ -22,11 +22,15 @@ import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.Add_App_contact;
 import com.renqi.takemedicine.base.BaseActivity;
+import com.renqi.takemedicine.base.EventbusActivity;
 import com.renqi.takemedicine.bean.CardBean;
+import com.renqi.takemedicine.event.BaseEvents;
 import com.renqi.takemedicine.utils.MedicationHelper;
 import com.renqi.takemedicine.utils.ToastUtil;
 import com.renqi.takemedicine.utils.WeiboDialogUtils;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.xutils.common.Callback;
@@ -42,7 +46,7 @@ import java.util.Date;
 import java.util.List;
 
 @ContentView(R.layout.activity_medication_reminder)
-public class MedicationReminderActivity extends BaseActivity {
+public class MedicationReminderActivity extends EventbusActivity {
     private OptionsPickerView pvCustomOptions;
     private ArrayList<CardBean> cardItem = new ArrayList<>();
     private ArrayList<CardBean> cardItem2 = new ArrayList<>();
@@ -79,6 +83,9 @@ public class MedicationReminderActivity extends BaseActivity {
 
     @ViewInject(R.id.offorno)
     private ImageView offorno;
+
+    @ViewInject(R.id.Remarks)
+    private TextView Remarks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +175,7 @@ public class MedicationReminderActivity extends BaseActivity {
                 }
                 if(cardItem4.get(0).isSetPicker())
                 {
+                    cardItem4.get(0).setSetPicker(false);
                     if(cardItem4.get(options1).getId()==0)
                     {
 
@@ -231,7 +239,14 @@ public class MedicationReminderActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 1:
-                Reminder.setText(data.getStringExtra("1"));
+                try {
+                    if(!MedicationHelper.isNullOrEmpty(data.getStringExtra("1")))
+                        Reminder.setText(data.getStringExtra("1"));
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
                 break;
         }
     }
@@ -385,7 +400,7 @@ public class MedicationReminderActivity extends BaseActivity {
         List<Add_App_contact> addApp_contactList =new ArrayList<>();
         addApp_contactList.add(
                 new Add_App_contact(
-                        new Add_App_contact.app_drugremind(TakeMedicinApplication.macAdress,
+                        new Add_App_contact.app_drugremind(TakeMedicinApplication.testMacAdress,
                                  medName.getText().toString().trim(),
                                 textView4.getText().toString().trim()+editText3.getText().toString().trim(),
        reminderModeTyep,editText4.getText().toString(),selectTime.getText().toString().trim(),editText41.getText().toString().trim(),"58118895bc54f41aa766cce3"))
@@ -444,8 +459,11 @@ public class MedicationReminderActivity extends BaseActivity {
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                ToastUtils.showShortToast(result);
-              WeiboDialogUtils.closeDialog(medicationUpload);
+             //   ToastUtils.showShortToast(result);
+                Log.e("result",result);
+               WeiboDialogUtils.closeDialog(medicationUpload);
+                new ToastUtil(getApplicationContext(), R.layout.toast_complete, "添加提醒成功").show();
+                finish();
             }
 
             @Override
@@ -464,5 +482,15 @@ public class MedicationReminderActivity extends BaseActivity {
 
             }
         });
+    }
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onEvent(BaseEvents.sendRemarks event) {
+        // UI updates must run on MainThread
+
+        if (event == BaseEvents.sendRemarks.SEND_REMARKS) {
+
+            Remarks.setText(  event.getObject().toString().trim());
+        }
+
     }
 }

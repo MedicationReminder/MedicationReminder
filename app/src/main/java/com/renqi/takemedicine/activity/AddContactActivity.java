@@ -22,6 +22,7 @@ import com.bigkoo.pickerview.listener.CustomListener;
 import com.blankj.utilcode.util.ToastUtils;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
+import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.Add_App_contact;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.bean.CardBean;
@@ -177,10 +178,12 @@ public class AddContactActivity extends BaseActivity {
 
                     user_type=cardItem.get(options1).getId();
                     ContactType.setText(tx);
+                    cardItem.get(0).setSetPicker(false);
                 }else  if(cardItemRel.get(0).isSetPicker())
                 {
                     String tx = cardItemRel.get(options1).getPickerViewText();
                     inputRelation.setText(tx);
+                    cardItemRel.get(0).setSetPicker(false);
                 }
 
 
@@ -238,7 +241,7 @@ public class AddContactActivity extends BaseActivity {
                 new Add_App_contact(
                new Add_App_contact.app_contact(
                 contactUserName.getText().toString().trim(),
-               "426426426",
+                       TakeMedicinApplication.testMacAdress,
                 inputRelation.getText().toString().trim(),
                 phoneNumber.getText().toString().trim(),
                 user_type))
@@ -273,9 +276,10 @@ public class AddContactActivity extends BaseActivity {
         }
 
         RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.app_contacts);
-        params.setBodyContent(getApp_contactJsonParam());
         params.setAsJsonContent(true);
-      Log.e("params",params.toString());
+        params.setBodyContent(getApp_contactJsonParam());
+
+        Log.e("params",params.toString());
         Log.e("params",getApp_contactJsonParam());
       //  Log.e("content",getApp_contactJsonParam());
         x.http().post(params, new Callback.CommonCallback<String>() {

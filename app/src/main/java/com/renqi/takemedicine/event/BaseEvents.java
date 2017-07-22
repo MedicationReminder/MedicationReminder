@@ -43,4 +43,17 @@ public interface BaseEvents {
             return obj;
         }
     }
+    enum sendRemarks implements BaseEvents{
+        SEND_REMARKS;
+        private Object obj;
+        @Override
+        public void setObject(Object obj) {
+         this.obj=obj;
+        }
+
+        @Override
+        public Object getObject() {
+            return obj;
+        }
+    }
 }
