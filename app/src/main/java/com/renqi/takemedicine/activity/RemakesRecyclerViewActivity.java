@@ -261,6 +261,7 @@ public class RemakesRecyclerViewActivity extends EventbusActivity {
             BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSTIMELIST;
             event.setObject(remarksTimeList);
             EventBus.getDefault().postSticky(event);
+
         }
         if(param.equals("water")){
             BaseEvents.CommonEvent event = BaseEvents.CommonEvent.SENDREMARKSWATERLIST;
