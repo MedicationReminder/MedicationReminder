@@ -2,15 +2,26 @@ package com.renqi.takemedicine.activity;
 
 
 import android.Manifest;
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +35,9 @@ import com.renqi.takemedicine.utils.MedicationHelper;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -165,9 +179,11 @@ public class MainActivity extends BaseActivity {
     @Event(R.id.addContact)
     private void addContact(View view) {
 
-            startActivity(new Intent(MainActivity.this, AddContactActivity.class));
+        startActivity(new Intent(MainActivity.this, AddContactActivity.class));
+
 
     }
+
     @Event(R.id.im_clock)
     private void imClock(View view) {
         startActivity(new Intent(MainActivity.this, ContactActivity.class));
@@ -179,10 +195,27 @@ public class MainActivity extends BaseActivity {
         startActivity(new Intent(MainActivity.this, LogisticsWebActivity.class));
     }
 
+/*    @Event(R.id.national_drugstore)
+    private void nationalDrugstore(View view) {
+        startActivity(new Intent(MainActivity.this, NationalDrugstoreWebActivity.class));
     @Event(R.id.national_drugstore)
     private void nationalDrugstore(View view) {
         startActivity(new Intent(MainActivity.this, NationalDrugstoreWebActivity.class));
     }
+
+    @Event(R.id.medication_introduction)
+    private void medicationIntroduction(View view) {
+        startActivity(new Intent(MainActivity.this, MedicationIntroductionWebActivity.class));
+    }
+
+    @Event(R.id.related_drugs)
+    private void relatedDrugs(View view) {
+        startActivity(new Intent(MainActivity.this, RelatedDrugsWebActivity.class));
+    }*/
+
+    /*
+    * 此方法是主界面出现promptDialog按返回键dialog dismis 没有promptDialog时 finish
+    */
 
     @Event(R.id.medication_introduction)
     private void medicationIntroduction(View view) {

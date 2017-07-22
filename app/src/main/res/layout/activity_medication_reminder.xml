@@ -8,9 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.renqi.takemedicine.activity.MedicationReminderActivity">
-<include
-    layout="@layout/base_toolbar"
- ></include>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,97 +20,145 @@
 
         <LinearLayout
 
-            android:orientation="vertical"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3.5">
+            android:layout_weight="3.5"
+            android:background="@color/white"
+            android:orientation="vertical">
+
             <LinearLayout
-              android:showDividers="end"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:showDividers="end">
+
                 <TextView
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="药品名称"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
+                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="药品名称"
+                    android:textSize="20dp" />
 
                 <EditText
-                    android:gravity="right"
-                    android:layout_marginRight="20dp"
                     android:id="@+id/editText2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:gravity="right"
                     android:hint="输入药品名称"
                     android:textColorHint="@color/textColor" />
             </LinearLayout>
+
             <View
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="#999999" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
-                <TextView
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="药品用量"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
 
-                <EditText
-                    android:gravity="right"
-                    android:layout_marginRight="20dp"
-                    android:id="@+id/editText3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                <TextView
+
+                    android:textColor="@color/textColor2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
+                    android:text="药品用量"
+                    android:textSize="20dp" />
+                <ImageView
+                    android:id="@+id/reduce"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/list_icon_reduce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" />
+<TextView
+    android:layout_weight="0.15"
+    android:layout_width="0dp"
+    android:layout_height="match_parent" />
+                <TextView
+
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.2"
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="1"
+                     />
+
+                <ImageView
+                    android:id="@+id/add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+
+                    android:src="@mipmap/list_icon_add" />
+
+                <TextView
+
+                    android:id="@+id/editText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="20dp"
+                   android:layout_weight="0.2"
                     android:background="@null"
-                    android:hint="输入药品名称"
-                    android:textColorHint="@color/textColor" />
+                    android:gravity="right"
+                    android:hint="颗"
+                   />
+                <TextView
+                    android:id="@+id/editText5"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginRight="20dp"
+                    android:drawableLeft="@mipmap/list_icon_triangle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
             </LinearLayout>
+
             <View
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="#999999" />
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
-                <TextView
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="服用次数"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
 
-                <EditText
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:textColor="@color/textColor2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="服用次数"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:textSize="17dp"
                     android:id="@+id/editText4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:gravity="right"
                     android:hint="请选择"
                     android:textColorHint="@color/textColor" />
             </LinearLayout>
@@ -121,151 +166,172 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_weight="2"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:orientation="vertical">
+
             <LinearLayout
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
-                <TextView
-                    android:textSize="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="服药起始时间"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <TextView
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
+                    android:textColor="@color/textColor2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="服药起始时间"
+                    android:textSize="20dp" />
+
+                <TextView
                     android:id="@+id/selectTime"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:textSize="17dp"
+                    android:gravity="right"
                     android:text="请选择时间"
-                    android:textColor="@color/textColor" />
+                    android:textColor="@color/textColor"
+                    android:textSize="17dp" />
             </LinearLayout>
+
             <View
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="#999999" />
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
-                <TextView
-                    android:textSize="20dp"
-                    android:layout_marginTop="15dp"
-                    android:text="服药间隔时间"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
 
-                <EditText
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:textColor="@color/textColor2"
+                    android:id="@+id/textView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:text="服药间隔时间"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:textSize="17dp"
                     android:id="@+id/editText41"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:gravity="right"
                     android:hint="请选择"
                     android:textColorHint="@color/textColor" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
-                <TextView
-                    android:textSize="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="被提醒人"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
+            android:layout_marginTop="20dp"
+            android:layout_weight="3"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-                <EditText
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:id="@+id/editText"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="被提醒人"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:textSize="17dp"
+                    android:id="@+id/Reminder"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:gravity="right"
                     android:hint="请选择"
                     android:textColorHint="@color/textColor" />
             </LinearLayout>
+
             <View
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="#999999" />
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
-                <TextView
-                    android:textSize="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="提醒开启"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
 
-                <ImageView
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:id="@+id/offorno"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
+                    android:text="提醒开启"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:src="@drawable/slider_open"
+                    android:id="@+id/offorno"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+
+                    android:layout_marginTop="10dp"
+                   android:layout_marginRight="20dp"
                     android:background="@null"
-                    />
+                    android:gravity="right" />
             </LinearLayout>
+
             <View
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="#999999" />
+
             <LinearLayout
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <TextView
-                    android:textSize="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="提醒方式"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
+                    android:textColor="@color/textColor2"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="提醒方式"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/reminderMode"
@@ -283,35 +349,40 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:textSize="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="...."
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="...."
+                android:textSize="20dp" />
 
-                <TextView
-                    android:textSize="15dp"
-                    android:layout_marginRight="20dp"
-                    android:gravity="left"
-                    android:id="@+id/Remarks"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_weight="10"
-                    android:background="@null"
-                    android:hint="默认:(姓名)到吃(药名)的时..."
-                    android:textColorHint="@color/textColor" />
+            <TextView
+                android:id="@+id/Remarks"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="10"
+                android:background="@null"
+                android:gravity="left"
+                android:hint="默认:(姓名)到吃(药名)的时..."
+                android:textColorHint="@color/textColor"
+                android:textSize="15dp" />
 
         </LinearLayout>
     </LinearLayout>
+
+    <include
+    layout="@layout/base_toolbar"
+ ></include>
+
 </LinearLayout>
