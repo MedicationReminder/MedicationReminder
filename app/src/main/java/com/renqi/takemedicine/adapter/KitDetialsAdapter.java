@@ -81,6 +81,7 @@ public class KitDetialsAdapter extends BaseAdapter {
             if (convertView == null) {
                 viewHolder = new ViewHolder2();
                 //获得组件，实例化组件
+
                 convertView = layoutInflater.inflate(R.layout.item_kit_details_hosptial, null);
                 viewHolder.hosptial_name = (TextView) convertView.findViewById(R.id.item_hosptial_name);
                 viewHolder.time = (TextView) convertView.findViewById(R.id.item_register_time);
