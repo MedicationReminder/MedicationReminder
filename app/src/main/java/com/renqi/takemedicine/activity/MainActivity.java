@@ -49,8 +49,8 @@ public class MainActivity extends BaseActivity {
             Manifest.permission.READ_CONTACTS
     };
     private List<String> mPermissionList = new ArrayList<>();
-
-    PromptButton promptButton,promptButton1;
+    /*private List<PromptButton> listpromptButton=new ArrayList<>();*/
+    PromptButton promptButton,promptButton1,promptButtonlogist,promptButtonHealthy,promptButtonDoctorOnline;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +80,27 @@ public class MainActivity extends BaseActivity {
             }
         });
         promptButton1.setTextColor(Color.parseColor("#FF4081"));
+        promptButtonlogist=new PromptButton("物流查询", new PromptButtonListener() {
+            @Override
+            public void onClick(PromptButton promptButton) {
+                startActivity(new Intent(MainActivity.this, LogisticsWebActivity.class));
+            }
+        });
+        promptButtonlogist.setTextColor(Color.parseColor("#59acdf"));
+        promptButtonHealthy=new PromptButton("健康头条", new PromptButtonListener() {
+            @Override
+            public void onClick(PromptButton promptButton) {
+                ToastUtils.showShortToast("健康头条");
+            }
+        });
+        promptButtonHealthy.setTextColor(Color.parseColor("#59acdf"));
+        promptButtonDoctorOnline=new PromptButton("药师在线咨询", new PromptButtonListener() {
+            @Override
+            public void onClick(PromptButton promptButton) {
+                ToastUtils.showShortToast("药师在线咨询");
+            }
+        });
+        promptButtonDoctorOnline.setTextColor(Color.parseColor("#59acdf"));
     }
 
 
@@ -156,8 +177,8 @@ public class MainActivity extends BaseActivity {
         //设置显示的文字大小及颜色
         promptDialog.getAlertDefaultBuilder().textSize(12).textColor(Color.GRAY);
         //默认两个按钮为Alert对话框，大于三个按钮的为底部SHeet形式展现
-        promptDialog.showAlertSheet("", true, cancle, promptButton,promptButton1
-        );
+        promptDialog.showAlertSheet("", true, cancle, promptButton,promptButton1,promptButtonlogist,
+                promptButtonHealthy,promptButtonDoctorOnline);
     }
     @Event(R.id.addContact)
     private void addContact(View view)
@@ -174,7 +195,7 @@ public class MainActivity extends BaseActivity {
 
     @Event(R.id.logistics)
     private void logistics(View view) {
-        startActivity(new Intent(MainActivity.this, LogisticsWebActivity.class));
+
     }
     @Event(R.id.national_drugstore)
     private void nationalDrugstore(View view) {

@@ -45,7 +45,7 @@ import java.util.List;
 public class AddContactActivity extends BaseActivity {
     private OptionsPickerView pvCustomOptions;
     private ArrayList<CardBean> cardItem = new ArrayList<>();
-
+    private ArrayList<CardBean> cardItemRel = new ArrayList<>();
     @ViewInject(R.id.ContactType)
     private TextView ContactType;
 
@@ -56,7 +56,7 @@ public class AddContactActivity extends BaseActivity {
     private EditText phoneNumber;
 
     @ViewInject(R.id.inputRelation)
-    private EditText inputRelation;
+    private TextView inputRelation;
 
     @ViewInject(R.id.iption)
     private TextView iption;
@@ -70,7 +70,7 @@ public class AddContactActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //    setContentView(R.layout.activity_add_contact);
-        getCardData();
+        getCardData();getRelData();
         initCustomOptionPicker();//初始化底部选择窗口
         setIption(AppConstants.iption.complete);
         setToolBarTitle(AppConstants.ToolBarTitle.addContacts);
@@ -86,12 +86,21 @@ public class AddContactActivity extends BaseActivity {
         if (pvCustomOptions != null) {
             pvCustomOptions.show();
             MedicationHelper.hideInputMethod(view);
-
+            pvCustomOptions.setPicker(cardItem);//添加数据
+            cardItem.get(0).setSetPicker(true);
         }else {
             ToastUtils.showShortToast("选择框尚未初始化");
         }
     }
-
+    @Event(R.id.inputRelation)
+    private void inputRelation(View view){
+        if (pvCustomOptions != null) {
+            MedicationHelper.hideInputMethod(view);
+            pvCustomOptions.setPicker(cardItemRel);//添加数据
+            cardItemRel.get(0).setSetPicker(true);
+            pvCustomOptions.show();
+        }
+    }
     @Event(R.id.importAddress)
     private void importAddress(View view) {
 
@@ -162,10 +171,19 @@ public class AddContactActivity extends BaseActivity {
         pvCustomOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
-                String tx = cardItem.get(options1).getPickerViewText();
-                 user_type=cardItem.get(options1).getId();
-                ContactType.setText(tx);
+                if(cardItem.get(0).isSetPicker()){
+                    //返回的分别是三个级别的选中位置
+                    String tx = cardItem.get(options1).getPickerViewText();
+
+                    user_type=cardItem.get(options1).getId();
+                    ContactType.setText(tx);
+                }else  if(cardItemRel.get(0).isSetPicker())
+                {
+                    String tx = cardItemRel.get(options1).getPickerViewText();
+                    inputRelation.setText(tx);
+                }
+
+
             }
         })
                 .setLayoutRes(R.layout.pickerview_custom_options, new CustomListener() {
@@ -175,7 +193,7 @@ public class AddContactActivity extends BaseActivity {
                         final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
                         //   final TextView tvAdd = (TextView) v.findViewById(R.id.tv_add);
                         TextView ivCancel = (TextView) v.findViewById(R.id.iv_cancel);
-                        pickerTitle.setText("请选择联系人类型");
+                        pickerTitle.setText("请选择");
                         tvSubmit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -196,7 +214,7 @@ public class AddContactActivity extends BaseActivity {
                 .isDialog(false)
                 .build();
 
-        pvCustomOptions.setPicker(cardItem);//添加数据
+
 
     }
 
@@ -207,6 +225,13 @@ public class AddContactActivity extends BaseActivity {
         cardItem.add(new CardBean(3, "医生使用"));
     }
 
+    private void getRelData() {
+        cardItemRel.add(new CardBean(0, "医患"));
+        cardItemRel.add(new CardBean(1, "客户"));
+        cardItemRel.add(new CardBean(2, "好友"));
+        cardItemRel.add(new CardBean(3, "家属"));
+        cardItemRel.add(new CardBean(4,"同事"));
+    }
     private String getApp_contactJsonParam(){
         List<Add_App_contact> addApp_contactList =new ArrayList<>();
         addApp_contactList.add(
@@ -280,6 +305,8 @@ public class AddContactActivity extends BaseActivity {
         contactUpload = WeiboDialogUtils.createLoadingDialog(AddContactActivity.this, "保存中...");
         contactUpload.show();
     }
+
+
     @Override
     public void onBackPressed() {
 

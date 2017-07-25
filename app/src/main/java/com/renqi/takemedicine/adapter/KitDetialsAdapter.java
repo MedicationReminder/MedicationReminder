@@ -60,46 +60,43 @@ public class KitDetialsAdapter extends BaseAdapter {
                 viewHolder = new ViewHolder();
                 //获得组件，实例化组件
                 convertView = layoutInflater.inflate(R.layout.item_kit_details, null);
+
                 viewHolder.name = (TextView) convertView.findViewById(R.id.item_drugs_name);
                 viewHolder.time = (TextView) convertView.findViewById(R.id.item_drugs_time);
                 viewHolder.eat_count = (TextView) convertView.findViewById(R.id.item_drugs_consumption);
                 viewHolder.counts = (TextView) convertView.findViewById(R.id.item_drugs_frequency);
                 viewHolder.time_for = (TextView) convertView.findViewById(R.id.item_drugs_intervaltime);
-
-                viewHolder.name.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getName());
-                viewHolder.time.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getTime());
-                viewHolder.eat_count.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getEat_count()+"粒/颗");
-                viewHolder.counts.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getCounts()+"次");
-                viewHolder.time_for.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getTime_for()+"小时");
-
-
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
+            viewHolder.name.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getName());
+            viewHolder.time.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getTime());
+            viewHolder.eat_count.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getEat_count()+"粒/颗");
+            viewHolder.counts.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getCounts()+"次");
+            viewHolder.time_for.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getTime_for()+"小时");
             return convertView;
         }else {
             ViewHolder2 viewHolder;
             if (convertView == null) {
                 viewHolder = new ViewHolder2();
                 //获得组件，实例化组件
+
                 convertView = layoutInflater.inflate(R.layout.item_kit_details_hosptial, null);
                 viewHolder.hosptial_name = (TextView) convertView.findViewById(R.id.item_hosptial_name);
                 viewHolder.time = (TextView) convertView.findViewById(R.id.item_register_time);
                 viewHolder.characteristic_name = (TextView) convertView.findViewById(R.id.item_characteristic_name);
                 viewHolder.doctor_name = (TextView) convertView.findViewById(R.id.item_doctor_name);
 
-
-                viewHolder.hosptial_name.setText(kitDetialsResponseBean.getApp_register_reminds().get(position).getHosptial_name());
-                viewHolder.time.setText(kitDetialsResponseBean.getApp_register_reminds().get(position).getTime());
-                viewHolder.characteristic_name.setText(kitDetialsResponseBean.getApp_register_reminds().get(position).getCharacteristic_name());
-                viewHolder.doctor_name.setText(kitDetialsResponseBean.getApp_register_reminds().get(position).getDoctor_name());
-
-
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder2) convertView.getTag();
             }
+            viewHolder.hosptial_name.setText(kitDetialsResponseBean.getApp_register_reminds().get(position).getHosptial_name());
+            viewHolder.time.setText(kitDetialsResponseBean.getApp_register_reminds().get(position).getTime());
+            viewHolder.characteristic_name.setText(kitDetialsResponseBean.getApp_register_reminds().get(position).getCharacteristic_name());
+            viewHolder.doctor_name.setText(kitDetialsResponseBean.getApp_register_reminds().get(position).getDoctor_name());
+
             return convertView;
         }
     }

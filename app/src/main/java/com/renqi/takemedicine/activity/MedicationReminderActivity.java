@@ -54,6 +54,7 @@ public class MedicationReminderActivity extends BaseActivity {
     private TextView iption;
     int a=1;
     int reminderModeTyep;
+    String contactID;
     @ViewInject(R.id.medName)
     private EditText medName;
 
@@ -231,7 +232,11 @@ public class MedicationReminderActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 1:
-                Reminder.setText(data.getStringExtra("1"));
+                if (data != null) {
+                    Reminder.setText(data.getStringExtra("1"));
+                    contactID = data.getStringExtra("2");
+                }
+
                 break;
         }
     }
@@ -388,7 +393,7 @@ public class MedicationReminderActivity extends BaseActivity {
                         new Add_App_contact.app_drugremind(TakeMedicinApplication.macAdress,
                                  medName.getText().toString().trim(),
                                 textView4.getText().toString().trim()+editText3.getText().toString().trim(),
-       reminderModeTyep,editText4.getText().toString(),selectTime.getText().toString().trim(),editText41.getText().toString().trim(),"58118895bc54f41aa766cce3"))
+       reminderModeTyep,editText4.getText().toString(),selectTime.getText().toString().trim(),editText41.getText().toString().trim(),contactID))
         );
 
         try {

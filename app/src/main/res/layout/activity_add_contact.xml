@@ -118,7 +118,8 @@
                 android:text="关系"
                 android:textSize="25dp" />
 
-            <EditText
+            <TextView
+                android:textSize="18dp"
                 android:id="@+id/inputRelation"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
