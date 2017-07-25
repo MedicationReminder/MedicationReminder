@@ -25,6 +25,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import me.leefeng.promptlibrary.PromptButton;
@@ -61,7 +62,7 @@ public class MainActivity extends BaseActivity {
         }
 
         setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
-        dateText.setText(MedicationHelper.getTime());
+        dateText.setText(MedicationHelper.getWeek(new Date())+MedicationHelper.getTime());
         //创建对象
         promptDialog = new PromptDialog(this);
         //设置自定义属性
