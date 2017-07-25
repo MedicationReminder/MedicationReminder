@@ -243,66 +243,7 @@ public class RegisteredReminderActivity extends BaseActivity {
     private void ipition(View view)
     {
 
-//        if(MedicationHelper.isNullOrEmpty(medName.getText().toString().trim()))
-//        {
-//            new ToastUtil(getApplicationContext(), R.layout.toast_center, "药名").show();
-//            return;
-//        }
-//
-//        if(MedicationHelper.isNullOrEmpty(editText4.getText().toString().trim()))
-//        {
-//            new ToastUtil(getApplicationContext(), R.layout.toast_center, "服用次数").show();
-//            return;
-//        }
-//        if(MedicationHelper.isNullOrEmpty(selectTime.getText().toString().trim()))
-//        {
-//            new ToastUtil(getApplicationContext(), R.layout.toast_center, "服药起始时间").show();
-//            return;
-//        }
-//        if(MedicationHelper.isNullOrEmpty(editText41.getText().toString().trim()))
-//        {
-//            new ToastUtil(getApplicationContext(), R.layout.toast_center, "服药间隔时间").show();
-//            return;
-//        }
-//        if(MedicationHelper.isNullOrEmpty(Reminder.getText().toString().trim()))
-//        {
-//            new ToastUtil(getApplicationContext(), R.layout.toast_center, "被提醒人").show();
-//            return;
-//        }
-//        if(MedicationHelper.isNullOrEmpty(reminderMode.getText().toString().trim()))
-//        {
-//            new ToastUtil(getApplicationContext(), R.layout.toast_center, "提醒方式").show();
-//            return;
-//        }
-//        medicationUpload = WeiboDialogUtils.createLoadingDialog(RegisteredReminderActivity.this, "上传用药信息中...");
-//        medicationUpload.show();
-//        RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.app_drugreminds);
-//        params.setAsJsonContent(true);
-//        params.setBodyContent(getApp_contactJsonParam());
-//        Log.e("json",getApp_contactJsonParam());
-//        x.http().post(params, new Callback.CommonCallback<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//                ToastUtils.showShortToast(result);
-//                WeiboDialogUtils.closeDialog(medicationUpload);
-//            }
-//
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//                ToastUtils.showShortToast(ex.getMessage().toString().trim());
-//                WeiboDialogUtils.closeDialog(medicationUpload);
-//            }
-//
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//
-//            }
-//        });
+
     }
 
     @Override
