@@ -371,6 +371,7 @@ public class RegisteredReminderActivity extends BaseActivity {
             @Override
             public void onFinished() {
 
+
             }
         });
     }
