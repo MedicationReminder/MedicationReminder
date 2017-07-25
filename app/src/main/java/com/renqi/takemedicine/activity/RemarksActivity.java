@@ -37,7 +37,9 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @ContentView(R.layout.activity_remarks)
 public class RemarksActivity extends EventbusActivity {
@@ -45,9 +47,11 @@ public class RemarksActivity extends EventbusActivity {
     private List<Remarks> remarkseFoodList=new ArrayList<>();
     private List<Remarks> remarksTimeList=new ArrayList<>();
     private List<Remarks> remarksWaterList=new ArrayList<>();
+    private List<Remarks> remarksDrugbestsList=new ArrayList<>();
+
     @ViewInject(R.id.textRemarks)
     private EditText textRemarks;
-    private String textRemarksString="",textRemarkTime="",textRemarkWater="",textRemarkFood="",textRemarkSpecial="";
+    private String textRemarksDrugbests="",textRemarkTime="",textRemarkWater="",textRemarkFood="",textRemarkSpecial="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,7 @@ public class RemarksActivity extends EventbusActivity {
     }
     @Event(R.id.editText5)
     private void  editText5(View view){
-        TipDialog tipDialog=new TipDialog(RemarksActivity.this);
+    /*    TipDialog tipDialog=new TipDialog(RemarksActivity.this);
         tipDialog.show();
         WindowManager windowManager = getWindowManager();
         Display display = windowManager.getDefaultDisplay();
@@ -68,6 +72,16 @@ public class RemarksActivity extends EventbusActivity {
         tipDialog.getWindow().setAttributes(lp);
         tipDialog.setCancelable(false);
         //点击dialog以外的地方dialog不消失*/
+        Intent intent=new Intent(RemarksActivity.this,RemakesRecyclerViewActivity.class);
+        intent.putExtra("type","drugbests");
+        startActivityForResult(intent,1);
+        if(TakeMedicinApplication.isFirstApp_drugbests==1){
+
+            BaseEvents.myEvent event = BaseEvents.myEvent.SENDREMARKSDRUGBESTS;
+            event.setObject(remarksDrugbestsList);
+            EventBus.getDefault().postSticky(event);
+        }
+
     }
     @Event(R.id.takeMedRemind)
     private void takeMedRemind(View v)
@@ -118,10 +132,16 @@ public class RemarksActivity extends EventbusActivity {
         EventBus.getDefault().postSticky(event2);
         }
     }
+
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onEvent(BaseEvents.CommonEvent event) {
 
         // UI updates must run on MainThread
+        if(event==BaseEvents.CommonEvent.SENDREMARKSDRUGBESTS)
+        {
+            if(TakeMedicinApplication.isFirstApp_drugbests==1)
+            remarksDrugbestsList= (List<Remarks>) event.getObject();
+        }
         if(event==BaseEvents.CommonEvent.SENDREMARKSFOODLIST) {
             if (TakeMedicinApplication.isFisterFood == 1) {
                 remarkseFoodList = (List<Remarks>) event.getObject();
@@ -174,15 +194,28 @@ public class RemarksActivity extends EventbusActivity {
                 textRemarkSpecial =textRemarkSpecial+ r.data;
             }
         }
-        textRemarks.setText(textRemarkTime+textRemarkWater+textRemarkFood+textRemarkSpecial);
-        textRemarkFood="";textRemarkTime="";textRemarkWater="";textRemarkSpecial="";
+        for (Remarks r : remarksDrugbestsList) {
+            if (r.isSelect) {
+                Log.e("选中", r.data + "  id是  " + r.id);
+                textRemarksDrugbests =textRemarksDrugbests+ r.data;
+            }
+        }
+        textRemarks.setText(textRemarkTime+textRemarkWater+textRemarkFood+textRemarkSpecial+textRemarksDrugbests);
+        textRemarkFood="";textRemarkTime="";textRemarkWater="";textRemarkSpecial="";textRemarksDrugbests="";
     }
     @Event(R.id.iption)
     private void iption(View view)
     {
+
         BaseEvents.sendRemarks event = BaseEvents.sendRemarks.SEND_REMARKS;
         event.setObject(textRemarks.getText().toString().trim());
         EventBus.getDefault().postSticky(event);
+         TakeMedicinApplication.isFirstSpecial=0;
+        TakeMedicinApplication.isFirstWater=0;
+        TakeMedicinApplication.isFisterFood=0;
+        TakeMedicinApplication.isFirstTiem=0;
+        TakeMedicinApplication.isFirstApp_drugbests=0;
+       // moveTaskToBack(true);
         finish();
 
     }

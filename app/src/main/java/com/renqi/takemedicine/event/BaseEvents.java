@@ -9,7 +9,8 @@ public interface BaseEvents {
     Object getObject();
     //事件定义
     enum CommonEvent implements BaseEvents {
-        SENDREMARKS,
+
+        SENDREMARKSDRUGBESTS,
         SENDREMARKSFOODLIST,
         SENDREMARKSWATERLIST
         ,SENDREMARKSPEICALLIST
@@ -27,7 +28,7 @@ public interface BaseEvents {
     }
     // ... 其他事件定义
     enum myEvent implements BaseEvents {
-        SENDREMARKSFORMYSELF
+         SENDREMARKSDRUGBESTS
         ,SENDREMARKSFOODLIST
         ,SENDREMARKSWATERLIST
         ,SENDREMARKSPEICALLIST
