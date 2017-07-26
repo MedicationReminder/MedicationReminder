@@ -49,4 +49,5 @@ public class AppConstants {
     public static  String HOSPTIALS="/app_drugreminds/hosptials";
 
 
+    public static  String APP_DRUGBEST="app_drugbest";//最佳吃药时间
 }

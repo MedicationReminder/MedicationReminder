@@ -196,7 +196,7 @@ public class MainActivity extends BaseActivity {
 
     @Event(R.id.logistics)
     private void logistics(View view) {
-
+         startActivity(new Intent(MainActivity.this,SearchActivity.class));
     }
     @Event(R.id.national_drugstore)
     private void nationalDrugstore(View view) {

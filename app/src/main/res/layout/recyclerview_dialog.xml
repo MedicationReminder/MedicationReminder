@@ -9,7 +9,7 @@
 <android.support.v7.widget.RecyclerView
 android:layout_marginTop="10dp"
     android:id="@+id/recyclerViewDialog"
-    android:layout_marginLeft="20dp"
+
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="8"
