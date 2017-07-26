@@ -23,4 +23,8 @@
 
     <color name="kitUnderline1">#BCF0C2</color>
     <color name="kitUnderline2">#C8C7CC</color>
+
+
+    <color name="spinner">#2dbe83</color>
+
 </resources>

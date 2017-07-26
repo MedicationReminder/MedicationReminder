@@ -21,7 +21,6 @@ import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.Add_App_contact;
-import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.base.EventbusActivity;
 import com.renqi.takemedicine.bean.CardBean;
 import com.renqi.takemedicine.event.BaseEvents;
@@ -86,6 +85,8 @@ public class MedicationReminderActivity extends EventbusActivity {
 
     @ViewInject(R.id.Remarks)
     private TextView Remarks;
+
+    private String contactID="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,14 +240,11 @@ public class MedicationReminderActivity extends EventbusActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 1:
-                try {
-                    if(!MedicationHelper.isNullOrEmpty(data.getStringExtra("1")))
-                        Reminder.setText(data.getStringExtra("1"));
-                }catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
 
+                if (data != null) {
+                    Reminder.setText(data.getStringExtra("1"));
+                    contactID = data.getStringExtra("2");
+                }
                 break;
         }
     }
@@ -403,7 +401,7 @@ public class MedicationReminderActivity extends EventbusActivity {
                         new Add_App_contact.app_drugremind(TakeMedicinApplication.testMacAdress,
                                  medName.getText().toString().trim(),
                                 textView4.getText().toString().trim()+editText3.getText().toString().trim(),
-       reminderModeTyep,editText4.getText().toString(),selectTime.getText().toString().trim(),editText41.getText().toString().trim(),"58118895bc54f41aa766cce3"))
+       reminderModeTyep,editText4.getText().toString(),selectTime.getText().toString().trim(),editText41.getText().toString().trim(),contactID))
         );
 
         try {

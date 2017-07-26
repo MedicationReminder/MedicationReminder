@@ -8,10 +8,10 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.renqi.takemedicine.R;
-import com.renqi.takemedicine.adapter.NatDrugstoreAdapter;
+import com.renqi.takemedicine.adapter.SearchDrugStoresAdapter;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
-import com.renqi.takemedicine.bean.response.NationalDrugstoreResponseBean;
+import com.renqi.takemedicine.bean.response.SearchDrugStoresResponseBean;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -19,25 +19,25 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-@ContentView(R.layout.activity_national_drugstore_web)
-public class NationalDrugstoreWebActivity extends BaseActivity {
+@ContentView(R.layout.activity_search_drug_stores)
+public class SearchDrugStoresActivity extends BaseActivity {
     @ViewInject(R.id.nationalDrugstoreListView)
     private ListView nationalDrugstoreListView;
-    private NatDrugstoreAdapter natDrugstoreAdapter;
-    private NationalDrugstoreResponseBean nationalDrugstoreResponseBean;
+private SearchDrugStoresResponseBean searchDrugStoresResponseBean;
+    private SearchDrugStoresAdapter searchDrugStoresAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolBarTitle(AppConstants.ToolBarTitle.nationalDrugstore);
+        setToolBarTitle(AppConstants.ToolBarTitle.nationalDrugstore1);
 
-        RequestParams requestParams=new RequestParams(AppConstants.BASE_ACTION+AppConstants.HOSPTIALS);
-
+        RequestParams requestParams=new RequestParams("http://www.yiliaode.com/api/v1/app_drugreminds/seach_drug_stores");
+        requestParams.addBodyParameter("name",this.getIntent().getExtras().getString("flag"));
         x.http().get(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                nationalDrugstoreResponseBean=new Gson().fromJson(result,NationalDrugstoreResponseBean.class);
-                natDrugstoreAdapter=new NatDrugstoreAdapter(NationalDrugstoreWebActivity.this,nationalDrugstoreResponseBean);
-                nationalDrugstoreListView.setAdapter(natDrugstoreAdapter);
+                searchDrugStoresResponseBean=new Gson().fromJson(result,SearchDrugStoresResponseBean.class);
+                searchDrugStoresAdapter=new SearchDrugStoresAdapter(SearchDrugStoresActivity.this,searchDrugStoresResponseBean);
+                nationalDrugstoreListView.setAdapter(searchDrugStoresAdapter);
             }
 
             @Override
@@ -63,7 +63,7 @@ public class NationalDrugstoreWebActivity extends BaseActivity {
             switch (msg.what) {
                 case 0:
 
-                    natDrugstoreAdapter.notifyDataSetChanged();
+                    searchDrugStoresAdapter.notifyDataSetChanged();
                     Log.e("position","加载图片完成");
                     break;
 

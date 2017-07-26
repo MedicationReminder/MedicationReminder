@@ -21,9 +21,11 @@ public class AppConstants {
         public static final String takemedicationReminder="吃药提醒";
         public static final String  registrationReminder="挂号提醒";
         public static final String  relatedDrugs="相关药品";
+        public static final String  relatedDrugs1="搜索药品";
         public static final String  nationalDrugstore="全国药店";
-        public static final String  medicationIntroduction="用药攻略";
+        public static final String  nationalDrugstore1="搜索药店";
 
+        public static final String  medicationIntroduction="用药攻略";
         public static final String  kitDetials="用药详情";
         public static final String  kitDetials2="挂号详情";
 
@@ -43,5 +45,11 @@ public class AppConstants {
     public static  String ALL_CONTACTS="app_contacts";
     public static  String DELETE_CONTACTS="app_contacts/destory";
     public static  String APP_CHOICE_NAME="app_choice_name";
+    public static  String APP_REGISTERREMINDS="app_registerreminds/";
+
+    public static  String SEARCHDRUGSNAME="/app_drugreminds/search_drugs_name";
+    public static  String HOSPTIALS="/app_drugreminds/hosptials";
+
+
     public static  String APP_DRUGBEST="app_drugbest";//最佳吃药时间
 }

@@ -8,29 +8,31 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.renqi.takemedicine.R;
-import com.renqi.takemedicine.bean.response.ContactResponseBean;
+
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created by Z on 2017/7/15.
+ * Created by zsj on 2017/7/26.
  */
 
-public class ContactAdapter extends BaseAdapter {
+public class HistoricalRecordAdapter extends BaseAdapter {
     Context mContext;
-    ContactResponseBean contactResponseBean;
+    List<Map<String, String>> getInfo;
     LayoutInflater layoutInflater;
-    public ContactAdapter( Context mContext,ContactResponseBean contactResponseBean){
+    public HistoricalRecordAdapter( Context mContext, List<Map<String, String>> getInfo){
         this.mContext = mContext;
-        this.contactResponseBean = contactResponseBean;
-        this.layoutInflater=LayoutInflater.from(mContext);
+        this.getInfo = getInfo;
+        this.layoutInflater= LayoutInflater.from(mContext);
     }
     @Override
     public int getCount() {
-        return contactResponseBean.getApp_contact().size();
+        return getInfo.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return contactResponseBean.getApp_contact().get(position);
+        return getInfo.get(position).get(position);
     }
 
     @Override
@@ -44,21 +46,22 @@ public class ContactAdapter extends BaseAdapter {
         if(convertView==null){
             viewHolder = new ViewHolder();
             //获得组件，实例化组件
-            convertView=layoutInflater.inflate(R.layout.item_contact, null);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.item_contact_name);
-            viewHolder.phone = (TextView) convertView.findViewById(R.id.item_contact_phone);
+            convertView=layoutInflater.inflate(R.layout.item_historical_record, null);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.name);
 
             convertView.setTag(viewHolder);
         }else{
             viewHolder=(ViewHolder) convertView.getTag();
         }
+        if(getInfo.size()==1&&getInfo.get(0).get("search")!=null){
+            viewHolder.name.setText("当前历史记录！");
+        }else {
+            viewHolder.name.setText(getInfo.get(position).get("search_name"));
 
-        viewHolder.name.setText(contactResponseBean.getApp_contact().get(position).getName());
-        viewHolder.phone.setText(contactResponseBean.getApp_contact().get(position).getPhone());
+        }
         return convertView;
     }
     class ViewHolder{
         TextView name;
-        TextView phone;
     }
 }

@@ -57,6 +57,10 @@ public class KitDetailsActivity extends BaseActivity {
             public void onSuccess(String result) {
                 Log.e("result",result);
                 kitDetialsResponseBean = new Gson().fromJson(result, KitDetialsResponseBean.class);
+
+
+                kitDetialsResponseBean.getApp_drugreminds().size();
+
                 KitDetialsAdapter kitDetialsAdapter = new KitDetialsAdapter(getApplicationContext(), kitDetialsResponseBean, flag);
                 lvKitDetials.setAdapter(kitDetialsAdapter);
                 if (kitDetialsResponseBean.getApp_drugreminds().size() == 0) {
