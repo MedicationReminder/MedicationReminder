@@ -1,6 +1,10 @@
 package com.renqi.takemedicine.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.renqi.takemedicine.R;
+import com.renqi.takemedicine.activity.RelatedDrugsWebActivity;
 import com.renqi.takemedicine.bean.response.RelatedDrugsWebResponseBean;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zsj on 2017/7/25.
@@ -19,10 +31,17 @@ public class RelDrugsAdapter extends BaseAdapter {
     Context mContext;
 RelatedDrugsWebResponseBean relatedDrugsWebResponseBean;
     LayoutInflater layoutInflater;
+    List<Bitmap> bitmapList;
     public RelDrugsAdapter( Context mContext,RelatedDrugsWebResponseBean relatedDrugsWebResponseBean){
         this.mContext = mContext;
         this.relatedDrugsWebResponseBean = relatedDrugsWebResponseBean;
         this.layoutInflater= LayoutInflater.from(mContext);
+        bitmapList = new ArrayList<>();
+        int size = relatedDrugsWebResponseBean.getDrug_names().size();
+        for (int i = 0; i < size; i++) {
+            bitmapList.add(i, null);
+        }
+        Log.e("position", "构造方法");
     }
     @Override
     public int getCount() {
@@ -62,7 +81,13 @@ RelatedDrugsWebResponseBean relatedDrugsWebResponseBean;
         viewHolder.code.setText("批号："+relatedDrugsWebResponseBean.getDrug_names().get(position).getCode());
         viewHolder.price.setText(relatedDrugsWebResponseBean.getDrug_names().get(position).getPrice());
 
-        viewHolder.icon.setImageResource(R.mipmap.example);
+        if (bitmapList.get(position) == null) {
+
+            new MyThread(relatedDrugsWebResponseBean.getDrug_names().get(position).getImage(), position).start();
+
+        } else {
+            viewHolder.icon.setImageBitmap(bitmapList.get(position));
+        }
         return convertView;
     }
     class ViewHolder{
@@ -72,5 +97,40 @@ RelatedDrugsWebResponseBean relatedDrugsWebResponseBean;
         TextView price;
         ImageView icon;
     }
+    class MyThread extends Thread {
+
+        private String imageUrl;
+        int position;
+
+        public MyThread(String imageUrl, int position) {
+            this.imageUrl = imageUrl;
+            this.position = position;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            Bitmap mBitmap = null;
+
+
+            HttpURLConnection conn = null;
+            try {
+                URL url = new URL(imageUrl);
+                conn = (HttpURLConnection) url.openConnection();
+                InputStream is = conn.getInputStream();
+                mBitmap = BitmapFactory.decodeStream(is);
+                bitmapList.add(position, mBitmap);
+                Message message = new Message();
+                message.what = 0;
+                ((RelatedDrugsWebActivity)mContext).MyHendler.sendMessage(message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
+
 }
 

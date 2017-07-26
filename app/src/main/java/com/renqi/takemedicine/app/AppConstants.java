@@ -21,9 +21,11 @@ public class AppConstants {
         public static final String takemedicationReminder="吃药提醒";
         public static final String  registrationReminder="挂号提醒";
         public static final String  relatedDrugs="相关药品";
+        public static final String  relatedDrugs1="搜索药品";
         public static final String  nationalDrugstore="全国药店";
-        public static final String  medicationIntroduction="用药攻略";
+        public static final String  nationalDrugstore1="搜索药店";
 
+        public static final String  medicationIntroduction="用药攻略";
         public static final String  kitDetials="用药详情";
         public static final String  kitDetials2="挂号详情";
 

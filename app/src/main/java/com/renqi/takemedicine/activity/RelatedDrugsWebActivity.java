@@ -1,6 +1,9 @@
 package com.renqi.takemedicine.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -25,8 +28,21 @@ private RelDrugsAdapter relDrugsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolBarTitle(AppConstants.ToolBarTitle.relatedDrugs);
+
         RequestParams requestParams=new RequestParams(AppConstants.BASE_ACTION+AppConstants.SEARCHDRUGSNAME);
+
+        Bundle bundle = this.getIntent().getExtras();
+
+        if(bundle==null){
+            setToolBarTitle(AppConstants.ToolBarTitle.relatedDrugs);
+        }else {
+            setToolBarTitle(AppConstants.ToolBarTitle.relatedDrugs1);
+            requestParams.addBodyParameter("name",bundle.getString("flag"));
+            requestParams.addBodyParameter("page","1");
+            requestParams.addBodyParameter("per","1000");
+
+        }
+
         x.http().get(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -51,4 +67,22 @@ private RelDrugsAdapter relDrugsAdapter;
             }
         });
     }
+    public Handler MyHendler =new  Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+
+                    relDrugsAdapter.notifyDataSetChanged();
+                    Log.e("position","加载图片完成");
+                    break;
+
+                default:
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+
+    };
 }

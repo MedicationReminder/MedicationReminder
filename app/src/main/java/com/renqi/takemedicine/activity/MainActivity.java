@@ -67,20 +67,7 @@ public class MainActivity extends BaseActivity {
         promptDialog = new PromptDialog(this);
         //设置自定义属性
         promptDialog.getDefaultBuilder().touchAble(true).round(3).loadingDuration(3000);
-        promptButton=new PromptButton("挂号提醒", new PromptButtonListener() {
-            @Override
-            public void onClick(PromptButton promptButton) {
-             startActivity(new Intent(MainActivity.this,RegisteredReminderActivity.class));
-            }
-        });
-        promptButton.setTextColor(Color.parseColor("#59acdf"));
-        promptButton1=  new PromptButton("用药提醒", new PromptButtonListener() {
-            @Override
-            public void onClick(PromptButton promptButton) {
-                startActivity(new Intent(MainActivity.this,MedicationReminderActivity.class));
-            }
-        });
-        promptButton1.setTextColor(Color.parseColor("#FF4081"));
+
         promptButtonlogist=new PromptButton("物流查询", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton promptButton) {
@@ -102,6 +89,21 @@ public class MainActivity extends BaseActivity {
             }
         });
         promptButtonDoctorOnline.setTextColor(Color.parseColor("#59acdf"));
+
+        promptButton=new PromptButton("挂号提醒", new PromptButtonListener() {
+            @Override
+            public void onClick(PromptButton promptButton) {
+                startActivity(new Intent(MainActivity.this,RegisteredReminderActivity.class));
+            }
+        });
+        promptButton.setTextColor(Color.parseColor("#59acdf"));
+        promptButton1=  new PromptButton("用药提醒", new PromptButtonListener() {
+            @Override
+            public void onClick(PromptButton promptButton) {
+                startActivity(new Intent(MainActivity.this,MedicationReminderActivity.class));
+            }
+        });
+        promptButton1.setTextColor(Color.parseColor("#FF4081"));
     }
 
 
@@ -177,9 +179,10 @@ public class MainActivity extends BaseActivity {
 
         //设置显示的文字大小及颜色
         promptDialog.getAlertDefaultBuilder().textSize(12).textColor(Color.GRAY);
+
         //默认两个按钮为Alert对话框，大于三个按钮的为底部SHeet形式展现
-        promptDialog.showAlertSheet("", true, cancle, promptButton,promptButton1,promptButtonlogist,
-                promptButtonHealthy,promptButtonDoctorOnline);
+        promptDialog.showAlertSheet("", true, cancle,promptButtonlogist,
+                promptButtonHealthy,promptButtonDoctorOnline, promptButton,promptButton1);
     }
     @Event(R.id.addContact)
     private void addContact(View view)

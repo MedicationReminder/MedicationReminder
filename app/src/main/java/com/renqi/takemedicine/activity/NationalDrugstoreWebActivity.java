@@ -1,6 +1,9 @@
 package com.renqi.takemedicine.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -26,7 +29,9 @@ public class NationalDrugstoreWebActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolBarTitle(AppConstants.ToolBarTitle.nationalDrugstore);
+
         RequestParams requestParams=new RequestParams(AppConstants.BASE_ACTION+AppConstants.HOSPTIALS);
+
         x.http().get(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -51,4 +56,22 @@ public class NationalDrugstoreWebActivity extends BaseActivity {
             }
         });
     }
+    public Handler MyHendler =new  Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+
+                    natDrugstoreAdapter.notifyDataSetChanged();
+                    Log.e("position","加载图片完成");
+                    break;
+
+                default:
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+
+    };
 }
