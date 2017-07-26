@@ -48,13 +48,13 @@ public class ContactAdapter extends BaseAdapter {
             viewHolder.name = (TextView) convertView.findViewById(R.id.item_contact_name);
             viewHolder.phone = (TextView) convertView.findViewById(R.id.item_contact_phone);
 
-            viewHolder.name.setText(contactResponseBean.getApp_contact().get(position).getName());
-            viewHolder.phone.setText(contactResponseBean.getApp_contact().get(position).getPhone());
-
             convertView.setTag(viewHolder);
         }else{
             viewHolder=(ViewHolder) convertView.getTag();
         }
+
+        viewHolder.name.setText(contactResponseBean.getApp_contact().get(position).getName());
+        viewHolder.phone.setText(contactResponseBean.getApp_contact().get(position).getPhone());
         return convertView;
     }
     class ViewHolder{

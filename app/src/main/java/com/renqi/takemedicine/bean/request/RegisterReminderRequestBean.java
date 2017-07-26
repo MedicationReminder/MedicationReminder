@@ -1,4 +1,4 @@
-package com.renqi.takemedicine.bean;
+package com.renqi.takemedicine.bean.request;
 
 /**
  * Created by Z on 2017/7/22.

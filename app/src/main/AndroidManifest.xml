@@ -32,8 +32,8 @@
         <activity android:name=".activity.NationalDrugstoreWebActivity" />
         <activity android:name=".activity.MedicationIntroductionWebActivity" />
         <activity android:name=".activity.KitDetailsActivity" />
-        <activity android:name=".activity.ContactActivity"></activity>
-        <activity android:name=".activity.RemakesRecyclerViewActivity"></activity>
+        <activity android:name=".activity.ContactActivity" />
+        <activity android:name=".activity.RemakesRecyclerViewActivity" />
     </application>
 
 </manifest>

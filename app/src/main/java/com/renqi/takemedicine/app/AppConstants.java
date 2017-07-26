@@ -43,6 +43,10 @@ public class AppConstants {
     public static  String ALL_CONTACTS="app_contacts";
     public static  String DELETE_CONTACTS="app_contacts/destory";
     public static  String APP_CHOICE_NAME="app_choice_name";
-
     public static  String APP_REGISTERREMINDS="app_registerreminds/";
+
+    public static  String SEARCHDRUGSNAME="/app_drugreminds/search_drugs_name";
+    public static  String HOSPTIALS="/app_drugreminds/hosptials";
+
+
 }
