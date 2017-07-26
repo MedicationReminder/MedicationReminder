@@ -1,6 +1,7 @@
 package com.renqi.takemedicine.base;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import com.renqi.takemedicine.R;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
+import static com.blankj.utilcode.util.BarUtils.getStatusBarHeight;
 
 /**
  * Created by Xu Wei on 2017/7/4.
@@ -80,11 +83,36 @@ public class BaseActivity extends AppCompatActivity {
             window.setStatusBarColor(setStatusBarColor());
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //4.4-5.0使用三方工具类，有些4.4的手机有问题，这里为演示方便，不使用沉浸式
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+           getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+
+
+          /*  SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintColor(setStatusBarColor());
+            tintManager.setStatusBarTintColor(setStatusBarColor());*/
         }
+    }
+    public void setImmerseLayout(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT&&Build.VERSION.SDK_INT <21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            int statusBarHeight = getStatusBarHeight(this.getBaseContext());
+            view.setPadding(0, statusBarHeight, 0, 0);
+        }
+    }
+    /**
+     * 用于获取状态栏的高度。 使用Resource对象获取
+     *
+     * @return 返回状态栏高度的像素值。
+     */
+    private int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen",
+                "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
     /** 获取主题色 */
     public int getColorPrimary() {

@@ -37,6 +37,7 @@
                 android:src="@mipmap/title_icon_back_n"
                 />
 <EditText
+    android:id="@+id/searchtext"
     android:textColor="#333"
     android:textColorHint="#999999"
     android:hint="    搜索药店、药品、医生"
@@ -190,10 +191,10 @@
             android:layout_weight="2"
             android:background="#ffffff">
 
-            <ListView
-                android:id="@+id/listView"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
             <TextView
                 android:visibility="invisible"

@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -49,6 +50,8 @@ public class MainActivity extends BaseActivity {
     private String[] permissions = new String[]{
             Manifest.permission.READ_CONTACTS
     };
+    @ViewInject(R.id.toolbarF)
+   private FrameLayout toolbarF;
     private List<String> mPermissionList = new ArrayList<>();
     /*private List<PromptButton> listpromptButton=new ArrayList<>();*/
     PromptButton promptButton,promptButton1,promptButtonlogist,promptButtonHealthy,promptButtonDoctorOnline;
@@ -61,6 +64,7 @@ public class MainActivity extends BaseActivity {
             jurisdiction();
         }
 
+   //  setImmerseLayout(toolbarF);
         setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
         dateText.setText(MedicationHelper.getWeek(new Date())+MedicationHelper.getTime());
         //创建对象
