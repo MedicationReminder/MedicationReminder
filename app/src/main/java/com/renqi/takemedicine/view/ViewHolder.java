@@ -1,6 +1,8 @@
 package com.renqi.takemedicine.view;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -61,14 +63,26 @@ public class ViewHolder extends RecyclerView.ViewHolder
         tv.setText(text);
         return this;
     }
-
+    public ViewHolder setTextColor(int viewId, String rgb)
+    {
+        TextView tv = getView(viewId);
+        tv.setTextColor(Color.parseColor(rgb));
+        return this;
+    }
     public ViewHolder setImageResource(int viewId, int resId)
     {
         ImageView view = getView(viewId);
         view.setImageResource(resId);
         return this;
     }
+    public ViewHolder setTextViewBottomImage(int viewId, Drawable resId)
+    {
+        TextView view = getView(viewId);
+        resId.setBounds(0, 0, resId.getMinimumWidth(), resId.getMinimumHeight());
 
+view.setCompoundDrawables(null,null,null,resId);
+        return this;
+    }
     public ViewHolder setOnClickListener(int viewId,
                                          View.OnClickListener listener)
     {

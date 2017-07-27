@@ -49,6 +49,14 @@ public class MedicationHelper {
         }
         return weeks[week_index];
     }
+    public static String idgui(String s,int num)throws Exception{
+        int changdu = s.getBytes("UTF-8").length;
+        if(changdu > num){
+            s = s.substring(0, s.length() - 1);
+            s = idgui(s,num);
+        }
+        return s;
+    }
     public static Dialog createLoadingDialog(Context context, String msg) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.dialog_loading, null);// 得到加载view
