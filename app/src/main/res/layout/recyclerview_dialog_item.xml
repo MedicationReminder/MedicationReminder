@@ -33,7 +33,7 @@
             android:singleLine="true"
             android:text="条目"
             android:textAlignment="center"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textView6"
@@ -42,17 +42,17 @@
             android:layout_weight="1.2" />
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
            android:textColor="#ffffff"
-         android:textSize="28dp"
+          android:textSize="20dp"
             android:gravity="right"
            android:id="@+id/time"
             android:layout_weight="1.6"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
             android:textSize="16sp"
-android:gravity="center"
+            android:gravity="center"
             android:id="@+id/amorpm"
             android:layout_marginRight="30dp"
             android:drawableBottom="@mipmap/time_icon_morningt"
