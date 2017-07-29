@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity {
             jurisdiction();
         }
 
-   //  setImmerseLayout(toolbarF);
+/* setImmerseLayout(toolbarF);*/
         setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
         dateText.setText(MedicationHelper.getWeek(new Date())+MedicationHelper.getTime());
         //创建对象

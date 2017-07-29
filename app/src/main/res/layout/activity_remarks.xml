@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:orientation="vertical"
-    android:background="@color/backgroundgrey"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:background="@color/colorPrimaryDark"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,6 +12,10 @@
     tools:context="com.renqi.takemedicine.activity.RemarksActivity">
     <include
         layout="@layout/base_toolbar"></include>
+    <LinearLayout
+        android:background="@color/backgroundgrey"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -227,6 +233,5 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-
+    </LinearLayout>
 </LinearLayout>

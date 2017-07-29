@@ -7,7 +7,7 @@
     <include
         layout="@layout/base_toolbar"></include>
 <android.support.v7.widget.RecyclerView
-android:layout_marginTop="10dp"
+
     android:id="@+id/recyclerViewDialog"
 
     android:layout_width="match_parent"

@@ -37,42 +37,42 @@
                     android:layout_height="match_parent"
                     android:drawableLeft="@mipmap/title_icon_back_n"
                     android:src="@mipmap/title_icon_back_n" />
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_weight="1"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginRight="10dp"
-    android:background="@drawable/edittext_bg"
-    android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/edittext_bg"
+                    android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_marginLeft="10dp"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2.5"></Spinner>
-    <TextView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="#2dbe83"/>
-    <EditText
-        android:id="@+id/search_name"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="8"
-        android:background="@null"
-        android:hint="搜索药店、药品、医生"
-        android:textColor="#333"
-        android:textColorHint="#999999" />
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"></Spinner>
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#2dbe83"/>
+                    <EditText
+                        android:id="@+id/search_name"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="8"
+                        android:background="@null"
+                        android:hint="搜索药店、药品、医生"
+                        android:textColor="#333"
+                        android:textColorHint="#999999" />
 
 
-</LinearLayout>
+                </LinearLayout>
 
 
 

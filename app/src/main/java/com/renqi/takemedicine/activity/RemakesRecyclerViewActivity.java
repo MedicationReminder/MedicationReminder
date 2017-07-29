@@ -23,6 +23,7 @@ import com.renqi.takemedicine.bean.Remarks;
 import com.renqi.takemedicine.bean.response.App_drugbestsResponseBean;
 import com.renqi.takemedicine.bean.response.KitDetialsResponseBean;
 import com.renqi.takemedicine.event.BaseEvents;
+import com.renqi.takemedicine.utils.MedicationHelper;
 import com.renqi.takemedicine.view.ViewHolder;
 
 import org.greenrobot.eventbus.EventBus;
@@ -158,6 +159,7 @@ public class RemakesRecyclerViewActivity extends EventbusActivity {
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String result) {
+                    Log.e("result",result);
                 //    App_drugbestsResponseBean drugbestsResponseBean=new Gson().fromJson(result, App_drugbestsResponseBean.class);
                     try {
                         JSONArray app_drugbests= new JSONObject(result).getJSONArray("app_drugbests");
@@ -209,21 +211,33 @@ public class RemakesRecyclerViewActivity extends EventbusActivity {
             public void convert(ViewHolder holder, final Remarks remarks, final int position) {
                 if(param.equals("drugbests"))
                 {
+                    holder.setTextColor(R.id.text,"#ffffff");
+                    holder.setTextColor(R.id.amorpm,"#ffffff");
+
+                    View view=holder.getView(R.id.view);
+                    view.setVisibility(View.INVISIBLE);
                     LinearLayout contentView=holder.getView(R.id.contentView);
-                    if(position==0) contentView.setBackgroundColor(Color.parseColor("#f7c959"));
+
+                    if(position==0) contentView.setBackgroundColor(Color.parseColor("#f6c959"));
                     if(position==1) contentView.setBackgroundColor(Color.parseColor("#eeb935"));
                     if(position==2) contentView.setBackgroundColor(Color.parseColor("#e6a235"));
                     if(position==3) contentView.setBackgroundColor(Color.parseColor("#e28037"));
-                    if(position==4) contentView.setBackgroundColor(Color.parseColor("#ce6536"));
-                    if(position==5) contentView.setBackgroundColor(Color.parseColor("#f7c959"));
-                    if(position==6) contentView.setBackgroundColor(Color.parseColor("#9187dd"));
-                    if(position==7) contentView.setBackgroundColor(Color.parseColor("#f7c959"));
-                    if(position==8) contentView.setBackgroundColor(Color.parseColor("#6f64c0"));
-                    if(position==9) contentView.setBackgroundColor(Color.parseColor("#413d92"));
-                    if(position==10) contentView.setBackgroundColor(Color.parseColor("#363378"));
-                    if(position==11) contentView.setBackgroundColor(Color.parseColor("#312e65"));
+                    if(position==4) contentView.setBackgroundColor(Color.parseColor("#cd6537"));
 
-
+                    if(position==5) contentView.setBackgroundColor(Color.parseColor("#9187dc"));
+                    if(position==6) contentView.setBackgroundColor(Color.parseColor("#6f64cd"));
+                    if(position==7) contentView.setBackgroundColor(Color.parseColor("#413d92"));
+                    if(position==8) contentView.setBackgroundColor(Color.parseColor("#363379"));
+                    if(position==9) contentView.setBackgroundColor(Color.parseColor("#302e65"));
+                   String str[] = remarks.data. split("\t");
+                    holder.setText(R.id.text, str[1]);
+                    String AmOrPm=remarks.data.substring(remarks.data.length()-2,remarks.data.length());
+                    if(AmOrPm=="PM"||AmOrPm.equals("PM"))
+                    {
+                      holder.setTextViewBottomImage(R.id.amorpm,getResources().getDrawable(R.mipmap.time_icon_nightt))  ;
+                    }
+                    holder.setText(R.id.amorpm,AmOrPm);
+                    holder.setText(R.id.time,str[0]);
                 }
                 final CheckBox checkBox = holder.getView(R.id.select_checkbox);
                        if(remarks.isSelect) checkBox.setChecked(true);else checkBox.setChecked(false);
@@ -246,6 +260,7 @@ public class RemakesRecyclerViewActivity extends EventbusActivity {
                     }
 
                 });
+                if(!param.equals("drugbests"))
                 holder.setText(R.id.text, remarks.data);
 
             }

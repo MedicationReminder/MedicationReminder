@@ -20,6 +20,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+
 /**
  * Created by Xu Wei on 2017/7/4.
  */
@@ -80,9 +81,13 @@ public class BaseActivity extends AppCompatActivity {
             window.setStatusBarColor(setStatusBarColor());
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //4.4-5.0使用三方工具类，有些4.4的手机有问题，这里为演示方便，不使用沉浸式
-           getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //     getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-          /*  SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+         /*   SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(setStatusBarColor());*/
         }
@@ -145,9 +150,9 @@ public class BaseActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-@Event(R.id.home)
-        private void home(View view)
-{
-    finish();
-}
+    @Event(R.id.home)
+    private void home(View view)
+    {
+        finish();
+    }
 }
