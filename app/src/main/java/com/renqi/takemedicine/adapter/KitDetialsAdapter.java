@@ -88,6 +88,7 @@ public class KitDetialsAdapter extends BaseAdapter {
                 viewHolder.characteristic_name = (TextView) convertView.findViewById(R.id.item_characteristic_name);
                 viewHolder.doctor_name = (TextView) convertView.findViewById(R.id.item_doctor_name);
 
+
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder2) convertView.getTag();
