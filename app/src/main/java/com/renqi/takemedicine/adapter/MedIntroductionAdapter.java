@@ -5,32 +5,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.renqi.takemedicine.R;
-import com.renqi.takemedicine.bean.response.ContactResponseBean;
+import com.renqi.takemedicine.bean.MedIntroductionAdapterBean;
+
+import java.util.List;
 
 /**
- * Created by Z on 2017/7/15.
+ * Created by zsj on 2017/7/25.
  */
 
-public class ContactAdapter extends BaseAdapter {
+public class MedIntroductionAdapter extends BaseAdapter {
     Context mContext;
-    ContactResponseBean contactResponseBean;
+   List<MedIntroductionAdapterBean> stringList;
     LayoutInflater layoutInflater;
-    public ContactAdapter( Context mContext,ContactResponseBean contactResponseBean){
+    public MedIntroductionAdapter( Context mContext,List<MedIntroductionAdapterBean> stringList){
         this.mContext = mContext;
-        this.contactResponseBean = contactResponseBean;
-        this.layoutInflater=LayoutInflater.from(mContext);
+        this.stringList = stringList;
+        this.layoutInflater= LayoutInflater.from(mContext);
     }
     @Override
     public int getCount() {
-        return contactResponseBean.getApp_contact().size();
+        return stringList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return contactResponseBean.getApp_contact().get(position);
+        return stringList.get(position);
     }
 
     @Override
@@ -44,21 +47,20 @@ public class ContactAdapter extends BaseAdapter {
         if(convertView==null){
             viewHolder = new ViewHolder();
             //获得组件，实例化组件
-            convertView=layoutInflater.inflate(R.layout.item_contact, null);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.item_contact_name);
-            viewHolder.phone = (TextView) convertView.findViewById(R.id.item_contact_phone);
+            convertView=layoutInflater.inflate(R.layout.item_medication_introduction, null);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.title);
+            viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
 
             convertView.setTag(viewHolder);
         }else{
             viewHolder=(ViewHolder) convertView.getTag();
         }
-
-        viewHolder.name.setText(contactResponseBean.getApp_contact().get(position).getName());
-        viewHolder.phone.setText(contactResponseBean.getApp_contact().get(position).getPhone());
+        viewHolder.name.setText(stringList.get(position).getName());
+        viewHolder.icon.setImageResource(stringList.get(position).getId());
         return convertView;
     }
     class ViewHolder{
         TextView name;
-        TextView phone;
+        ImageView icon;
     }
 }

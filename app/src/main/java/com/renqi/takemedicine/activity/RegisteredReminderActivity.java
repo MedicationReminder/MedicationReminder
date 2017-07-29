@@ -20,7 +20,7 @@ import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.bean.CardBean;
-import com.renqi.takemedicine.bean.RegisterReminderRequestBean;
+import com.renqi.takemedicine.bean.request.RegisterReminderRequestBean;
 import com.renqi.takemedicine.utils.MedicationHelper;
 import com.renqi.takemedicine.utils.ToastUtil;
 import com.renqi.takemedicine.utils.WeiboDialogUtils;

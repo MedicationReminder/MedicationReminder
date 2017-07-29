@@ -37,7 +37,7 @@ public class TakeMedicinApplication extends Application {
 
     public static String wlan_mac;
 
-    public static int isFirstTiem=0,isFirstWater=0,isFisterFood=0,isFirstSpecial=0;
+    public static int isFirstTiem=0,isFirstWater=0,isFisterFood=0,isFirstSpecial=0,isFirstApp_drugbests=0;
 
     //单例获取app对象
     public synchronized static TakeMedicinApplication getInstance() {

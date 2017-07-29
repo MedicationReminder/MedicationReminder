@@ -13,12 +13,12 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <WebView
-            android:id="@+id/relatedDrugsWebView"
+        <ListView
+            android:id="@+id/relatedDrugsListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </WebView>
+        </ListView>
     </LinearLayout>
 </LinearLayout>
 
