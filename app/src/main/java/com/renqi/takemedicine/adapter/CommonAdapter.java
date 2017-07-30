@@ -2,6 +2,7 @@ package com.renqi.takemedicine.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -31,6 +32,7 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<ViewHolder>
     mInflater = LayoutInflater.from(context);
     mLayoutId = layoutId;
     mDatas = datas;
+
 }
 
     @Override
