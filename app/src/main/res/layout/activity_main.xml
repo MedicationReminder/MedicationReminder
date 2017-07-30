@@ -75,169 +75,170 @@
     </FrameLayout>
 
 
-<LinearLayout
-    android:background="@color/backgroundgrey"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentStart="true">
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/appbar"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:id="@+id/dateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="27dp"
-        android:textColor="@color/textColor"
-        android:text="周四，9月 13"/>
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/backgroundgrey"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/appbar"
-            android:orientation="vertical">
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="周四，9月 13"
+            android:textColor="@color/textColor"
+            android:textSize="27dp" />
 
-            <TextView
-                android:textSize="18dp"
-                android:textColor="#6895eb"
-                android:text="晚 上"
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="44dp"
-                android:drawableBottom="@mipmap/time_icon_night"
+        <LinearLayout
 
-                android:layout_alignTop="@+id/im_clock"
-                android:layout_alignParentStart="true" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9">
 
-            <ImageView
-                android:id="@+id/im_clock"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="30dp"
-                android:layout_marginLeft="75dp"
-                android:layout_marginRight="75dp"
-                android:layout_marginTop="20dp"
-                android:src="@mipmap/icon_time_bg3x" />
+                android:layout_below="@+id/appbar"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/im_clock"
+                    android:layout_marginStart="44dp"
+                    android:drawableBottom="@mipmap/time_icon_night"
+                    android:text="晚 上"
+
+                    android:textColor="#6895eb"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:id="@+id/im_clock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginRight="75dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/icon_time_bg3x" />
+
+                <TextView
+
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageView2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="34dp"
+                    android:drawableBottom="@mipmap/time_icon_morning"
+                    android:text="上 午"
+
+                    android:textColor="#fd8667"
+                    android:textSize="18dp" />
+
+                <TextView
+
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/im_clock"
+                    android:layout_alignStart="@+id/imageView2"
+                    android:drawableTop="@mipmap/time_icon_evening"
+                    android:text="傍 晚"
+                    android:textColor="#b47df7"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/imageView4"
+                    android:layout_alignBottom="@+id/imageView4"
+                    android:layout_alignStart="@+id/imageView3"
+                    android:layout_marginStart="7dp"
+                    android:drawableTop="@mipmap/time_icon_noon"
+                    android:text="下 午"
+                    android:textColor="#f78d77"
+                    android:textSize="18dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15" />
 
-                android:textSize="18dp"
-                android:textColor="#fd8667"
-                android:text="上 午"
-                android:id="@+id/imageView3"
+            <Button
+
+                android:id="@+id/related_drugs"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="34dp"
-                android:drawableBottom="@mipmap/time_icon_morning"
-
-                android:layout_alignBottom="@+id/imageView2"
-                android:layout_alignParentEnd="true" />
+                android:layout_height="32dp"
+                android:layout_gravity="left"
+                android:background="@mipmap/button_drug_n"
+                android:gravity="center"
+                android:text="相关药品"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
 
-                android:textSize="18dp"
-                android:textColor="#b47df7"
-                android:text="傍 晚"
-                android:id="@+id/imageView4"
+            <Button
+                android:id="@+id/national_drugstore"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/time_icon_evening"
-                android:layout_alignBottom="@+id/im_clock"
-                android:layout_alignStart="@+id/imageView2" />
+                android:layout_height="32dp"
+                android:layout_gravity="left"
+                android:background="@mipmap/button_evaluate_n"
+                android:gravity="center"
+                android:text="全国药店"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
 
             <TextView
-                android:textSize="18dp"
-                android:textColor="#f78d77"
-                android:text="下 午"
-                android:id="@+id/imageView5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+
+            <Button
+                android:id="@+id/medication_introduction"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:drawableTop="@mipmap/time_icon_noon"
-                android:layout_alignBaseline="@+id/imageView4"
-                android:layout_alignBottom="@+id/imageView4"
-                android:layout_alignStart="@+id/imageView3" />
-        </RelativeLayout>
+                android:layout_height="32dp"
+                android:layout_gravity="right"
+                android:background="@mipmap/button_raiders_n"
+                android:gravity="center"
+                android:text="用药攻略"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15" />
+        </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.9"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15" />
-
-        <Button
-
-            android:id="@+id/related_drugs"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_gravity="left"
-            android:background="@mipmap/button_drug_n"
-            android:gravity="center"
-            android:text="相关药品"
-            android:textColor="@color/white"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2" />
-
-        <Button
-            android:id="@+id/national_drugstore"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_gravity="left"
-            android:background="@mipmap/button_evaluate_n"
-            android:gravity="center"
-            android:text="全国药店"
-            android:textColor="@color/white"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2" />
-
-        <Button
-            android:id="@+id/medication_introduction"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_gravity="right"
-            android:background="@mipmap/button_raiders_n"
-            android:gravity="center"
-            android:text="用药攻略"
-            android:textColor="@color/white"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15" />
-    </LinearLayout>
-
-</LinearLayout>
-
-
 
 
 </LinearLayout>

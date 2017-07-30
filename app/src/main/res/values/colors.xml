@@ -10,6 +10,7 @@
 
 
     <!--字体颜色-->
+    <color name="textColor3">#333333</color>
     <color name="textColor">#999999</color>
     <color name="textColor2">#444444</color>
     <color name="textBlue">#5fb5e8</color>

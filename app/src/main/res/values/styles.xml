@@ -73,4 +73,12 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/default_text_size</item>
+    </style>
+    <style name="MyTabLayoutTextAppearance"
+        parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>
