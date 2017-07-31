@@ -37,7 +37,11 @@
         <activity
             android:name=".activity.SearchActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".activity.SearchDrugStoresActivity"></activity>
+        <activity android:name=".activity.SearchDrugStoresActivity"/>
+        <activity android:name=".activity.SearchActivity2"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            />
+        <activity android:name=".activity.OnlineConsultingActivity"/>
     </application>
 
 </manifest>
