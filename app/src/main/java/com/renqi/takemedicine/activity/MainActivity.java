@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -25,6 +26,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,6 +46,8 @@ public class MainActivity extends BaseActivity {
     private TextView textView;
     @ViewInject(R.id.dateText)
     private TextView dateText;
+    @ViewInject(R.id.im_clock)
+    private ImageView im_clock;
     private PromptDialog promptDialog;
     private static final String TAG = "MainActivity";
     private long firstTime = 0;
@@ -67,6 +71,33 @@ public class MainActivity extends BaseActivity {
 /* setImmerseLayout(toolbarF);*/
         setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
         dateText.setText(MedicationHelper.getWeek(new Date())+MedicationHelper.getTime());
+
+        initBottomDialog();
+
+        initClockImg();
+    }
+
+    private void initClockImg() {
+        SimpleDateFormat sm = new SimpleDateFormat("HH:mm");
+       // time.setText(sm.format(new Date()));
+        int hour = Integer.parseInt(new SimpleDateFormat("HH").format(new Date()));
+
+        if (6 <= hour && hour <= 9) {
+          //  EarlyMiddleLate.setText("早上");
+            im_clock.setImageResource(R.mipmap.morning_clock);
+        } else if (9 < hour && hour <= 16) {
+          //  EarlyMiddleLate.setText("中午");
+            im_clock.setImageResource(R.mipmap.afternoon_clock);
+        } else if (16 < hour && hour <= 20) {
+         //   EarlyMiddleLate.setText("傍晚");
+            im_clock.setImageResource(R.mipmap.evening_clock);
+        } else {
+         //   EarlyMiddleLate.setText("夜晚");
+            im_clock.setImageResource(R.mipmap.night_clock);
+        }
+    }
+
+    private void initBottomDialog() {
         //创建对象
         promptDialog = new PromptDialog(this);
         //设置自定义属性
@@ -89,7 +120,7 @@ public class MainActivity extends BaseActivity {
         promptButtonDoctorOnline=new PromptButton("药师在线咨询", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton promptButton) {
-                ToastUtils.showShortToast("药师在线咨询");
+               startActivity(new Intent(MainActivity.this,OnlineConsultingActivity.class));
             }
         });
         promptButtonDoctorOnline.setTextColor(Color.parseColor("#59acdf"));
@@ -202,7 +233,7 @@ public class MainActivity extends BaseActivity {
 
     @Event(R.id.logistics)
     private void logistics(View view) {
-         startActivity(new Intent(MainActivity.this,SearchActivity.class));
+         startActivity(new Intent(MainActivity.this,SearchActivity2.class));
     }
     @Event(R.id.national_drugstore)
     private void nationalDrugstore(View view) {
@@ -234,5 +265,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        initClockImg();
+    }
 }

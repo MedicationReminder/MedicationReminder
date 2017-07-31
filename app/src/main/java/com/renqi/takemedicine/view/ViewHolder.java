@@ -80,7 +80,15 @@ public class ViewHolder extends RecyclerView.ViewHolder
         TextView view = getView(viewId);
         resId.setBounds(0, 0, resId.getMinimumWidth(), resId.getMinimumHeight());
 
-view.setCompoundDrawables(null,null,null,resId);
+         view.setCompoundDrawables(null,null,null,resId);
+        return this;
+    }
+    public ViewHolder setTextViewRightImage(int viewId, Drawable resId)
+    {
+        TextView view = getView(viewId);
+        resId.setBounds(0, 0, resId.getMinimumWidth(), resId.getMinimumHeight());
+
+        view.setCompoundDrawables(null,null,resId,null);
         return this;
     }
     public ViewHolder setOnClickListener(int viewId,
