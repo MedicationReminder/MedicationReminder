@@ -116,6 +116,7 @@ public class KitDetailsActivity extends BaseActivity {
             if (kitDetialsResponseBean.getApp_register_reminds().size() == 0) {
                 ToastUtils.showLongToast("今日暂无挂号提醒！");
 
+
             }
         } else {
             flag = true;
