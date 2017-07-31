@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
+    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:background="@color/colorPrimaryDark"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/backgroundgrey"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.renqi.takemedicine.activity.MainActivity">
@@ -73,13 +76,14 @@
 
 
 <LinearLayout
+    android:background="@color/backgroundgrey"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentTop="true"
     android:layout_alignParentStart="true">
     <TextView
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/appbar"
         android:layout_gravity="center"
         android:gravity="center"
@@ -236,7 +240,7 @@
 
 
 
-</FrameLayout>
+</LinearLayout>
 
 
 
