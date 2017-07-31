@@ -146,7 +146,6 @@ public class MainActivity extends BaseActivity {
 
                     if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
 
-
                     }else {
                         //判断是否勾选禁止后不再询问
                         boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i]);
