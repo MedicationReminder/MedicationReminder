@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:clipToPadding="true"
     android:background="@color/colorPrimaryDark"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.renqi.takemedicine.activity.SearchActivity"
-    android:orientation="vertical">
+    tools:context="com.renqi.takemedicine.activity.SearchActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -39,42 +40,43 @@
                     android:layout_height="match_parent"
                     android:drawableLeft="@mipmap/title_icon_back_n"
                     android:src="@mipmap/title_icon_back_n" />
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_weight="1"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginRight="10dp"
-    android:background="@drawable/edittext_bg"
-    android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/edittext_bg"
+                    android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_marginLeft="10dp"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2.5"></Spinner>
-    <TextView
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="#2dbe83"/>
-    <EditText
-        android:id="@+id/search_name"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="8"
-        android:background="@null"
-        android:hint="搜索药店、药品、医生"
-        android:textColor="#333"
-        android:textColorHint="#999999" />
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"></Spinner>
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#2dbe83"/>
+                    <EditText
+                        android:id="@+id/search_name"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="8"
+                        android:background="@null"
+                        android:hint="搜索药店、药品、医生"
+                        android:textSize="15sp"
+                        android:textColor="#333"
+                        android:textColorHint="#999999" />
 
 
-</LinearLayout>
+                </LinearLayout>
 
 
 
@@ -92,18 +94,20 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
+
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
         android:paddingLeft="10dp"
+        android:background="#efeff4"
         android:paddingRight="10dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="15dp"
             android:layout_weight="1.2"
             android:background="#ffffff"
             android:orientation="vertical">
@@ -212,7 +216,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="40dp"
             android:layout_weight="2.8"
             android:background="#ffffff"

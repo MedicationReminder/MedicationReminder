@@ -81,6 +81,7 @@ public class KitDetailsActivity extends BaseActivity {
             @Override
             public void onFinished() {
 
+
             }
         });
 
