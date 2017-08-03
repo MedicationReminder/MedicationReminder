@@ -36,6 +36,10 @@ public class DoctorBookWebActivity extends BaseActivity {
         doctorBookWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if(view.getUrl().equals("http://www.yiliaode.com/cities")){
+                    view.loadUrl("http://www.yiliaode.com/doctors");
+                    return true;
+                }
                 view.loadUrl(url);
                 return true;
             }

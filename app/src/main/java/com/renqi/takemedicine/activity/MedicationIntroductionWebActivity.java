@@ -36,6 +36,10 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
         medicationIntroductionWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if(view.getUrl().equals("http://www.yiliaode.com/cities")){
+                    view.loadUrl("http://www.yiliaode.com/strategy_categories/576b48c2391af0550c6798f8/sub_strategy_categories");
+                    return true;
+                }
                 view.loadUrl(url);
                 return true;
             }

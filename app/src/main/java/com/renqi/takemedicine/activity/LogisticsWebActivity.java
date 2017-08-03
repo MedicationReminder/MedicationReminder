@@ -3,12 +3,14 @@ package com.renqi.takemedicine.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
@@ -24,6 +26,8 @@ public class LogisticsWebActivity extends BaseActivity {
     @ViewInject(R.id.logisticsWebView)
     private WebView logisticsWebView;
 
+    @ViewInject(R.id.pb_progress)
+    private ProgressBar pbProgress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,19 @@ public class LogisticsWebActivity extends BaseActivity {
 
         });
         logisticsWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                // TODO 自动生成的方法存根
 
+                if(newProgress==100){
+                    pbProgress.setVisibility(View.GONE);//加载完网页进度条消失
+                }
+                else{
+                    pbProgress.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
+                    pbProgress.setProgress(newProgress);//设置进度值
+                }
+
+            }
             //配置权限（同样在WebChromeClient中实现）
             @Override
             public void onGeolocationPermissionsShowPrompt(String origin,

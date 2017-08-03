@@ -11,6 +11,16 @@
     tools:context="com.renqi.takemedicine.activity.LogisticsWebActivity">
 <include
     layout="@layout/base_toolbar"></include>
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dip"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:progressDrawable="@drawable/progress_bar_states" >
+
+    </ProgressBar>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
