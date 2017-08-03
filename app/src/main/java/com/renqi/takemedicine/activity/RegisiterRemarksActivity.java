@@ -1,6 +1,8 @@
 package com.renqi.takemedicine.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -22,15 +24,36 @@ public class RegisiterRemarksActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolBarTitle(AppConstants.ToolBarTitle.remarks);
         setIption(AppConstants.iption.complete);
-
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("textRemarks", Context.MODE_PRIVATE);
+        String result = sp.getString("textRemarks", "");
+        if(!result.equals(""))
+        textRemarks.setText(result);
     }
+
     @Event(R.id.iption)
-    private void home(View view){
+    private void iption(View view){
 
         Intent intent=new Intent();
         intent.putExtra("1",textRemarks.getText().toString());
 
         setResult(2,intent);
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("textRemarks", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("textRemarks","");
+        editor.commit();
+
+        finish();
+    }
+
+    @Event(R.id.home)
+    private void home(View view){
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("textRemarks", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("textRemarks",  textRemarks.getText().toString());
+        editor.commit();
+
         finish();
     }
 }

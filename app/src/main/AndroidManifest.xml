@@ -49,7 +49,9 @@
         <activity android:name=".activity.HealthHeadlinesWebActivity" />
         <activity android:name=".activity.DoctorBookWebActivity" />
         <activity android:name=".activity.HospitalEncyclopediaWebActivity" />
-        <activity android:name=".activity.RegisiterRemarksActivity"></activity>
+        <activity android:name=".activity.RegisiterRemarksActivity" />
+        <activity android:name=".activity.ContactDeleteEditActivity" />
+        <activity android:name=".activity.EditContactActivity"></activity>
     </application>
 
 </manifest>

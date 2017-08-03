@@ -20,12 +20,14 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.gson.Gson;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.Add_App_contact;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.bean.CardBean;
+import com.renqi.takemedicine.bean.response.ContactResponseBean;
 import com.renqi.takemedicine.utils.MedicationHelper;
 import com.renqi.takemedicine.utils.ToastUtil;
 import com.renqi.takemedicine.utils.WeiboDialogUtils;
@@ -42,8 +44,9 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
-@ContentView(R.layout.activity_add_contact)
-public class AddContactActivity extends BaseActivity {
+@ContentView(R.layout.activity_edit_contact)
+public class EditContactActivity extends BaseActivity {
+
     private OptionsPickerView pvCustomOptions;
     private ArrayList<CardBean> cardItem = new ArrayList<>();
     private ArrayList<CardBean> cardItemRel = new ArrayList<>();
@@ -62,7 +65,7 @@ public class AddContactActivity extends BaseActivity {
     @ViewInject(R.id.iption)
     private TextView iption;
 
-    private int user_type=5;
+    private int user_type = 5;
 
     Dialog contactUpload;
 
@@ -70,15 +73,20 @@ public class AddContactActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //    setContentView(R.layout.activity_add_contact);
-        getCardData();getRelData();
+        getCardData();
+        getRelData();
         initCustomOptionPicker();//初始化底部选择窗口
         setIption(AppConstants.iption.complete);
-        setToolBarTitle(AppConstants.ToolBarTitle.addContacts);
-    // ToastUtils.showShortToast( TakeMedicinApplication.macAdress);
+        setToolBarTitle("修改联系人");
+        Intent intent = getIntent();
+        ContactResponseBean.AppContactBean appContactBean = new Gson()
+                .fromJson(intent.getStringExtra("edit"), ContactResponseBean.AppContactBean.class);
 
+        ContactType.setText(appContactBean.getDevice_token());
+                contactUserName.setText(appContactBean.getName());
+        phoneNumber.setText(appContactBean.getPhone());
+                inputRelation.setText(appContactBean.getRelation());
     }
-
 
 
     @Event(R.id.ContactType)
@@ -89,12 +97,13 @@ public class AddContactActivity extends BaseActivity {
             MedicationHelper.hideInputMethod(view);
             pvCustomOptions.setPicker(cardItem);//添加数据
             cardItem.get(0).setSetPicker(true);
-        }else {
+        } else {
             ToastUtils.showShortToast("选择框尚未初始化");
         }
     }
+
     @Event(R.id.inputRelation)
-    private void inputRelation(View view){
+    private void inputRelation(View view) {
         if (pvCustomOptions != null) {
             MedicationHelper.hideInputMethod(view);
             pvCustomOptions.setPicker(cardItemRel);//添加数据
@@ -102,6 +111,7 @@ public class AddContactActivity extends BaseActivity {
             pvCustomOptions.show();
         }
     }
+
     @Event(R.id.importAddress)
     private void importAddress(View view) {
 
@@ -122,12 +132,7 @@ public class AddContactActivity extends BaseActivity {
 
 
     }
-    @Event(R.id.editAddress)
-    private void editAddress(View view) {
 
-                startActivity(new Intent(AddContactActivity.this,ContactDeleteEditActivity.class));
-
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -177,15 +182,14 @@ public class AddContactActivity extends BaseActivity {
         pvCustomOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
-                if(cardItem.get(0).isSetPicker()){
+                if (cardItem.get(0).isSetPicker()) {
                     //返回的分别是三个级别的选中位置
                     String tx = cardItem.get(options1).getPickerViewText();
 
-                    user_type=cardItem.get(options1).getId();
+                    user_type = cardItem.get(options1).getId();
                     ContactType.setText(tx);
                     cardItem.get(0).setSetPicker(false);
-                }else  if(cardItemRel.get(0).isSetPicker())
-                {
+                } else if (cardItemRel.get(0).isSetPicker()) {
                     String tx = cardItemRel.get(options1).getPickerViewText();
                     inputRelation.setText(tx);
                     cardItemRel.get(0).setSetPicker(false);
@@ -223,7 +227,6 @@ public class AddContactActivity extends BaseActivity {
                 .build();
 
 
-
     }
 
     private void getCardData() {
@@ -238,18 +241,19 @@ public class AddContactActivity extends BaseActivity {
         cardItemRel.add(new CardBean(1, "客户"));
         cardItemRel.add(new CardBean(2, "好友"));
         cardItemRel.add(new CardBean(3, "家属"));
-        cardItemRel.add(new CardBean(4,"同事"));
+        cardItemRel.add(new CardBean(4, "同事"));
     }
-    private String getApp_contactJsonParam(){
-        List<Add_App_contact> addApp_contactList =new ArrayList<>();
+
+    private String getApp_contactJsonParam() {
+        List<Add_App_contact> addApp_contactList = new ArrayList<>();
         addApp_contactList.add(
                 new Add_App_contact(
-               new Add_App_contact.app_contact(
-                contactUserName.getText().toString().trim(),
-                       TakeMedicinApplication.testMacAdress,
-                inputRelation.getText().toString().trim(),
-                phoneNumber.getText().toString().trim(),
-                user_type))
+                        new Add_App_contact.app_contact(
+                                contactUserName.getText().toString().trim(),
+                                TakeMedicinApplication.testMacAdress,
+                                inputRelation.getText().toString().trim(),
+                                phoneNumber.getText().toString().trim(),
+                                user_type))
         );
 
         try {
@@ -258,12 +262,12 @@ public class AddContactActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-     return "";
+        return "";
     }
+
     @Event(R.id.iption)
-    private void iption(View view){
-        if(user_type==5)
-        {
+    private void iption(View view) {
+        if (user_type == 5) {
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "联系人类型").show();
             return;
         }
@@ -272,34 +276,36 @@ public class AddContactActivity extends BaseActivity {
 //        {   new ToastUtil(getApplicationContext(), R.layout.toast_center, "联系人").show();return;}
 
 
-        if(MedicationHelper.isNullOrEmpty(inputRelation.getText().toString().trim()))
-        {
-            new ToastUtil(getApplicationContext(), R.layout.toast_center, "关系").show();return;
+        if (MedicationHelper.isNullOrEmpty(inputRelation.getText().toString().trim())) {
+            new ToastUtil(getApplicationContext(), R.layout.toast_center, "关系").show();
+            return;
         }
-        if(MedicationHelper.isNullOrEmpty(phoneNumber.getText().toString().trim())) {
-            new ToastUtil(getApplicationContext(), R.layout.toast_center, "电话号码").show();return;
+        if (MedicationHelper.isNullOrEmpty(phoneNumber.getText().toString().trim())) {
+            new ToastUtil(getApplicationContext(), R.layout.toast_center, "电话号码").show();
+            return;
 
         }
 
-        RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.app_contacts);
+        RequestParams params = new RequestParams(AppConstants.BASE_ACTION + AppConstants.app_contacts);
         params.setAsJsonContent(true);
         params.setBodyContent(getApp_contactJsonParam());
 
-        Log.e("params",params.toString());
-        Log.e("params",getApp_contactJsonParam());
-      //  Log.e("content",getApp_contactJsonParam());
+        Log.e("params", params.toString());
+        Log.e("params", getApp_contactJsonParam());
+        //  Log.e("content",getApp_contactJsonParam());
+
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 WeiboDialogUtils.closeDialog(contactUpload);
                 new ToastUtil(getApplicationContext(), R.layout.toast_complete, "已添加").show();
-               // ToastUtils.showShortToast(result);
+                // ToastUtils.showShortToast(result);
                 finish();
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                 ToastUtils.showShortToast("访问接口失败");
+                ToastUtils.showShortToast("访问接口失败");
             }
 
             @Override
@@ -312,7 +318,7 @@ public class AddContactActivity extends BaseActivity {
 
             }
         });
-        contactUpload = WeiboDialogUtils.createLoadingDialog(AddContactActivity.this, "保存中...");
+        contactUpload = WeiboDialogUtils.createLoadingDialog(EditContactActivity.this, "修改中...");
         contactUpload.show();
     }
 
@@ -322,4 +328,5 @@ public class AddContactActivity extends BaseActivity {
 
         super.onBackPressed();
     }
+
 }

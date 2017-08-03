@@ -314,7 +314,7 @@ android:layout_weight="0.1"
               android:layout_height="match_parent"
               android:layout_marginRight="25dp"
               android:layout_weight="1"
-              android:text="默认: （姓名）到(医院)（科室）找（医生）的挂号时间到了"
+              android:hint="默认: （姓名）到(医院)（科室）找（医生）的挂号时间到了"
               android:textColor="@color/textColor"
               android:textSize="20dp" />
       </LinearLayout>

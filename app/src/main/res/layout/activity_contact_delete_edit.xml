@@ -9,19 +9,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.renqi.takemedicine.activity.ContactActivity">
+    tools:context="com.renqi.takemedicine.activity.ContactDeleteEditActivity">
     <include
         layout="@layout/base_toolbar" >
     </include>
-<LinearLayout
-    android:background="@color/backgroundgrey"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ListView
-        android:id="@+id/lv_contact"
+    <LinearLayout
+        android:background="@color/backgroundgrey"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.renqi.takemedicine.swipemenulistview.SwipeMenuListView
+            android:id="@+id/lv_contact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </ListView>
-</LinearLayout>
+        </com.renqi.takemedicine.swipemenulistview.SwipeMenuListView>
+    </LinearLayout>
 </LinearLayout>

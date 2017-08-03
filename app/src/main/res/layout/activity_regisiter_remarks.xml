@@ -41,7 +41,7 @@
                     android:maxLines="10"
                     android:minLines="8"
                     android:scrollbars="vertical"
-                    android:text="默认: （姓名）到(医院)（科室）找（医生）的挂号时间到了"
+                    android:hint="默认: （姓名）到(医院)（科室）找（医生）的挂号时间到了"
                     android:textColor="@color/textColor" />
             </LinearLayout>
 

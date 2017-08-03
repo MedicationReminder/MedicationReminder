@@ -90,6 +90,7 @@ public class RegisteredReminderActivity extends BaseActivity {
         rDepartmentName();
         SharedPreferences sp = getApplicationContext().getSharedPreferences("reg_remarks", Context.MODE_PRIVATE);
         String result = sp.getString("reg_remarks", "");
+        if(!result.equals(""))
         reg_remarks.setText(result);
     }
 
