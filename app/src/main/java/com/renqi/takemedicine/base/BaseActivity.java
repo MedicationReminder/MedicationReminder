@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.renqi.takemedicine.R;
+import com.renqi.takemedicine.app.TakeMedicinApplication;
 
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -31,6 +32,7 @@ public class BaseActivity extends AppCompatActivity {
     @ViewInject(R.id.toolbar_title) private TextView toolbar_title;
     @ViewInject(R.id.home) private TextView home;
     @ViewInject(R.id.iption)private TextView iption;
+    private static BaseActivity instance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,10 @@ public class BaseActivity extends AppCompatActivity {
         initSystemBarTint();
 
     }
-
+    //单例获取BaseActivity对象
+    public synchronized static BaseActivity getInstance() {
+        return instance;
+    }
 
 
     /**子类修改Toolbartitle**/
@@ -51,7 +56,7 @@ public class BaseActivity extends AppCompatActivity {
     {
         toolbar_title.setText(tiele);
     }
-    protected void  setIption(String iption1){iption.setText(iption1);}
+    public void  setIption(String iption1){iption.setText(iption1);}
     /** 子类可以重写改变状态栏颜色 */
     protected int setStatusBarColor() {
         return getColorPrimary();
