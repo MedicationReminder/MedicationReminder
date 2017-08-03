@@ -1,11 +1,18 @@
 package com.renqi.takemedicine.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.adapter.FragmentAdapter;
 import com.renqi.takemedicine.adapter.SectionsPagerAdapter;
@@ -21,6 +28,7 @@ import org.json.JSONException;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -101,4 +109,23 @@ public class OnlineConsultingActivity extends BaseActivity {
             }
         });
     }
+    @Event(R.id.phone)
+    private void phone(View view)
+    {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            //获取权限
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:0510-81816227")));
+            } else {
+                ToastUtils.showLongToast("您已拒绝拨打权限，请前往设置开通或者重新安装！");
+            }
+        } else {
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:0510-81816227")));
+        }
+
+
+    }
+
 }

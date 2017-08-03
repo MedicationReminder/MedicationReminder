@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private long firstTime = 0;
     private String[] permissions = new String[]{
-            Manifest.permission.READ_CONTACTS
+            Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE
     };
     @ViewInject(R.id.toolbarF)
    private FrameLayout toolbarF;
@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity {
             jurisdiction();
         }
 
-/* setImmerseLayout(toolbarF);*/
+     /* setImmerseLayout(toolbarF);*/
         setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
         dateText.setText(MedicationHelper.getWeek(new Date())+MedicationHelper.getTime());
 
@@ -113,7 +113,8 @@ public class MainActivity extends BaseActivity {
         promptButtonHealthy=new PromptButton("健康头条", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton promptButton) {
-                ToastUtils.showShortToast("健康头条");
+       startActivity(new Intent(MainActivity.this,HealthHeadlinesWebActivity.class));
+
             }
         });
         promptButtonHealthy.setTextColor(Color.parseColor("#59acdf"));
@@ -233,11 +234,11 @@ public class MainActivity extends BaseActivity {
 
     @Event(R.id.logistics)
     private void logistics(View view) {
-         startActivity(new Intent(MainActivity.this,SearchActivity2.class));
+         startActivity(new Intent(MainActivity.this,SearchActivity.class));
     }
     @Event(R.id.national_drugstore)
     private void nationalDrugstore(View view) {
-        startActivity(new Intent(MainActivity.this, NationalDrugstoreWebActivity.class));
+        startActivity(new Intent(MainActivity.this, NationalDrugstoreWebActivity2.class));
     }
 
     @Event(R.id.medication_introduction)
@@ -247,7 +248,7 @@ public class MainActivity extends BaseActivity {
 
     @Event(R.id.related_drugs)
     private void relatedDrugs(View view) {
-        startActivity(new Intent(MainActivity.this, RelatedDrugsWebActivity.class));
+        startActivity(new Intent(MainActivity.this, RelatedDrugsWebActivity2.class));
     }
 
     /*

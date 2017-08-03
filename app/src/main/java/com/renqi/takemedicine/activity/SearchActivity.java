@@ -15,6 +15,7 @@ import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.adapter.HistoricalRecordAdapter;
 import com.renqi.takemedicine.adapter.SpinnerAdapter;
 import com.renqi.takemedicine.base.BaseActivity;
+import com.renqi.takemedicine.utils.ToastUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,9 +59,9 @@ public class SearchActivity extends BaseActivity {
     @ViewInject(R.id.listView)
     private ListView listView;
 
-    List<TextView> textviweList=new ArrayList<>();
+    List<TextView> textviweList = new ArrayList<>();
 
-    private  String[] mCountries = { "药品", "药店", "药厂"};
+    private String[] mCountries = {"药品", "药店", "药厂"};
 
     private SpinnerAdapter spinnerAdapter;
     private HistoricalRecordAdapter historicalRecordAdapter;
@@ -68,18 +69,24 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        textviweList.add(KeyWord1);  textviweList.add(KeyWord2);  textviweList.add(KeyWord3);  textviweList.add(KeyWord4);
-        textviweList.add(KeyWord5);  textviweList.add(KeyWord6);  textviweList.add(KeyWord7);  textviweList.add(KeyWord8);
-        RequestParams params=new RequestParams("http://101.69.181.251/api/v1/app_drugreminds/search_words");
+        textviweList.add(KeyWord1);
+        textviweList.add(KeyWord2);
+        textviweList.add(KeyWord3);
+        textviweList.add(KeyWord4);
+        textviweList.add(KeyWord5);
+        textviweList.add(KeyWord6);
+        textviweList.add(KeyWord7);
+        textviweList.add(KeyWord8);
+        RequestParams params = new RequestParams("http://101.69.181.251/api/v1/app_drugreminds/search_words");
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 try {
-                    JSONArray list=new JSONArray(result);
-                    for (int i = 0; i <list.length() ; i++) {
-                        if(i==8)
+                    JSONArray list = new JSONArray(result);
+                    for (int i = 0; i < list.length(); i++) {
+                        if (i == 8)
                             return;
-                        textviweList.get(i).setText(list.get(i)+"");
+                        textviweList.get(i).setText(list.get(i) + "");
 
                     }
 
@@ -104,12 +111,12 @@ public class SearchActivity extends BaseActivity {
             }
         });
 
-        spinnerAdapter=new SpinnerAdapter(this,mCountries);
+        spinnerAdapter = new SpinnerAdapter(this, mCountries);
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinner.setSelection(position,true);
+                spinner.setSelection(position, true);
             }
 
             @Override
@@ -117,62 +124,72 @@ public class SearchActivity extends BaseActivity {
 
             }
         });
-        spinner.setSelection(0,true);
+        spinner.setSelection(0, true);
 
 
-
-        if(getInfo(this,"HR").equals("")){
-            List<Map<String, String>> getInfo=new ArrayList<>();
-            Map<String, String> map=new HashMap<>();
-            map.put("search","name");
+        if (getInfo(this, "HR").equals("")) {
+            List<Map<String, String>> getInfo = new ArrayList<>();
+            Map<String, String> map = new HashMap<>();
+            map.put("search", "name");
             getInfo.add(map);
-            historicalRecordAdapter=new HistoricalRecordAdapter(this,getInfo);
+            historicalRecordAdapter = new HistoricalRecordAdapter(this, getInfo);
             listView.setAdapter(historicalRecordAdapter);
-        }else {
-            List<Map<String, String>> getInfo=getInfo(this,"HR");
-            historicalRecordAdapter=new HistoricalRecordAdapter(this,getInfo);
+        } else {
+            List<Map<String, String>> getInfo = getInfo(this, "HR");
+            historicalRecordAdapter = new HistoricalRecordAdapter(this, getInfo);
             listView.setAdapter(historicalRecordAdapter);
         }
     }
 
 
     @Event(R.id.iption)
-    private void iption(View view){
-        if(getInfo(this,"HR").equals("")){
-            List<Map<String, String>> getInfo=new ArrayList<>();
-            Map<String, String> map=new HashMap<>();
-            map.put("search_name",search_name.getText().toString());
-            getInfo.add(0,map);
-            saveInfo(this,"HR",getInfo);
-        }else {
-        List<Map<String, String>> getInfo=getInfo(this,"HR");
-            if(getInfo.size()<5){
-                Map<String, String> map=new HashMap<>();
-                map.put("search_name",search_name.getText().toString());
-                getInfo.add(getInfo.size(),map);
-                saveInfo(this,"HR",getInfo);
-            }else {
-                getInfo.remove(0);
-                Map<String, String> map=new HashMap<>();
-                map.put("search_name",search_name.getText().toString());
-                getInfo.add(getInfo.size(),map);
-                saveInfo(this,"HR",getInfo);
-            }
+    private void iption(View view) {
+
+        if (search_name.getText().toString().trim().equals("")) {
+            new ToastUtil(getApplicationContext(), R.layout.toast_center, "填写搜索内容").show();
+            return;
         }
 
-//        Intent intent =new Intent(SearchActivity.this,RelatedDrugsWebActivity.class);
-//        Bundle bundle=new Bundle();
-//        bundle.putString("flag",search_name.getText().toString());
-//        intent.putExtras(bundle);
-//        startActivity(intent);
+        if (getInfo(this, "HR").equals("")) {
+            List<Map<String, String>> getInfo = new ArrayList<>();
+            Map<String, String> map = new HashMap<>();
+            map.put("search_name", search_name.getText().toString());
+            getInfo.add(0, map);
+            saveInfo(this, "HR", getInfo);
+        } else {
+            List<Map<String, String>> getInfo = getInfo(this, "HR");
+            if (getInfo.size() < 5) {
+                Map<String, String> map = new HashMap<>();
+                map.put("search_name", search_name.getText().toString());
+                getInfo.add(getInfo.size(), map);
+                saveInfo(this, "HR", getInfo);
+            } else {
+                getInfo.remove(0);
+                Map<String, String> map = new HashMap<>();
+                map.put("search_name", search_name.getText().toString());
+                getInfo.add(getInfo.size(), map);
+                saveInfo(this, "HR", getInfo);
+            }
+        }
+        if (spinner.getSelectedItem().toString().equals("药品")) {
+            Intent intent = new Intent(SearchActivity.this, RelatedDrugsWebActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("flag", search_name.getText().toString());
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else if (spinner.getSelectedItem().toString().equals("药店")) {
+            Intent intent = new Intent(SearchActivity.this, SearchDrugStoresActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("flag", search_name.getText().toString());
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else {
 
-        Intent intent =new Intent(SearchActivity.this,SearchDrugStoresActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putString("flag",search_name.getText().toString());
-        intent.putExtras(bundle);
-        startActivity(intent);
+        }
+
 
     }
+
     public void saveInfo(Context context, String key, List<Map<String, String>> datas) {
         JSONArray mJsonArray = new JSONArray();
         for (int i = 0; i < datas.size(); i++) {
@@ -224,15 +241,17 @@ public class SearchActivity extends BaseActivity {
 
         return datas;
     }
+
     @Event(R.id.clear)
-    private void clear(View view){
-        List<Map<String, String>> getInfo=new ArrayList<>();
-        saveInfo(this,"HR",getInfo);
-        historicalRecordAdapter=new HistoricalRecordAdapter(this,getInfo);
+    private void clear(View view) {
+        List<Map<String, String>> getInfo = new ArrayList<>();
+        saveInfo(this, "HR", getInfo);
+        historicalRecordAdapter = new HistoricalRecordAdapter(this, getInfo);
         listView.setAdapter(historicalRecordAdapter);
     }
+
     @Event(R.id.home)
-    private void home(View view){
+    private void home(View view) {
         finish();
     }
 }

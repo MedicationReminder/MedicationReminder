@@ -21,28 +21,32 @@ import com.renqi.takemedicine.base.BaseActivity;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
-@ContentView(R.layout.activity_medication_introduction_web)
-public class MedicationIntroductionWebActivity extends BaseActivity {
-    @ViewInject(R.id.medicationIntroductionWebView)
-    private WebView medicationIntroductionWebView;
+@ContentView(R.layout.activity_related_drugs_web2)
+public class RelatedDrugsWebActivity2 extends BaseActivity {
+    @ViewInject(R.id.relatedDrugsWebView)
+    private WebView relatedDrugsWebView;
     @ViewInject(R.id.pb_progress)
     private ProgressBar pbProgress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolBarTitle(AppConstants.ToolBarTitle.medicationIntroduction);
+        setToolBarTitle(AppConstants.ToolBarTitle.relatedDrugs);
         initData();
-        medicationIntroductionWebView.loadUrl("http://www.yiliaode.com/strategy_categories/576b48c2391af0550c6798f8/sub_strategy_categories");
-        medicationIntroductionWebView.setWebViewClient(new WebViewClient() {
+        relatedDrugsWebView.loadUrl("http://www.yiliaode.com/drug_names");
+        relatedDrugsWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if(view.getUrl().equals("http://www.yiliaode.com/cities")){
+                    view.loadUrl("http://www.yiliaode.com/drug_names");
+                    return true;
+                }
                 view.loadUrl(url);
                 return true;
             }
 
 
         });
-        medicationIntroductionWebView.setWebChromeClient(new WebChromeClient() {
+        relatedDrugsWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 // TODO 自动生成的方法存根
@@ -69,7 +73,7 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
     }
 
     private void initData() {
-        WebSettings settings = medicationIntroductionWebView.getSettings();
+        WebSettings settings = relatedDrugsWebView.getSettings();
         settings.setJavaScriptEnabled(true);//开启webview支持JS
         settings.setDatabaseEnabled(true);
         String dir = this.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
@@ -79,7 +83,6 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
         //设置定位的数据库路径
         settings.setGeolocationDatabasePath(dir);
         settings.setDomStorageEnabled(true);
-
         if (isNetworkAvailable(getApplicationContext())) {
             //有网络连接，设置默认缓存模式
             settings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -104,8 +107,9 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
         return false;
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && medicationIntroductionWebView.canGoBack()) {
-            medicationIntroductionWebView.goBack();
+        if (keyCode == KeyEvent.KEYCODE_BACK && relatedDrugsWebView.canGoBack()) {
+            relatedDrugsWebView.goBack();
+
             return true;
         }
 
@@ -115,12 +119,12 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
     //销毁Webview
     @Override
     protected void onDestroy() {
-        if (medicationIntroductionWebView != null) {
-            medicationIntroductionWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-            medicationIntroductionWebView.clearHistory();
-            ((ViewGroup) medicationIntroductionWebView.getParent()).removeView(medicationIntroductionWebView);
-            medicationIntroductionWebView.destroy();
-            medicationIntroductionWebView = null;
+        if (relatedDrugsWebView != null) {
+            relatedDrugsWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            relatedDrugsWebView.clearHistory();
+            ((ViewGroup) relatedDrugsWebView.getParent()).removeView(relatedDrugsWebView);
+            relatedDrugsWebView.destroy();
+            relatedDrugsWebView = null;
         }
         super.onDestroy();
     }

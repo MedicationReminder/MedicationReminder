@@ -262,8 +262,9 @@ public class AddContactActivity extends BaseActivity {
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "联系人类型").show();
             return;
         }
-        if(MedicationHelper.isNullOrEmpty(contactUserName.getText().toString().trim()))
-        {   new ToastUtil(getApplicationContext(), R.layout.toast_center, "联系人").show();return;}
+
+//        if(MedicationHelper.isNullOrEmpty(contactUserName.getText().toString().trim()))
+//        {   new ToastUtil(getApplicationContext(), R.layout.toast_center, "联系人").show();return;}
 
 
         if(MedicationHelper.isNullOrEmpty(inputRelation.getText().toString().trim()))

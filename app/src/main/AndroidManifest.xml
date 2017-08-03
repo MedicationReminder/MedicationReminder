@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".app.TakeMedicinApplication"
@@ -37,11 +39,17 @@
         <activity
             android:name=".activity.SearchActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".activity.SearchDrugStoresActivity"/>
-        <activity android:name=".activity.SearchActivity2"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
-        <activity android:name=".activity.OnlineConsultingActivity"/>
+        <activity android:name=".activity.SearchDrugStoresActivity" />
+        <activity
+            android:name=".activity.SearchActivity2"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".activity.OnlineConsultingActivity" />
+        <activity android:name=".activity.NationalDrugstoreWebActivity2" />
+        <activity android:name=".activity.RelatedDrugsWebActivity2" />
+        <activity android:name=".activity.HealthHeadlinesWebActivity" />
+        <activity android:name=".activity.DoctorBookWebActivity" />
+        <activity android:name=".activity.HospitalEncyclopediaWebActivity" />
+        <activity android:name=".activity.RegisiterRemarksActivity"></activity>
     </application>
 
 </manifest>

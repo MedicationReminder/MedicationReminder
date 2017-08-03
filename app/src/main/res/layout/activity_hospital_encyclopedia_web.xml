@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.renqi.takemedicine.activity.MedicationIntroductionWebActivity">
+    tools:context="com.renqi.takemedicine.activity.HospitalEncyclopediaWebActivity">
     <include
         layout="@layout/base_toolbar"></include>
     <ProgressBar
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <WebView
-            android:id="@+id/medicationIntroductionWebView"
+            android:id="@+id/hospitalEncyclopediaWebView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </WebView>

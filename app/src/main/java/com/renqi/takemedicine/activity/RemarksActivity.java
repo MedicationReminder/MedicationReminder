@@ -1,45 +1,28 @@
 package com.renqi.takemedicine.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Switch;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.renqi.takemedicine.R;
-import com.renqi.takemedicine.adapter.CommonAdapter;
 import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.app.TakeMedicinApplication;
-import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.base.EventbusActivity;
 import com.renqi.takemedicine.bean.Remarks;
 import com.renqi.takemedicine.event.BaseEvents;
-import com.renqi.takemedicine.utils.TipDialog;
-import com.renqi.takemedicine.utils.ToastUtil;
-import com.renqi.takemedicine.view.ViewHolder;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ContentView(R.layout.activity_remarks)
 public class RemarksActivity extends EventbusActivity {
@@ -57,6 +40,7 @@ public class RemarksActivity extends EventbusActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
              setToolBarTitle(AppConstants.ToolBarTitle.remarks);
+             setToolBarTitleColor(Color.RED);
              setIption(AppConstants.iption.complete);
 
     }

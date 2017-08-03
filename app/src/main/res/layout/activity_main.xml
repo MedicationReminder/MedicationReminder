@@ -196,7 +196,7 @@
                 android:layout_gravity="left"
                 android:background="@mipmap/button_drug_n"
                 android:gravity="center"
-                android:text="相关药品"
+                android:text="药品大全"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
 

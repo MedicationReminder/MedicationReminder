@@ -14,14 +14,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.renqi.takemedicine.R;
 
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
-
-import static com.blankj.utilcode.util.BarUtils.getStatusBarHeight;
 
 /**
  * Created by Xu Wei on 2017/7/4.
@@ -51,6 +48,11 @@ public class BaseActivity extends AppCompatActivity {
     {
         toolbar_title.setText(tiele);
     }
+    protected void  setToolBarTitleColor(int color)
+    {
+        toolbar_title.setTextColor(color);
+    }
+
     protected void  setIption(String iption1){iption.setText(iption1);}
     /** 子类可以重写改变状态栏颜色 */
     protected int setStatusBarColor() {

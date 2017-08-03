@@ -172,6 +172,7 @@ public class ContactActivity extends BaseActivity {
 private void home(View view){
     Intent intent=new Intent();
     intent.putExtra("1","");
+    intent.putExtra("2","");
     setResult(1,intent);
     finish();
 }

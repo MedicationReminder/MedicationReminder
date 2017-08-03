@@ -21,19 +21,19 @@ import com.renqi.takemedicine.base.BaseActivity;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
-@ContentView(R.layout.activity_medication_introduction_web)
-public class MedicationIntroductionWebActivity extends BaseActivity {
-    @ViewInject(R.id.medicationIntroductionWebView)
-    private WebView medicationIntroductionWebView;
+@ContentView(R.layout.activity_health_headlines_web)
+public class HealthHeadlinesWebActivity extends BaseActivity {
+    @ViewInject(R.id.healthHeadlinesWebView)
+    private WebView healthHeadlinesWebView;
     @ViewInject(R.id.pb_progress)
     private ProgressBar pbProgress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolBarTitle(AppConstants.ToolBarTitle.medicationIntroduction);
+        setToolBarTitle(AppConstants.ToolBarTitle.healthHeadlines);
         initData();
-        medicationIntroductionWebView.loadUrl("http://www.yiliaode.com/strategy_categories/576b48c2391af0550c6798f8/sub_strategy_categories");
-        medicationIntroductionWebView.setWebViewClient(new WebViewClient() {
+        healthHeadlinesWebView.loadUrl("http://www.jiankanghj.com");
+        healthHeadlinesWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -42,7 +42,7 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
 
 
         });
-        medicationIntroductionWebView.setWebChromeClient(new WebChromeClient() {
+        healthHeadlinesWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 // TODO 自动生成的方法存根
@@ -69,7 +69,7 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
     }
 
     private void initData() {
-        WebSettings settings = medicationIntroductionWebView.getSettings();
+        WebSettings settings = healthHeadlinesWebView.getSettings();
         settings.setJavaScriptEnabled(true);//开启webview支持JS
         settings.setDatabaseEnabled(true);
         String dir = this.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
@@ -104,8 +104,8 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
         return false;
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && medicationIntroductionWebView.canGoBack()) {
-            medicationIntroductionWebView.goBack();
+        if (keyCode == KeyEvent.KEYCODE_BACK && healthHeadlinesWebView.canGoBack()) {
+            healthHeadlinesWebView.goBack();
             return true;
         }
 
@@ -115,12 +115,12 @@ public class MedicationIntroductionWebActivity extends BaseActivity {
     //销毁Webview
     @Override
     protected void onDestroy() {
-        if (medicationIntroductionWebView != null) {
-            medicationIntroductionWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-            medicationIntroductionWebView.clearHistory();
-            ((ViewGroup) medicationIntroductionWebView.getParent()).removeView(medicationIntroductionWebView);
-            medicationIntroductionWebView.destroy();
-            medicationIntroductionWebView = null;
+        if (healthHeadlinesWebView != null) {
+            healthHeadlinesWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            healthHeadlinesWebView.clearHistory();
+            ((ViewGroup) healthHeadlinesWebView.getParent()).removeView(healthHeadlinesWebView);
+            healthHeadlinesWebView.destroy();
+            healthHeadlinesWebView = null;
         }
         super.onDestroy();
     }

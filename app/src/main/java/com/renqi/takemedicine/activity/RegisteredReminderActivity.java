@@ -1,10 +1,13 @@
 package com.renqi.takemedicine.activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -85,6 +88,9 @@ public class RegisteredReminderActivity extends BaseActivity {
         Reminder();
         rReminderType();
         rDepartmentName();
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("reg_remarks", Context.MODE_PRIVATE);
+        String result = sp.getString("reg_remarks", "");
+        reg_remarks.setText(result);
     }
 
     private void showDatePickDialog(DateType type) {
@@ -228,6 +234,18 @@ public class RegisteredReminderActivity extends BaseActivity {
 
     }
 
+    @Event(R.id.doctor_book)
+    private void doctor_book(View view) {
+  startActivity(new Intent(RegisteredReminderActivity.this,DoctorBookWebActivity.class));
+    }
+
+    @Event(R.id.hospital_encyclopedia)
+    private void hospital_encyclopedia(View view) {
+        startActivity(new Intent(RegisteredReminderActivity.this,HospitalEncyclopediaWebActivity.class));
+    }
+
+
+
     @Event(R.id.reg_reister_time)
     private void reg_reister_time(View view) {
         MedicationHelper.hideInputMethod(view);
@@ -237,6 +255,7 @@ public class RegisteredReminderActivity extends BaseActivity {
     @Event(R.id.reg_remarks)
     private void reg_remarks(View view) {
 
+        startActivityForResult(new Intent(RegisteredReminderActivity.this,RegisiterRemarksActivity.class), 2);
     }
 
     @Event(R.id.reg_offorno)
@@ -287,9 +306,10 @@ public class RegisteredReminderActivity extends BaseActivity {
             cardItem6.get(0).setSetPicker(true);
             pvCustomOptions.show();
             MedicationHelper.hideInputMethod(view);
-
         } else {
+
             ToastUtils.showShortToast("选择框尚未初始化");
+
         }
 
     }
@@ -353,8 +373,10 @@ public class RegisteredReminderActivity extends BaseActivity {
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                ToastUtils.showShortToast(result);
+                Log.e("result",result);
                 WeiboDialogUtils.closeDialog(medicationUpload);
+                new ToastUtil(getApplicationContext(), R.layout.toast_complete, "添加提醒成功").show();
+                finish();
             }
 
             @Override
@@ -373,6 +395,10 @@ public class RegisteredReminderActivity extends BaseActivity {
 
             }
         });
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("reg_remarks", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("reg_remarks", "");
+        editor.commit();
     }
 
     @Override
@@ -382,6 +408,16 @@ public class RegisteredReminderActivity extends BaseActivity {
                 if (data != null) {
                     reminder.setText(data.getStringExtra("1"));
                     contactID = data.getStringExtra("2");
+                }
+                break;
+
+            case 2:
+                if (data != null) {
+                    reg_remarks.setText(data.getStringExtra("1"));
+                    SharedPreferences sp = getApplicationContext().getSharedPreferences("reg_remarks", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("reg_remarks", data.getStringExtra("1"));
+                    editor.commit();
                 }
                 break;
         }

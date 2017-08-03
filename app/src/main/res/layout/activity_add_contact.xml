@@ -187,7 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2.2"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/importAddress"
@@ -198,6 +198,17 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/round_corner_bg"
                 android:text="从电话本导入"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+            <Button
+                android:id="@+id/editAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/round_corner_bg"
+                android:text="修改/删除  电话本"
                 android:textColor="@color/white"
                 android:textSize="18dp" />
         </LinearLayout>

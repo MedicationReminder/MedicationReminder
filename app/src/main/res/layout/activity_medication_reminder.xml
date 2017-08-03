@@ -379,10 +379,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_weight="10"
                 android:background="@null"
-                android:gravity="left"
+                android:gravity="left|center"
                 android:hint="默认:(姓名)到吃(药名)的时..."
                 android:textColorHint="@color/textColor"
                 android:textSize="15dp" />
