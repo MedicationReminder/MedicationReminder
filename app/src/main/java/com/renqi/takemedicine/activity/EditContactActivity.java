@@ -126,6 +126,7 @@ public class EditContactActivity extends BaseActivity {
                 ToastUtils.showLongToast("您已拒绝读取联系人权限，请前往设置开通或者重新安装！");
             }
         } else {
+
             startActivityForResult(new Intent(
                     Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 0);
         }
