@@ -5,15 +5,18 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.Utils;
 import com.google.gson.Gson;
+import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.bean.response.LoginResponseBean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
+import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.io.FileInputStream;
@@ -25,6 +28,7 @@ import java.util.List;
  */
 
 public class TakeMedicinApplication extends Application {
+
     private Logger log = LoggerFactory.getLogger(TakeMedicinApplication.class);
     private static Context context;
     //保存们每一个activity的list

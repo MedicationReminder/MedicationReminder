@@ -21,7 +21,10 @@ public class EventbusActivity extends BaseActivity {
 
     protected void registEventBus() {
         //子类如果需要注册eventbus，则重写此方法
-        EventBus.getDefault().register(this);
+        if (!EventBus.getDefault().isRegistered(this))
+        {
+            EventBus.getDefault().register(this);
+        }
     }
 
     protected void unRegistEventBus() {

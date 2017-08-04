@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.renqi.takemedicine.R;
+import com.renqi.takemedicine.app.TakeMedicinApplication;
 
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -28,6 +29,7 @@ public class BaseActivity extends AppCompatActivity {
     @ViewInject(R.id.toolbar_title) private TextView toolbar_title;
     @ViewInject(R.id.home) private TextView home;
     @ViewInject(R.id.iption)private TextView iption;
+    private static BaseActivity instance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +42,10 @@ public class BaseActivity extends AppCompatActivity {
         initSystemBarTint();
 
     }
-
+    //单例获取BaseActivity对象
+    public synchronized static BaseActivity getInstance() {
+        return instance;
+    }
 
 
     /**子类修改Toolbartitle**/
