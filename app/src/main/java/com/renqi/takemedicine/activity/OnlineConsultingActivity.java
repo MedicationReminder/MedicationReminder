@@ -9,15 +9,15 @@ import android.support.v7.widget.Toolbar;
 import com.blankj.utilcode.util.ToastUtils;
 import com.renqi.takemedicine.R;
 import com.renqi.takemedicine.adapter.FragmentAdapter;
+
 import com.renqi.takemedicine.adapter.SectionsPagerAdapter;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.base.EventbusActivity;
+import com.renqi.takemedicine.bean.FragmentPrama;
 import com.renqi.takemedicine.bean.InfoEntity;
 import com.renqi.takemedicine.event.BaseEvents;
 import com.renqi.takemedicine.fragment.FragmentTabOnLineConuslting;
-import com.renqi.takemedicine.fragment.FragmentTest;
-import com.renqi.takemedicine.fragment.FragmentTest2;
-import com.renqi.takemedicine.fragment.FragmentTest3;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,14 +42,15 @@ public class OnlineConsultingActivity extends EventbusActivity {
     private ViewPager mViewPager;
     @ViewInject(R.id.tabs)
     private TabLayout tabs;
-    private List<InfoEntity> tabTitleName = new ArrayList<>();
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    static int VIEWPAGER_OFF_SCREEN_PAGE_LIMIT = 6;
     private ArrayList<String> titleList = new ArrayList<String>();
-   // private ArrayList<Fragment> fragmentList = new ArrayList<Fragment>() ;
+
     private ArrayList<Fragment> fragmentListReady = new ArrayList<Fragment>() ;
 
     private FragmentAdapter fragmentAdapter;
 
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private List<InfoEntity> tabFragmentTitleName = new ArrayList<>();
     JSONArray datalist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +66,38 @@ public class OnlineConsultingActivity extends EventbusActivity {
             }
 
             @Override
-            public void onPageSelected(int position) {
-
+            public void onPageSelected(final int position) {
+                RequestParams params=new RequestParams("http://101.69.181.251/api/v1/topics");
                 try {
-                    BaseEvents.sendParamsToOnlineConsultingFragment event = BaseEvents.sendParamsToOnlineConsultingFragment.SEND_Param;
-                    event.setObject(datalist.getString(position));
-                  //  ToastUtils.showShortToast(datalist.getString(position));
-                    EventBus.getDefault().postSticky(event);
+                    params.addBodyParameter("topic_category_name",datalist.getString(position));
+                    x.http().get(params, new Callback.CommonCallback<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+                            BaseEvents.sendParamsToOnlineConsultingFragment event = BaseEvents.sendParamsToOnlineConsultingFragment.SEND_Param;
+                            event.setObject(result);
+                            EventBus.getDefault().postSticky(event);
+                        }
+
+                        @Override
+                        public void onError(Throwable ex, boolean isOnCallback) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(CancelledException cex) {
+
+                        }
+
+                        @Override
+                        public void onFinished() {
+
+                        }
+                    });
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
 
             }
 
@@ -88,33 +111,26 @@ public class OnlineConsultingActivity extends EventbusActivity {
     private void httpInitTabData() {
 
         RequestParams params=new RequestParams("http://101.69.181.251/api/v1/topics/topic_categories");
-     x.http().get(params, new Callback.CommonCallback<String>() {
+        x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 try {
-                     datalist = new JSONArray(result);
-             //   FragmentTabOnLineConuslting fragmentTabOnLineConuslting =new FragmentTabOnLineConuslting() ;
-                    for (int i = 0; i < datalist.length(); i++) {
-                        titleList.add(datalist.getString(i));
-                        //  fragmentList.add(fragmentListReady.get(i));
-                        fragmentListReady.add(new FragmentTabOnLineConuslting());
-
-                    }
-
-                    fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), titleList, fragmentListReady);
-            /*       tabTitleName.add(new InfoEntity("Test",""));
-                    tabTitleName.add(new InfoEntity("Test2",""));
-                    tabTitleName.add(new InfoEntity("Test3",""));
+                    datalist = new JSONArray(result);
+                    //   FragmentTabOnLineConuslting fragmentTabOnLineConuslting =new FragmentTabOnLineConuslting() ;
                     mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-                    mSectionsPagerAdapter.init(tabTitleName);*/
-
-                    mViewPager.setAdapter(fragmentAdapter);
-                  /*  Fragment fragment = getSupportFragmentManager().findFragmentByTag(
-                  "android:switcher:" + R.id.container + ":" + mViewPager.getCurrentItem() );*/
-
-
+                    VIEWPAGER_OFF_SCREEN_PAGE_LIMIT=datalist.length();
+                    for (int i = 0; i < datalist.length(); i++) {
+                    //    titleList.add(datalist.getString(i));
+                 //       fragmentListReady.add(new FragmentTabOnLineConuslting(new FragmentPrama(datalist.getString(i),i ) ) );
+                        tabFragmentTitleName.add(new InfoEntity(datalist.getString(i),""));
+                    }
+                    mSectionsPagerAdapter.init(tabFragmentTitleName);
+                  //  fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), titleList, fragmentListReady);
+                    mViewPager.setAdapter(mSectionsPagerAdapter);
+                   /* getSupportFragmentManager().beginTransaction().replace()*/
+                    mViewPager.setOffscreenPageLimit(VIEWPAGER_OFF_SCREEN_PAGE_LIMIT);
                     tabs.setupWithViewPager(mViewPager, true);
-                    tabs.setTabsFromPagerAdapter(fragmentAdapter);
+                    tabs.setTabsFromPagerAdapter(mSectionsPagerAdapter);
                     tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
                 } catch (JSONException e) {
                     e.printStackTrace();

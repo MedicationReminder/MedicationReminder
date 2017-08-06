@@ -81,7 +81,7 @@
                 android:background="@color/white"
                 app:tabIndicatorColor="@color/colorPrimaryDark"
                 app:tabSelectedTextColor="@color/colorPrimaryDark"
-                app:tabTextAppearance="@style/MyTabLayoutTextAppearanceInverse"
+                    style="@style/MyTabLayoutTextAppearanceInverse"
                 app:tabTextColor="@color/textColor" />
         </LinearLayout>
 
