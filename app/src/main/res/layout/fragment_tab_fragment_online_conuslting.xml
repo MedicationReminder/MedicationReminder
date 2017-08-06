@@ -8,17 +8,20 @@
   >
 
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <ProgressBar
 
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,11 +29,12 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="12dp"
-
+            android:id="@+id/demoView"
             android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
@@ -99,7 +103,53 @@
             </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/demoView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical">
+               <EditText
+                   android:id="@+id/title"
+                   android:textColorHint="@color/textColor"
+                   android:hint="输入咨询标题"
+                   android:layout_width="match_parent"
+                   android:layout_height="60dp" />
+                <EditText
 
+                    android:layout_marginTop="15dp"
+                    android:textSize="16dp"
+                    android:textColorHint="@color/textColor"
+                    android:hint="您可以就执业药师相关的疑问在此提出，我们将尽量为您解答。具有代表性的问题将予以公布，供大家参考，欢迎广大同仁积极参加."
+                    android:id="@+id/add_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="true"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:minLines="8"
+                    android:maxLines="10"
+                    android:scrollbars="vertical"
+                    android:background="@android:drawable/edit_text"
+                    >
+                </EditText>
+
+            </LinearLayout>
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

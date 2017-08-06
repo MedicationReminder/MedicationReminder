@@ -52,6 +52,11 @@
         <activity android:name=".activity.RegisiterRemarksActivity" />
         <activity android:name=".activity.ContactDeleteEditActivity" />
         <activity android:name=".activity.EditContactActivity"></activity>
+        <activity android:name=".activity.SearchDrugStoresActivity" />
+
+
+        <activity android:name=".activity.CreateQuestionAanswerActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
     </application>
 
 </manifest>

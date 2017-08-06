@@ -58,7 +58,8 @@ public interface BaseEvents {
         }
     }
     enum sendParamsToOnlineConsultingFragment implements BaseEvents{
-        SEND_Param;
+        ShowQA,
+        ShowDemo;
         private Object obj;
         @Override
         public void setObject(Object obj) {
