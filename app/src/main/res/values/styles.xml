@@ -83,6 +83,7 @@
     </style>
     <style name="MyTabLayoutTextAppearanceInverse"
         parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

@@ -4,7 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Xu Wei on 2017/7/30.
+ * Created by Mumu
+ * on 2017/1/23.
  */
 
 public class InfoEntity implements Parcelable {
