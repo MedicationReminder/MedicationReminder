@@ -57,6 +57,9 @@ public class BaseActivity extends AppCompatActivity {
         toolbar_title.setText(tiele);
     }
     public void  setIption(String iption1){iption.setText(iption1);}
+    public String getIption(){
+        return iption.getText().toString().trim();
+    }
     /** 子类可以重写改变状态栏颜色 */
     protected int setStatusBarColor() {
         return getColorPrimary();

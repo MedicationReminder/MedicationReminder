@@ -93,9 +93,10 @@ public class TabLayoutFragment extends Fragment {
                 Log.e("result",result);
                 try {
                     JSONArray data= new JSONObject(result).getJSONArray("topics");
-                    String title,created_at,topic_category_name,content;int status,replies_count;
+                    String id, title,created_at,topic_category_name,content;int status,replies_count;
                     for (int i = 0; i <data.length() ; i++) {
                         JSONObject o= (JSONObject) data.get(i);
+                        id=o.getString("id");
                         if(MedicationHelper.isNullOrEmpty(o.getString("title")))
                         {
                             title="";
@@ -126,7 +127,7 @@ public class TabLayoutFragment extends Fragment {
 
                         replies_count =o.getInt("replies_count");
 
-                        listTopicsData.add(new TopicsData(title,created_at,topic_category_name,content,status,replies_count));
+                        listTopicsData.add(new TopicsData(id,title,created_at,topic_category_name,content,status,replies_count));
                     }
                     onlineConusltingRecyclerView .setLayoutManager(new LinearLayoutManager(TakeMedicinApplication.getContext()));
                     commonAdapter =new CommonAdapter<TopicsData>(
@@ -175,7 +176,7 @@ public class TabLayoutFragment extends Fragment {
         });
 
     }
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+/*    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onEvent(BaseEvents.sendParamsToOnlineConsultingFragment event) {
         // UI updates must run on MainThread
 
@@ -184,7 +185,7 @@ public class TabLayoutFragment extends Fragment {
             ToastUtils.showShortToast(event.getObject().toString());
         }
 
-    }
+    }*/
 
     @Override
     public void onDestroy() {

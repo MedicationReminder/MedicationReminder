@@ -366,13 +366,15 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="@color/red"
+                android:gravity="left"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_weight="1"
-                android:text="...."
-                android:textSize="20dp" />
+                android:text="会吃药温馨提醒"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/Remarks"

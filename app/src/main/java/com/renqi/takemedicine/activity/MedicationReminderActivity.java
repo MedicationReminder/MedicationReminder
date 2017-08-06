@@ -265,8 +265,8 @@ public class MedicationReminderActivity extends EventbusActivity {
     }
     private void timeInterval(){
 
-        for (int i = 1; i <25 ; i++) {
-            cardItem2.add(new CardBean(i, i+"" ));
+        for (int i = 1; i <31 ; i++) {
+            cardItem2.add(new CardBean(i, i+"天" ));
         }
     }
     private void times(){

@@ -209,7 +209,7 @@ public class FragmentTabOnLineConuslting extends Fragment  {
     public void onEvent(BaseEvents.sendParamsToOnlineConsultingFragment event) throws JSONException {
         // UI updates must run on MainThread
 
-        if (event == BaseEvents.sendParamsToOnlineConsultingFragment.SEND_Param) {
+        if (event == BaseEvents.sendParamsToOnlineConsultingFragment.ShowDemo) {
             Log.e("eventbus","eventbus");
             listTopicsData.clear();
            JSONArray data=new JSONArray(event.getObject().toString());
