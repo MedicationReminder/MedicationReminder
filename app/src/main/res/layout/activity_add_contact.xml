@@ -195,29 +195,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_corner_bg"
                     android:text="从电话本导入"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="#fff"
-                    android:layout_weight="0.1"></TextView>
 
-                <Button
-                    android:id="@+id/editAddress"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_corner_bg"
-                    android:text="修改/删除  电话本"
-                    android:textColor="@color/white"
-                    android:textSize="18dp" />
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -371,7 +371,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="...."
+                android:text="会吃药温馨提醒"
+                android:textColor="#f00"
                 android:textSize="20dp" />
 
             <TextView

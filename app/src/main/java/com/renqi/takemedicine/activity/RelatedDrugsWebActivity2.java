@@ -15,7 +15,6 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.renqi.takemedicine.R;
-import com.renqi.takemedicine.app.AppConstants;
 import com.renqi.takemedicine.base.BaseActivity;
 
 import org.xutils.view.annotation.ContentView;
@@ -30,7 +29,7 @@ public class RelatedDrugsWebActivity2 extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolBarTitle(AppConstants.ToolBarTitle.relatedDrugs);
+        setToolBarTitle("药品大全");
         initData();
         relatedDrugsWebView.loadUrl("http://www.yiliaode.com/drug_names");
         relatedDrugsWebView.setWebViewClient(new WebViewClient() {

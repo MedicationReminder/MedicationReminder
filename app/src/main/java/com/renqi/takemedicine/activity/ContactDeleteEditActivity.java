@@ -38,7 +38,7 @@ public class ContactDeleteEditActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setToolBarTitle(AppConstants.ToolBarTitle.Contacts);
+        setToolBarTitle("修改/删除电话本");
         initMenu();
 
 

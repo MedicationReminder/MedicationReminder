@@ -122,12 +122,7 @@ public class AddContactActivity extends BaseActivity {
 
 
     }
-    @Event(R.id.editAddress)
-    private void editAddress(View view) {
 
-                startActivity(new Intent(AddContactActivity.this,ContactDeleteEditActivity.class));
-
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
