@@ -1,10 +1,16 @@
 package com.renqi.takemedicine.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -240,11 +246,13 @@ public class MedicationReminderActivity extends EventbusActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 1:
-
                 if (data != null) {
                     Reminder.setText(data.getStringExtra("1"));
                     contactID = data.getStringExtra("2");
                 }
+                break;
+            case 10:
+                medName.setText(data.getStringExtra("medName"));
                 break;
         }
     }
@@ -491,4 +499,18 @@ public class MedicationReminderActivity extends EventbusActivity {
         }
 
     }
+    @Event(R.id.medName)
+    private void medName(View view)
+    {
+        Intent intent=new Intent(MedicationReminderActivity.this,AssociativeSearchActivity.class);
+        startActivityForResult(intent,10);
+    }
+
+
+
+
+
+
+
+
 }

@@ -42,8 +42,10 @@
             android:name=".activity.SearchActivity2"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".activity.OnlineConsultingActivity" />
-        <activity android:name=".activity.CreateQuestionAanswerActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity
+            android:name=".activity.CreateQuestionAanswerActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".activity.AssociativeSearchActivity"></activity>
     </application>
 
 </manifest>
