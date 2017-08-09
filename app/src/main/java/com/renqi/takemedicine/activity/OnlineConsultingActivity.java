@@ -1,36 +1,29 @@
 package com.renqi.takemedicine.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.renqi.takemedicine.R;
-import com.renqi.takemedicine.adapter.FragmentAdapter;
-
 import com.renqi.takemedicine.adapter.SectionsPagerAdapter;
-import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.base.EventbusActivity;
-import com.renqi.takemedicine.bean.FragmentPrama;
 import com.renqi.takemedicine.bean.InfoEntity;
 import com.renqi.takemedicine.bean.response.CreateQAParam;
 import com.renqi.takemedicine.event.BaseEvents;
-import com.renqi.takemedicine.fragment.FragmentTabOnLineConuslting;
 import com.renqi.takemedicine.fragment.PlaceHolderFragment;
 import com.renqi.takemedicine.utils.MedicationHelper;
-import com.renqi.takemedicine.utils.ToastUtil;
 
-
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
@@ -59,6 +52,8 @@ public class OnlineConsultingActivity extends EventbusActivity   {
     @ViewInject(R.id.tabs)
     private TabLayout tabs;
 
+    @ViewInject(R.id.phone)
+    private TabLayout phone;
     static int VIEWPAGER_OFF_SCREEN_PAGE_LIMIT = 6;
     private ArrayList<Fragment> fragmentListReady = new ArrayList<Fragment>() ;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -71,7 +66,7 @@ public class OnlineConsultingActivity extends EventbusActivity   {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setToolBarTitle("在线医师");
+        setToolBarTitle("药师在线");
 
         httpInitTabData();
         setIption("创建问答");
@@ -251,5 +246,23 @@ public class OnlineConsultingActivity extends EventbusActivity   {
 
     }
 
+    @Event(R.id.phone)
+    private void phone(View view)
+    {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            //获取权限
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:0510-81816227")));
+            } else {
+                ToastUtils.showLongToast("您已拒绝拨打权限，请前往设置开通或者重新安装！");
+            }
+        } else {
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:0510-81816227")));
+        }
+
+
+    }
 
 }

@@ -10,6 +10,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -27,20 +29,28 @@ import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.Add_App_contact;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.bean.CardBean;
-import com.renqi.takemedicine.bean.response.ContactResponseBean;
+import com.renqi.takemedicine.bean.request.EditContactRequestBean;
+import com.renqi.takemedicine.bean.response.EditContactResponseBean;
+import com.renqi.takemedicine.http.HttpPatch;
 import com.renqi.takemedicine.utils.MedicationHelper;
 import com.renqi.takemedicine.utils.ToastUtil;
 import com.renqi.takemedicine.utils.WeiboDialogUtils;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +78,17 @@ public class EditContactActivity extends BaseActivity {
     private int user_type = 5;
 
     Dialog contactUpload;
-
+    String id;
+    String device_token;
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            contactUpload.dismiss();
+            new ToastUtil(getApplicationContext(), R.layout.toast_complete, "已修改").show();
+            finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +98,22 @@ public class EditContactActivity extends BaseActivity {
         initCustomOptionPicker();//初始化底部选择窗口
         setIption(AppConstants.iption.complete);
         setToolBarTitle("修改联系人");
+        setIption("修改");
         Intent intent = getIntent();
-        ContactResponseBean.AppContactBean appContactBean = new Gson()
-                .fromJson(intent.getStringExtra("edit"), ContactResponseBean.AppContactBean.class);
+        Log.e("wwwwww", intent.getStringExtra("edit"));
 
-        ContactType.setText(appContactBean.getDevice_token());
-                contactUserName.setText(appContactBean.getName());
-        phoneNumber.setText(appContactBean.getPhone());
-                inputRelation.setText(appContactBean.getRelation());
+        try {
+            JSONObject object = new JSONObject(intent.getStringExtra("edit"));
+            id = object.getString("id");
+            device_token = object.getString("device_token");
+            contactUserName.setText(object.getString("name"));
+            phoneNumber.setText(object.getString("phone"));
+            inputRelation.setText(object.getString("relation"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
@@ -286,41 +314,49 @@ public class EditContactActivity extends BaseActivity {
             return;
 
         }
-
-        RequestParams params = new RequestParams(AppConstants.BASE_ACTION + AppConstants.app_contacts);
-        params.setAsJsonContent(true);
-        params.setBodyContent(getApp_contactJsonParam());
-
-        Log.e("params", params.toString());
-        Log.e("params", getApp_contactJsonParam());
-        //  Log.e("content",getApp_contactJsonParam());
-
-        x.http().post(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                WeiboDialogUtils.closeDialog(contactUpload);
-                new ToastUtil(getApplicationContext(), R.layout.toast_complete, "已添加").show();
-                // ToastUtils.showShortToast(result);
-                finish();
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                ToastUtils.showShortToast("访问接口失败");
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
         contactUpload = WeiboDialogUtils.createLoadingDialog(EditContactActivity.this, "修改中...");
         contactUpload.show();
+
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                EditContactRequestBean.AppContactBean appContactBean = new EditContactRequestBean.AppContactBean();
+                appContactBean.setName(contactUserName.getText().toString());
+                appContactBean.setPhone(phoneNumber.getText().toString());
+                appContactBean.setRelation(inputRelation.getText().toString());
+                appContactBean.setToken(device_token);
+                EditContactRequestBean editContactRequestBean = new EditContactRequestBean();
+                editContactRequestBean.setApp_contact(appContactBean);
+                editContactRequestBean.setId(id);
+                String jsonParam = new Gson().toJson(editContactRequestBean);
+                JSONObject resultObj = null;
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPatch httpPut = new HttpPatch("http://101.69.181.251/api/v1/app_contacts/" + id);
+                httpPut.setHeader("Content-type", "application/json");
+                httpPut.setHeader("Charset", HTTP.UTF_8);
+                httpPut.setHeader("Accept", "application/json");
+                httpPut.setHeader("Accept-Charset", HTTP.UTF_8);
+                try {
+                    if (jsonParam != null) {
+                        StringEntity entity = new StringEntity(jsonParam, HTTP.UTF_8);
+                        httpPut.setEntity(entity);
+                    }
+                    HttpResponse response = httpClient.execute(httpPut);
+
+                    resultObj = new JSONObject(EntityUtils.toString(response.getEntity()));
+                } catch (IOException | ParseException | JSONException e) {
+                    e.printStackTrace();
+                }
+                EditContactResponseBean editContactResponseBean = new Gson().fromJson(resultObj.toString(), EditContactResponseBean.class);
+                if (editContactResponseBean.getStatus() == 200) {
+                    mHandler.sendMessage(new Message());
+                }
+            }
+        }.start();
+
+
     }
 
 

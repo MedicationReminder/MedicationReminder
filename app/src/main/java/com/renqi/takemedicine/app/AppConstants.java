@@ -26,15 +26,15 @@ public class AppConstants {
         public static final String  nationalDrugstore1="搜索药店";
 
         public static final String  medicationIntroduction="用药攻略";
-        public static final String  kitDetials="用药详情";
-        public static final String  kitDetials2="挂号详情";
+        public static final String  kitDetials="用药提醒详情";
+        public static final String  kitDetials2="挂号提醒详情";
         public static final String healthHeadlines="健康头条";
 
         public static final String doctorBook="查看医生";
 
         public static final String hospitalEncyclopedia="查看医院";
 
-        public static final String  kitDetialsRemind="切换提醒";
+        public static final String  kitDetialsRemind="切换";
     }
     public static class  iption
     {

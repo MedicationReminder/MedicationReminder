@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -17,35 +19,39 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.codbking.widget.DatePickDialog;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
+import com.google.gson.Gson;
 import com.renqi.takemedicine.R;
-import com.renqi.takemedicine.app.AppConstants;
-import com.renqi.takemedicine.app.TakeMedicinApplication;
-import com.renqi.takemedicine.base.Add_App_contact;
 import com.renqi.takemedicine.base.EventbusActivity;
 import com.renqi.takemedicine.bean.CardBean;
+import com.renqi.takemedicine.bean.response.EditMedRemRequestBean;
 import com.renqi.takemedicine.event.BaseEvents;
+import com.renqi.takemedicine.http.HttpPatch;
 import com.renqi.takemedicine.utils.MedicationHelper;
 import com.renqi.takemedicine.utils.ToastUtil;
 import com.renqi.takemedicine.utils.WeiboDialogUtils;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-@ContentView(R.layout.activity_medication_reminder)
-public class MedicationReminderActivity extends EventbusActivity {
+@ContentView(R.layout.activity_medication_reminder2)
+public class MedicationReminderActivity2 extends EventbusActivity {
     private OptionsPickerView pvCustomOptions;
     private ArrayList<CardBean> cardItem = new ArrayList<>();
     private ArrayList<CardBean> cardItem2 = new ArrayList<>();
@@ -88,23 +94,56 @@ public class MedicationReminderActivity extends EventbusActivity {
 
     private String contactID="";
 
+
+    private String id;
+    private String token;
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            medicationUpload.dismiss();
+            new ToastUtil(getApplicationContext(), R.layout.toast_complete, "已修改").show();
+            finish();
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolBarTitle(AppConstants.ToolBarTitle.medicationReminder);
-      //  setContentView(R.layout.activity_medication_reminder);
-         setIption(AppConstants.iption.complete);
-         initCustomOptionPicker();
-         timeInterval();
-         getke();
-         times();
-         Reminder();
-         rReminderType();
+        setToolBarTitle("修改用药提醒");
+        //  setContentView(R.layout.activity_medication_reminder);
+        setIption("修改");
+        initCustomOptionPicker();
+        timeInterval();
+        getke();
+        times();
+        Reminder();
+        rReminderType();
+
+        Intent intent=getIntent();
+        Log.e("wwwwww", intent.getStringExtra("1"));
+
+        try {
+            JSONObject object = new JSONObject(intent.getStringExtra("1"));
+            id=object.getString("id");
+            token="426426426";
+            medName.setText(object.getString("name"));
+            selectTime.setText(object.getString("time"));
+            editText4.setText(object.getString("eat_count"));
+            textView4.setText(object.getString("counts"));
+         //   editText41.setText(Integer.parseInt(object.getString("time_for"))/24+"天");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
     @Event(R.id.Remarks)
     private void  Remarks(View view)
     {
-        startActivity(new Intent(MedicationReminderActivity.this,RemarksActivity.class));
+        startActivity(new Intent(MedicationReminderActivity2.this,RemarksActivity.class));
     }
     @Event(R.id.selectTime)
     private void selectTime(View view){
@@ -161,8 +200,8 @@ public class MedicationReminderActivity extends EventbusActivity {
                 if(cardItem2.get(0).isSetPicker())
                 {
 
-                String num=cardItem2.get(options1).getPickerViewText();
-                editText41.setText(num);
+                    String num=cardItem2.get(options1).getPickerViewText();
+                    editText41.setText(num);
                     cardItem2.get(0).setSetPicker(false);
                     return;
                 }
@@ -180,7 +219,7 @@ public class MedicationReminderActivity extends EventbusActivity {
                     if(cardItem4.get(options1).getId()==0)
                     {
 
-                        startActivityForResult(new Intent(MedicationReminderActivity.this,ContactActivity.class),1);
+                        startActivityForResult(new Intent(MedicationReminderActivity2.this,ContactActivity.class),1);
 
                         return;
                     }
@@ -256,6 +295,7 @@ public class MedicationReminderActivity extends EventbusActivity {
         cardItem.add(new CardBean(2, "丸"));
         cardItem.add(new CardBean(3, "贴"));
         cardItem.add(new CardBean(4, "支"));
+
         cardItem.add(new CardBean(5, "袋"));
         cardItem.add(new CardBean(6, "Mg"));
         cardItem.add(new CardBean(7, "Ml"));
@@ -269,18 +309,9 @@ public class MedicationReminderActivity extends EventbusActivity {
         }
     }
     private void times(){
-        cardItem3.add(new CardBean(0,"1"));
-        cardItem3.add(new CardBean(1,"2"));
-        cardItem3.add(new CardBean(2,"3"));
-        cardItem3.add(new CardBean(3,"4"));
-        cardItem3.add(new CardBean(4,"5"));
-        cardItem3.add(new CardBean(5,"6"));
-        cardItem3.add(new CardBean(6,"7"));
-        cardItem3.add(new CardBean(7,"8"));
-        cardItem3.add(new CardBean(8,"9"));
-        cardItem3.add(new CardBean(9,"10"));
-        cardItem3.add(new CardBean(10,"11"));
-        cardItem3.add(new CardBean(11,"12"));
+        cardItem3.add(new CardBean(0,"每日一次"));
+        cardItem3.add(new CardBean(1,"每日二次"));
+        cardItem3.add(new CardBean(2,"每日三次"));
     }
     private void Reminder(){
         cardItem4.add(new CardBean(0,"联系人页面选择"));
@@ -296,14 +327,14 @@ public class MedicationReminderActivity extends EventbusActivity {
     private void editText3(View view)
     {
         if (pvCustomOptions != null) {
-        pvCustomOptions.setPicker(cardItem);//添加数据
-        cardItem.get(0).setSetPicker(true);
-        pvCustomOptions.show();
-        MedicationHelper.hideInputMethod(view);
+            pvCustomOptions.setPicker(cardItem);//添加数据
+            cardItem.get(0).setSetPicker(true);
+            pvCustomOptions.show();
+            MedicationHelper.hideInputMethod(view);
 
-    }else {
-        ToastUtils.showShortToast("选择框尚未初始化");
-    }
+        }else {
+            ToastUtils.showShortToast("选择框尚未初始化");
+        }
 
     }
     @Event(R.id.editText5)
@@ -363,11 +394,11 @@ public class MedicationReminderActivity extends EventbusActivity {
     @Event(R.id.reduce)
     private void reduce(View v)
     {
-       int num=Integer.parseInt(textView4.getText().toString().trim());
-       if(num==1)
-           return;
+        int num=Integer.parseInt(textView4.getText().toString().trim());
+        if(num==1)
+            return;
         else if(num>1)
-           textView4.setText(( num-1)+"");
+            textView4.setText(( num-1)+"");
     }
     @Event(R.id.add)
     private void add(View view)
@@ -402,26 +433,7 @@ public class MedicationReminderActivity extends EventbusActivity {
             ToastUtils.showShortToast("选择框尚未初始化");
         }
     }
-    private String getApp_contactJsonParam(){
-        List<Add_App_contact> addApp_contactList =new ArrayList<>();
-        String str=Integer.parseInt(editText41.getText().toString().split("天")[0])*24+"";
-        addApp_contactList.add(
-                new Add_App_contact(
-                        new Add_App_contact.app_drugremind(TakeMedicinApplication.testMacAdress,
-                                medName.getText().toString().trim(),
-                                textView4.getText().toString().trim(),
-                                reminderModeTyep,editText4.getText().toString(),selectTime.getText().toString().trim(),str,contactID))
-        );
 
-        try {
-            return new JSONArray(MedicationHelper
-                    .gson.toJson(addApp_contactList)).get(0).toString().trim();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return "";
-    }
     @Event(R.id.iption)
     private void ipition(View view)
     {
@@ -457,38 +469,57 @@ public class MedicationReminderActivity extends EventbusActivity {
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "提醒方式").show();
             return;
         }
-        medicationUpload = WeiboDialogUtils.createLoadingDialog(MedicationReminderActivity.this, "上传用药信息中...");
+        medicationUpload = WeiboDialogUtils.createLoadingDialog(MedicationReminderActivity2.this, "修改用药提醒中...");
         medicationUpload.show();
-        RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.app_drugreminds);
-        params.setAsJsonContent(true);
-        params.setBodyContent(getApp_contactJsonParam());
-        Log.e("json",getApp_contactJsonParam());
-        x.http().post(params, new Callback.CommonCallback<String>() {
+
+
+        new Thread() {
             @Override
-            public void onSuccess(String result) {
-             //   ToastUtils.showShortToast(result);
-                Log.e("result",result);
-               WeiboDialogUtils.closeDialog(medicationUpload);
-                new ToastUtil(getApplicationContext(), R.layout.toast_complete, "添加提醒成功").show();
-                finish();
+            public void run() {
+                EditMedRemRequestBean.AppDrugremindBean appDrugremindBean=new EditMedRemRequestBean.AppDrugremindBean();
+                appDrugremindBean.setApp_contact_id(contactID);
+                appDrugremindBean.setToken(token);
+                appDrugremindBean.setName(medName.getText().toString());
+                appDrugremindBean.setCount(textView4.getText().toString());
+                appDrugremindBean.setAlert_mode(reminderModeTyep);
+                appDrugremindBean.setEat_count(editText4.getText().toString());
+                appDrugremindBean.setEat_time(selectTime.getText().toString());
+                appDrugremindBean.setTime_to(editText41.getText().toString());
+                EditMedRemRequestBean editMedRemRequestBean=new EditMedRemRequestBean();
+                editMedRemRequestBean.setApp_drugremind(appDrugremindBean);
+                editMedRemRequestBean.setId(id);
+
+
+                String jsonParam = new Gson().toJson(editMedRemRequestBean);
+                JSONObject resultObj = null;
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPatch httpPut = new HttpPatch("http://101.69.181.251/api/v1/app_drugreminds/"+id);
+                httpPut.setHeader("Content-type", "application/json");
+                httpPut.setHeader("Charset", HTTP.UTF_8);
+                httpPut.setHeader("Accept", "application/json");
+                httpPut.setHeader("Accept-Charset", HTTP.UTF_8);
+                try {
+                    if (jsonParam != null) {
+                        StringEntity entity = new StringEntity(jsonParam,HTTP.UTF_8);
+                        httpPut.setEntity(entity);
+                    }
+                    HttpResponse response = httpClient.execute(httpPut);
+                    resultObj = new JSONObject(EntityUtils.toString(response.getEntity()));
+                } catch (IOException | ParseException | JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.e("result1", resultObj.toString());
+                try {
+                    if(resultObj.getString("status").equals("200")){
+                        mHandler.sendMessage(new Message());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+        }.start();
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                ToastUtils.showShortToast(ex.getMessage().toString().trim());
-                WeiboDialogUtils.closeDialog(medicationUpload);
-            }
 
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
     }
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onEvent(BaseEvents.sendRemarks event) {

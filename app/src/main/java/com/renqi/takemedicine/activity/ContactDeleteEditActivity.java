@@ -34,32 +34,33 @@ public class ContactDeleteEditActivity extends BaseActivity {
     private SwipeMenuListView lvContact;
     private ContactAdapter contactAdapter;
     private ContactResponseBean contactResponseBean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setToolBarTitle("修改/删除电话本");
+
         initMenu();
 
 
-
-        RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.ALL_CONTACTS);
-        params.addBodyParameter("token","426426426");
-        Log.e("params",params.toString());
+        RequestParams params = new RequestParams(AppConstants.BASE_ACTION + AppConstants.ALL_CONTACTS);
+        params.addBodyParameter("token", "426426426");
+        Log.e("params", params.toString());
 
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                Log.e("ALL_CONTACTS","onSuccess");
+                Log.e("ALL_CONTACTS", "onSuccess");
 
-                contactResponseBean=new Gson().fromJson(result.toString(),ContactResponseBean.class);
-                contactAdapter = new ContactAdapter(ContactDeleteEditActivity.this,contactResponseBean);
+                contactResponseBean = new Gson().fromJson(result.toString(), ContactResponseBean.class);
+                contactAdapter = new ContactAdapter(ContactDeleteEditActivity.this, contactResponseBean);
                 lvContact.setAdapter(contactAdapter);
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Log.e("ALL_CONTACTS",ex.toString());
+                Log.e("ALL_CONTACTS", ex.toString());
             }
 
             @Override
@@ -75,6 +76,8 @@ public class ContactDeleteEditActivity extends BaseActivity {
 
 
     }
+
+
 
     /**
      * 侧滑删除历史消息
@@ -114,10 +117,9 @@ public class ContactDeleteEditActivity extends BaseActivity {
         lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(ContactDeleteEditActivity.this,EditContactActivity.class);
-                intent.putExtra("edit",contactResponseBean.getApp_contact().get(position).toString());
-                startActivityForResult(intent,1);
-
+                Intent intent = new Intent(ContactDeleteEditActivity.this, EditContactActivity.class);
+                intent.putExtra("edit", contactResponseBean.getApp_contact().get(position).toString());
+                startActivityForResult(intent, 1);
 
             }
         });
@@ -129,21 +131,21 @@ public class ContactDeleteEditActivity extends BaseActivity {
                 switch (index) {
                     case 0:
 
-                        RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.DELETE_CONTACTS);
-                        params.addBodyParameter("token","426426426");
-                        params.addBodyParameter("id",contactResponseBean.getApp_contact().get(position).getId());
-                        Log.e("params",params.toString());
+                        RequestParams params = new RequestParams(AppConstants.BASE_ACTION + AppConstants.DELETE_CONTACTS);
+                        params.addBodyParameter("token", "426426426");
+                        params.addBodyParameter("id", contactResponseBean.getApp_contact().get(position).getId());
+                        Log.e("params", params.toString());
 
                         x.http().get(params, new Callback.CommonCallback<String>() {
                             @Override
                             public void onSuccess(String result) {
-                                Log.e("DELETE_CONTACTS","onSuccess");
+                                Log.e("DELETE_CONTACTS", "onSuccess");
 
                             }
 
                             @Override
                             public void onError(Throwable ex, boolean isOnCallback) {
-                                Log.e("DELETE_CONTACTS",ex.toString());
+                                Log.e("DELETE_CONTACTS", ex.toString());
                             }
 
                             @Override
@@ -159,7 +161,7 @@ public class ContactDeleteEditActivity extends BaseActivity {
 
 
                         contactResponseBean.getApp_contact().remove(position);
-                        contactAdapter = new ContactAdapter(ContactDeleteEditActivity.this,contactResponseBean);
+                        contactAdapter = new ContactAdapter(ContactDeleteEditActivity.this, contactResponseBean);
                         lvContact.setAdapter(contactAdapter);
 
                     case 1:
@@ -170,11 +172,49 @@ public class ContactDeleteEditActivity extends BaseActivity {
             }
         });
     }
+
     @Event(R.id.home)
-    private void home(View view){
+    private void home(View view) {
         finish();
     }
+
     private int dp2px(int dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        RequestParams params = new RequestParams(AppConstants.BASE_ACTION + AppConstants.ALL_CONTACTS);
+        params.addBodyParameter("token", "426426426");
+        Log.e("params", params.toString());
+
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.e("ALL_CONTACTS", "onSuccess");
+
+                contactResponseBean = new Gson().fromJson(result.toString(), ContactResponseBean.class);
+                contactAdapter = new ContactAdapter(ContactDeleteEditActivity.this, contactResponseBean);
+                lvContact.setAdapter(contactAdapter);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e("ALL_CONTACTS", ex.toString());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
     }
 }

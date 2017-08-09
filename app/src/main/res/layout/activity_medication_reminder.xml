@@ -193,7 +193,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="服药起始时间"
+                    android:text="服药时间"
                     android:textColor="@color/textColor2"
                     android:textSize="20dp" />
 

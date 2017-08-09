@@ -51,12 +51,13 @@
         <activity android:name=".activity.HospitalEncyclopediaWebActivity" />
         <activity android:name=".activity.RegisiterRemarksActivity" />
         <activity android:name=".activity.ContactDeleteEditActivity" />
-        <activity android:name=".activity.EditContactActivity"></activity>
+        <activity android:name=".activity.EditContactActivity" />
         <activity android:name=".activity.SearchDrugStoresActivity" />
-
-
-        <activity android:name=".activity.CreateQuestionAanswerActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity
+            android:name=".activity.CreateQuestionAanswerActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".activity.MedicationReminderActivity2" />
+        <activity android:name=".activity.RegisteredReminderActivity2"></activity>
     </application>
 
 </manifest>

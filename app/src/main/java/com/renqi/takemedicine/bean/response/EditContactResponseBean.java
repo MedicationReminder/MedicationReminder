@@ -1,26 +1,48 @@
 package com.renqi.takemedicine.bean.response;
 
-import java.util.List;
-
 /**
- * Created by zsj on 2017/7/17.
+ * Created by zsj on 2017/8/9.
  */
 
-public class ContactResponseBean {
+public class EditContactResponseBean {
 
-    private List<AppContactBean> app_contact;
+    /**
+     * app_contact : {"id":"5983e1e3391af004118a253f","name":"'小屋'","device_token":"426426426","relation":"盆友","phone":"123456"}
+     * message : 成功
+     * status : 200
+     */
 
-    public List<AppContactBean> getApp_contact() {
+    private AppContactBean app_contact;
+    private String message;
+    private int status;
+
+    public AppContactBean getApp_contact() {
         return app_contact;
     }
 
-    public void setApp_contact(List<AppContactBean> app_contact) {
+    public void setApp_contact(AppContactBean app_contact) {
         this.app_contact = app_contact;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public static class AppContactBean {
         /**
-         * id : 596c5755391af04a66b5a3d0
+         * id : 5983e1e3391af004118a253f
          * name : '小屋'
          * device_token : 426426426
          * relation : 盆友
@@ -32,17 +54,6 @@ public class ContactResponseBean {
         private String device_token;
         private String relation;
         private String phone;
-
-        @Override
-        public String toString() {
-            return "{" +
-                    "id=\"" + id + '\"' +
-                    ", name=\"" + name + '\"' +
-                    ", device_token=\"" + device_token + '\"' +
-                    ", relation=\"" + relation + '\"' +
-                    ", phone=\"" + phone + '\"' +
-                    '}';
-        }
 
         public String getId() {
             return id;

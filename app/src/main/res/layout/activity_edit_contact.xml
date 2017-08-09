@@ -172,6 +172,7 @@
                     android:background="@null"
                     android:gravity="right"
                     android:hint="请输入电话号码"
+                    android:inputType="number"
                     android:textColorHint="@color/textColor" />
             </LinearLayout>
 
