@@ -456,6 +456,7 @@ public class RegisteredReminderActivity2 extends BaseActivity {
         switch (requestCode) {
             case 1:
                 if (data != null) {
+
                     reminder.setText(data.getStringExtra("1"));
                     contactID = data.getStringExtra("2");
                 }
