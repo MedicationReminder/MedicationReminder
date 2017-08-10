@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +19,7 @@ import com.renqi.takemedicine.adapter.CommonAdapter;
 import com.renqi.takemedicine.app.TakeMedicinApplication;
 import com.renqi.takemedicine.base.BaseActivity;
 import com.renqi.takemedicine.bean.Reply;
+import com.renqi.takemedicine.utils.MedicationHelper;
 import com.renqi.takemedicine.utils.ToastUtil;
 import com.renqi.takemedicine.view.ViewHolder;
 
@@ -44,15 +48,22 @@ public class CreateQuestionAanswerActivity extends BaseActivity {
     @ViewInject(R.id.replyView)
     private LinearLayout replyView;
     @ViewInject(R.id.replyRecyclerview)private RecyclerView replyRecyclerview;
+    @ViewInject(R.id.textView8)private  TextView textView8;
+    @ViewInject(R.id.root_view)private LinearLayout root_view;
+    @ViewInject(R.id.btnSend)private Button btnSend;
+    @ViewInject(R.id.relay)private EditText relay;
     CommonAdapter commonAdapter;
     int replies_count;
     List<Reply> replyList=new ArrayList<>();
+    private int screenHeight = 0;
+    private int keyHeight = 0;
 
     String QAid,topic_category_name,created_at;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolBarTitle("问答详情");
+       // relay.setFocusable(false);
         QAid= getIntent().getStringExtra("id");
         RequestParams params=new RequestParams("http://101.69.181.251/api/v1/topics/"+QAid);
         Log.e("param",params.toString());
@@ -118,10 +129,48 @@ public class CreateQuestionAanswerActivity extends BaseActivity {
         //setIption();
     }
 
-    @Event(R.id.home)
+  /*  @Event(R.id.home)
     private  void back(View v)
     {
         finish();
     }
+    private void initOtherData() {
+        screenHeight = this.getWindowManager().getDefaultDisplay().getHeight();
+        keyHeight = screenHeight / 3;
+    }
+    @Event(R.id.relay)
+    private  void  relay(View v)
+    {
 
+        int visalbe=textView8.getVisibility();
+        if(visalbe==8)
+        {
+            textView8.setVisibility(View.VISIBLE);
+            btnSend.setVisibility(View.GONE);
+        }else {
+            textView8.setVisibility(View.GONE);
+            btnSend.setVisibility(View.VISIBLE);
+
+        }
+
+    }*/
+    @Event(R.id.btnSend)
+    private void btnSend(View view){
+       if(MedicationHelper.isNullOrEmpty(relay.getText().toString().trim())) {
+           ToastUtils.showShortToast("亲,您还没有输入回复内容");
+           return;
+       }else {
+           RequestParams params=new RequestParams("http://101.69.181.251/api/v1/topics/"+QAid+"/create_reply");
+
+           params.setAsJsonContent(true);
+
+       }
+
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+
+        return false;
+    }
 }
