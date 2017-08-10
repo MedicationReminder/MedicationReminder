@@ -60,7 +60,8 @@
                         android:background="@null"
                         android:gravity="right"
                         android:hint="输入药品名称"
-                        android:textColorHint="@color/textColor" />
+                        android:textColorHint="@color/textColor"
+                        android:textSize="15dp"/>
                 </LinearLayout>
 
                 <View

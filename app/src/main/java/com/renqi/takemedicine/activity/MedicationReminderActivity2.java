@@ -285,6 +285,9 @@ public class MedicationReminderActivity2 extends EventbusActivity {
                     contactID = data.getStringExtra("2");
                 }
                 break;
+            case 10:
+                medName.setText(data.getStringExtra("medName"));
+                break;
         }
     }
 
@@ -530,5 +533,12 @@ public class MedicationReminderActivity2 extends EventbusActivity {
             Remarks.setText(  event.getObject().toString().trim());
         }
 
+    }
+
+    @Event(R.id.medName)
+    private void medName(View view)
+    {
+        Intent intent=new Intent(MedicationReminderActivity2.this,AssociativeSearchActivity.class);
+        startActivityForResult(intent,10);
     }
 }
