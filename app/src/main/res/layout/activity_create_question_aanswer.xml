@@ -11,6 +11,12 @@
     tools:context="com.renqi.takemedicine.activity.CreateQuestionAanswerActivity">
 <include
     layout="@layout/base_toolbar"></include>
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="match_parent"
