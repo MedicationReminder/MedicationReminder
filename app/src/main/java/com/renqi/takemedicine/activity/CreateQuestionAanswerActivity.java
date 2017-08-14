@@ -1,5 +1,6 @@
 package com.renqi.takemedicine.activity;
 
+import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -180,6 +182,8 @@ public class CreateQuestionAanswerActivity extends BaseActivity {
                    relay.setText("");
                    relay.requestFocus();
                    replyList.clear();
+                   InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                   imm.hideSoftInputFromWindow(relay.getWindowToken(), 0) ;
                    progress_bar.setVisibility(View.VISIBLE);
                    commonAdapter.notifyDataSetChanged();
                 new Handler().postDelayed(new Runnable() {
