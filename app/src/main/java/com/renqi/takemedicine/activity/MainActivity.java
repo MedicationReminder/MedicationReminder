@@ -265,7 +265,9 @@ public class MainActivity extends BaseActivity {
     }
     @Event(R.id.im_clock)
     private void imClock(View view) {
-      startActivity(new Intent(MainActivity.this, KitDetailsActivity.class));
+    //  startActivity(new Intent(MainActivity.this, KitDetailsActivity.class));
+
+
 
     }
 

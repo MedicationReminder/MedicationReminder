@@ -25,7 +25,8 @@
         </activity>
         <activity android:name=".activity.RegisteredReminderActivity" />
         <activity android:name=".activity.AddContactActivity" />
-        <activity android:name=".activity.MedicationReminderActivity" />
+        <activity android:name=".activity.MedicationReminderActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".activity.RemarksActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -52,7 +53,6 @@
         <activity android:name=".activity.RegisiterRemarksActivity" />
         <activity android:name=".activity.ContactDeleteEditActivity" />
         <activity android:name=".activity.EditContactActivity" />
-        <activity android:name=".activity.SearchDrugStoresActivity" />
         <activity
             android:name=".activity.CreateQuestionAanswerActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />

@@ -1,5 +1,6 @@
 package com.renqi.takemedicine.activity;
 
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
