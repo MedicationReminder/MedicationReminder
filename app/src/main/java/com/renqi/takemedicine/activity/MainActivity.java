@@ -50,6 +50,7 @@ public class MainActivity extends BaseActivity {
     private ImageView im_clock;
     private PromptDialog promptDialog;
 
+
     private PromptDialog promptDialog2;
     private static final String TAG = "MainActivity";
     private long firstTime = 0;
