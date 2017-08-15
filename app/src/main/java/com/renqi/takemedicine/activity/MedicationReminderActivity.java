@@ -445,6 +445,7 @@ private List<String> dayCountList=new ArrayList<>();
             if(Reminder.getText().toString().trim().equals("本人")){
                 cardItem5.remove(2);
 
+
             }else {
                 cardItem5.remove(0);
                 cardItem5.remove(1);
