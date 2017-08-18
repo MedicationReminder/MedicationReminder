@@ -442,6 +442,7 @@ private List<String> dayCountList=new ArrayList<>();
                 ToastUtils.showShortToast("请先选择被提醒人！");
                 return;
 
+
             }
             if(Reminder.getText().toString().trim().equals("本人")){
                 cardItem5.remove(2);
