@@ -49,16 +49,22 @@ public class MainActivity extends BaseActivity {
     @ViewInject(R.id.im_clock)
     private ImageView im_clock;
     private PromptDialog promptDialog;
+
+
+    private PromptDialog promptDialog2;
     private static final String TAG = "MainActivity";
     private long firstTime = 0;
     private String[] permissions = new String[]{
-            Manifest.permission.READ_CONTACTS
+            Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE
     };
     @ViewInject(R.id.toolbarF)
    private FrameLayout toolbarF;
     private List<String> mPermissionList = new ArrayList<>();
-    /*private List<PromptButton> listpromptButton=new ArrayList<>();*/
     PromptButton promptButton,promptButton1,promptButtonlogist,promptButtonHealthy,promptButtonDoctorOnline;
+
+    PromptButton add,edit;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,11 +74,13 @@ public class MainActivity extends BaseActivity {
             jurisdiction();
         }
 
-/* setImmerseLayout(toolbarF);*/
+     /* setImmerseLayout(toolbarF);*/
         setToolBarTitle(AppConstants.ToolBarTitle.takemedicationReminder);
         dateText.setText(MedicationHelper.getWeek(new Date())+MedicationHelper.getTime());
 
         initBottomDialog();
+
+        initBottomDialog2();
 
         initClockImg();
     }
@@ -113,7 +121,8 @@ public class MainActivity extends BaseActivity {
         promptButtonHealthy=new PromptButton("健康头条", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton promptButton) {
-                ToastUtils.showShortToast("健康头条");
+       startActivity(new Intent(MainActivity.this,HealthHeadlinesWebActivity.class));
+
             }
         });
         promptButtonHealthy.setTextColor(Color.parseColor("#59acdf"));
@@ -140,7 +149,29 @@ public class MainActivity extends BaseActivity {
         });
         promptButton1.setTextColor(Color.parseColor("#FF4081"));
     }
+    private void initBottomDialog2() {
+        //创建对象
+        promptDialog2 = new PromptDialog(this);
+        //设置自定义属性
+        promptDialog2.getDefaultBuilder().touchAble(true).round(3).loadingDuration(3000);
 
+        add=new PromptButton("新增电话本", new PromptButtonListener() {
+            @Override
+            public void onClick(PromptButton promptButton) {
+                startActivity(new Intent(MainActivity.this,AddContactActivity.class));
+            }
+        });
+        add.setTextColor(Color.parseColor("#59acdf"));
+        edit=new PromptButton("修改/删除电话本", new PromptButtonListener() {
+            @Override
+            public void onClick(PromptButton promptButton) {
+                startActivity(new Intent(MainActivity.this,ContactDeleteEditActivity.class));
+
+            }
+        });
+        edit.setTextColor(Color.parseColor("#59acdf"));
+
+    }
 
     private void jurisdiction() {
         mPermissionList.clear();
@@ -176,7 +207,6 @@ public class MainActivity extends BaseActivity {
 
 
                     if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-
 
                     }else {
                         //判断是否勾选禁止后不再询问
@@ -222,23 +252,35 @@ public class MainActivity extends BaseActivity {
     @Event(R.id.addContact)
     private void addContact(View view)
     {
-        startActivity(new Intent(MainActivity.this,AddContactActivity.class));
+
+        PromptButton cancle = new PromptButton("取消", null);
+        cancle.setTextColor(Color.parseColor("#59acdf"));
+
+        //设置显示的文字大小及颜色
+        promptDialog.getAlertDefaultBuilder().textSize(12).textColor(Color.GRAY);
+
+        //默认两个按钮为Alert对话框，大于三个按钮的为底部SHeet形式展现
+        promptDialog.showAlertSheet("", true, cancle,edit,add);
+
+
 
     }
     @Event(R.id.im_clock)
     private void imClock(View view) {
-      startActivity(new Intent(MainActivity.this, KitDetailsActivity.class));
+    //  startActivity(new Intent(MainActivity.this, KitDetailsActivity.class));
+
+
 
     }
 
 
     @Event(R.id.logistics)
     private void logistics(View view) {
-         startActivity(new Intent(MainActivity.this,SearchActivity2.class));
+         startActivity(new Intent(MainActivity.this,SearchActivity.class));
     }
     @Event(R.id.national_drugstore)
     private void nationalDrugstore(View view) {
-        startActivity(new Intent(MainActivity.this, NationalDrugstoreWebActivity.class));
+        startActivity(new Intent(MainActivity.this, NationalDrugstoreWebActivity2.class));
     }
 
     @Event(R.id.medication_introduction)
@@ -248,7 +290,7 @@ public class MainActivity extends BaseActivity {
 
     @Event(R.id.related_drugs)
     private void relatedDrugs(View view) {
-        startActivity(new Intent(MainActivity.this, RelatedDrugsWebActivity.class));
+        startActivity(new Intent(MainActivity.this, RelatedDrugsWebActivity2.class));
     }
 
     /*

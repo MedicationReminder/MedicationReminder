@@ -17,11 +17,11 @@
     android:background="@color/backgroundgrey"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.renqi.takemedicine.swipemenulistview.SwipeMenuListView
+    <ListView
         android:id="@+id/lv_contact"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.renqi.takemedicine.swipemenulistview.SwipeMenuListView>
+    </ListView>
 </LinearLayout>
 </LinearLayout>

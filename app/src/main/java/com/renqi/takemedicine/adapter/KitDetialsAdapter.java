@@ -72,9 +72,10 @@ public class KitDetialsAdapter extends BaseAdapter {
             }
             viewHolder.name.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getName());
             viewHolder.time.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getTime());
-            viewHolder.eat_count.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getEat_count()+"粒/颗");
-            viewHolder.counts.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getCounts()+"次");
-            viewHolder.time_for.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getTime_for()+"小时");
+            viewHolder.counts.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getEat_count()+"粒/颗");
+            viewHolder.eat_count.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getCounts()+"次");
+          //  viewHolder.time_for.setText(kitDetialsResponseBean.getApp_drugreminds().get(position).getTime_for()+"小时");
+            viewHolder.time_for.setVisibility(View.GONE);
             return convertView;
         }else {
             ViewHolder2 viewHolder;
@@ -87,6 +88,7 @@ public class KitDetialsAdapter extends BaseAdapter {
                 viewHolder.time = (TextView) convertView.findViewById(R.id.item_register_time);
                 viewHolder.characteristic_name = (TextView) convertView.findViewById(R.id.item_characteristic_name);
                 viewHolder.doctor_name = (TextView) convertView.findViewById(R.id.item_doctor_name);
+
 
                 convertView.setTag(viewHolder);
             } else {

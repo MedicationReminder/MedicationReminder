@@ -33,6 +33,17 @@ public class ContactResponseBean {
         private String relation;
         private String phone;
 
+        @Override
+        public String toString() {
+            return "{" +
+                    "id=\"" + id + '\"' +
+                    ", name=\"" + name + '\"' +
+                    ", device_token=\"" + device_token + '\"' +
+                    ", relation=\"" + relation + '\"' +
+                    ", phone=\"" + phone + '\"' +
+                    '}';
+        }
+
         public String getId() {
             return id;
         }

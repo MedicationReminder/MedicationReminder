@@ -44,6 +44,18 @@ public class KitDetialsResponseBean {
         private int counts;
         private int time_for;
 
+        @Override
+        public String toString() {
+            return "{" +
+                    "id=\"" + id + '\"' +
+                    ", name=\"" + name + '\"' +
+                    ", time=\"" + time + '\"' +
+                    ", eat_count=\"" + eat_count + '\"'+
+                    ", counts=\"" + counts + '\"' +
+                    ", time_for=\"" + time_for+ '\"' +
+                    '}';
+        }
+
         public String getId() {
             return id;
         }
@@ -109,6 +121,18 @@ public class KitDetialsResponseBean {
         private String characteristic_name;
         private String doctor_name;
         private int time_for;
+
+        @Override
+        public String toString() {
+            return "{" +
+                    "id=\"" + id + '\"' +
+                    ", hosptial_name=\"" + hosptial_name + '\"' +
+                    ", time=\"" + time + '\"' +
+                    ", characteristic_name=\"" + characteristic_name + '\"' +
+                    ", doctor_name=\"" + doctor_name + '\"' +
+                    ", time_for=\"" + time_for + '\"' +
+                    '}';
+        }
 
         public String getId() {
             return id;

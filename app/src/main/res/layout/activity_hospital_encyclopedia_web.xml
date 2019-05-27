@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:background="@color/colorPrimaryDark"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.renqi.takemedicine.activity.HospitalEncyclopediaWebActivity">
+    <include
+        layout="@layout/base_toolbar"></include>
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dip"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:progressDrawable="@drawable/progress_bar_states" >
+
+    </ProgressBar>
+    <LinearLayout
+        android:background="@color/backgroundgrey"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <WebView
+            android:id="@+id/hospitalEncyclopediaWebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </WebView>
+    </LinearLayout>
+</LinearLayout>

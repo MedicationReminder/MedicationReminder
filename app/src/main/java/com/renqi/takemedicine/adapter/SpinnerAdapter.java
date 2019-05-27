@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.renqi.takemedicine.R;
-import com.renqi.takemedicine.activity.SearchActivity2;
 
 /**
  * Created by zsj on 2017/7/26.
@@ -18,7 +17,7 @@ public class SpinnerAdapter  extends BaseAdapter {
     Context mContext;
     String[] mCountries;
     LayoutInflater layoutInflater;
-    public SpinnerAdapter( Context mContext,String[] mCountries){
+    public SpinnerAdapter(Context mContext,String[] mCountries){
         this.mContext = mContext;
         this.mCountries = mCountries;
         this.layoutInflater= LayoutInflater.from(mContext);

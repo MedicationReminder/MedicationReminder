@@ -60,7 +60,8 @@
                     android:background="@null"
                     android:gravity="right"
                     android:hint="输入药品名称"
-                    android:textColorHint="@color/textColor" />
+                    android:textColorHint="@color/textColor"
+                    android:textSize="15dp"/>
             </LinearLayout>
 
             <View
@@ -172,6 +173,44 @@
                     android:textSize="17dp" />
             </LinearLayout>
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#999999" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="每日服用次数"
+                    android:textColor="@color/textColor2"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/day_count"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请选择"
+                    android:textColorHint="@color/textColor"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -185,7 +224,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="2">
 
                 <TextView
                     android:layout_width="0dp"
@@ -193,7 +232,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="服药起始时间"
+                    android:text="服药时间"
                     android:textColor="@color/textColor2"
                     android:textSize="20dp" />
 
@@ -208,7 +247,9 @@
                     android:gravity="right"
                     android:hint="请选择时间"
                     android:textColor="@color/textColor"
-                    android:textSize="17dp" />
+                    android:textSize="17dp"
+                    android:scrollbars="vertical"
+                    android:singleLine="false"/>
             </LinearLayout>
 
             <View
@@ -221,7 +262,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1.5">
 
                 <TextView
                     android:id="@+id/textView"
@@ -252,7 +293,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="3"
             android:background="@color/white"
             android:orientation="vertical">
@@ -366,25 +407,23 @@
             android:orientation="horizontal">
 
             <TextView
-                android:textColor="@color/red"
-                android:gravity="left"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="会吃药温馨提醒"
-                android:textSize="15dp" />
+                android:textColor="#f00"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/Remarks"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_weight="10"
                 android:background="@null"
-                android:gravity="left"
+                android:gravity="left|center"
                 android:hint="默认:(姓名)到吃(药名)的时..."
                 android:textColorHint="@color/textColor"
                 android:textSize="15dp" />

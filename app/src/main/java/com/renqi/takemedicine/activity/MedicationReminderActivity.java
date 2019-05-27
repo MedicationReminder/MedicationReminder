@@ -1,16 +1,12 @@
 package com.renqi.takemedicine.activity;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.Nullable;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -58,11 +54,15 @@ public class MedicationReminderActivity extends EventbusActivity {
     private ArrayList<CardBean> cardItem3 = new ArrayList<>();
     private ArrayList<CardBean> cardItem4 = new ArrayList<>();
     private ArrayList<CardBean> cardItem5 = new ArrayList<>();
+    private ArrayList<CardBean> cardItem6 = new ArrayList<>();
     Dialog medicationUpload;
     @ViewInject(R.id.iption)
     private TextView iption;
-    int a=1;
+    int a = 1;
     int reminderModeTyep;
+    int dayCount;
+
+
     @ViewInject(R.id.medName)
     private EditText medName;
 
@@ -72,13 +72,13 @@ public class MedicationReminderActivity extends EventbusActivity {
     @ViewInject(R.id.editText3)
     private TextView editText3;
     @ViewInject(R.id.editText4)
-    private  TextView editText4;
+    private TextView editText4;
 
     @ViewInject(R.id.editText41)
-    private  TextView editText41;
+    private TextView editText41;
 
-    @ViewInject(R.id. textView4)
-    private TextView  textView4;
+    @ViewInject(R.id.textView4)
+    private TextView textView4;
 
     @ViewInject(R.id.selectTime)
     private TextView selectTime;
@@ -91,34 +91,41 @@ public class MedicationReminderActivity extends EventbusActivity {
 
     @ViewInject(R.id.Remarks)
     private TextView Remarks;
+    @ViewInject(R.id.day_count)
+    private TextView day_count;
 
-    private String contactID="";
+    private String contactID = "";
+private List<String> dayCountList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolBarTitle(AppConstants.ToolBarTitle.medicationReminder);
-      //  setContentView(R.layout.activity_medication_reminder);
-         setIption(AppConstants.iption.complete);
-         initCustomOptionPicker();
-         timeInterval();
-         getke();
-         times();
-         Reminder();
-         rReminderType();
+        //  setContentView(R.layout.activity_medication_reminder);
+        setIption(AppConstants.iption.complete);
+        initCustomOptionPicker();
+        timeInterval();
+        getke();
+        times();
+        Reminder();
+        rReminderType();
+        DayCount();
+        selectTime.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
+
     @Event(R.id.Remarks)
-    private void  Remarks(View view)
-    {
-        startActivity(new Intent(MedicationReminderActivity.this,RemarksActivity.class));
+    private void Remarks(View view) {
+        startActivity(new Intent(MedicationReminderActivity.this, RemarksActivity.class));
     }
+
     @Event(R.id.selectTime)
-    private void selectTime(View view){
+    private void selectTime(View view) {
 
         MedicationHelper.hideInputMethod(view);
-        showDatePickDialog(DateType.TYPE_YMDHMS);
+      //  showDatePickDialog(DateType.TYPE_HM);
 
     }
+
     private void showDatePickDialog(DateType type) {
         DatePickDialog dialog = new DatePickDialog(this);
         //设置上下年分限制
@@ -128,22 +135,31 @@ public class MedicationReminderActivity extends EventbusActivity {
         //设置类型
         dialog.setType(type);
         //设置消息体的显示格式，日期格式
-        dialog.setMessageFormat("yyyy-MM-dd HH:mm:ss");
+        dialog.setMessageFormat("HH:mm:ss");
         //设置选择回调
         dialog.setOnChangeLisener(null);
         //设置点击确定按钮回调
         dialog.setOnSureLisener(new OnSureLisener() {
             @Override
             public void onSure(Date date) {
-                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                String str=sdf.format(date);
-                selectTime.setText(str);
-
+                String str = sdf.format(date);
+                selectTime.setText(selectTime.getText().toString()+str+"\n");
+                dayCountList.add(str);
             }
         });
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Log.e("onCancel","onCancel");
+                showDatePickDialog(DateType.TYPE_YMDHMS);
+            }
+        });
+
         dialog.show();
     }
+
     private void initCustomOptionPicker() {
         //条件选择器初始化，自定义布局
         /**
@@ -157,60 +173,64 @@ public class MedicationReminderActivity extends EventbusActivity {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
-                if(cardItem.get(0).isSetPicker()){
+                if (cardItem.get(0).isSetPicker()) {
                     String tx = cardItem.get(options1).getPickerViewText();
-
                     editText3.setText(tx);
                     cardItem.get(0).setSetPicker(false);
                     return;
                 }
-                if(cardItem2.get(0).isSetPicker())
-                {
+                if (cardItem2.get(0).isSetPicker()) {
 
-                String num=cardItem2.get(options1).getPickerViewText();
-                editText41.setText(num);
+                    String num = cardItem2.get(options1).getPickerViewText();
+                    editText41.setText(num);
                     cardItem2.get(0).setSetPicker(false);
                     return;
                 }
-                if(cardItem3.get(0).isSetPicker())
-                {
-                    String num=cardItem3.get(options1).getPickerViewText();
-
+                if (cardItem3.get(0).isSetPicker()) {
+                    String num = cardItem3.get(options1).getPickerViewText();
                     editText4.setText(num);
                     cardItem3.get(0).setSetPicker(false);
                     return;
                 }
-                if(cardItem4.get(0).isSetPicker())
-                {
+                if (cardItem4.get(0).isSetPicker()) {
                     cardItem4.get(0).setSetPicker(false);
-                    if(cardItem4.get(options1).getId()==0)
-                    {
-
-                        startActivityForResult(new Intent(MedicationReminderActivity.this,ContactActivity.class),1);
-
+                    if (cardItem4.get(options1).getId() == 0) {
+                        startActivityForResult(new Intent(MedicationReminderActivity.this, ContactActivity.class), 1);
                         return;
                     }
-                    String num=cardItem4.get(options1).getPickerViewText();
+                    String num = cardItem4.get(options1).getPickerViewText();
 
                     Reminder.setText(num);
                     cardItem4.get(0).setSetPicker(false);
                     return;
                 }
-                if(cardItem5.get(0).isSetPicker())
-                {
-                    String num=cardItem5.get(options1).getPickerViewText();
-                    reminderModeTyep=cardItem5.get(options1).getId();
+                if (cardItem5.get(0).isSetPicker()) {
+
+                    String num = cardItem5.get(options1).getPickerViewText();
+                    reminderModeTyep = cardItem5.get(options1).getId()+1;
                     reminderMode.setText(num);
                     cardItem5.get(0).setSetPicker(false);
                     return;
                 }
+                if (cardItem6.get(0).isSetPicker()) {
+                    dayCountList.clear();
+                    selectTime.setText("");
+                    String num = cardItem6.get(options1).getPickerViewText();
+                    dayCount = cardItem6.get(options1).getId()+1;
+                    day_count.setText(num);
+                    cardItem6.get(0).setSetPicker(false);
+                    for (int i = 0; i < dayCount; i++) {
+                        showDatePickDialog(DateType.TYPE_HM);
+                    }
 
+                    return;
+                }
             }
         })
                 .setLayoutRes(R.layout.pickerview_custom_options, new CustomListener() {
                     @Override
                     public void customLayout(View v) {
-                        TextView pickerTitle= (TextView) v.findViewById(R.id.pickerTitle);
+                        TextView pickerTitle = (TextView) v.findViewById(R.id.pickerTitle);
                         final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
                         //   final TextView tvAdd = (TextView) v.findViewById(R.id.tv_add);
                         TextView ivCancel = (TextView) v.findViewById(R.id.iv_cancel);
@@ -230,16 +250,13 @@ public class MedicationReminderActivity extends EventbusActivity {
                             }
                         });
 
-                    }})
+                    }
+                })
                 .isDialog(false)
                 .build();
 
 
-
     }
-
-
-
 
 
     @Override
@@ -252,6 +269,7 @@ public class MedicationReminderActivity extends EventbusActivity {
                 }
                 break;
             case 10:
+                if(data!=null)
                 medName.setText(data.getStringExtra("medName"));
                 break;
         }
@@ -264,78 +282,88 @@ public class MedicationReminderActivity extends EventbusActivity {
         cardItem.add(new CardBean(2, "丸"));
         cardItem.add(new CardBean(3, "贴"));
         cardItem.add(new CardBean(4, "支"));
-
         cardItem.add(new CardBean(5, "袋"));
         cardItem.add(new CardBean(6, "Mg"));
         cardItem.add(new CardBean(7, "Ml"));
         cardItem.add(new CardBean(8, "g"));
 
     }
-    private void timeInterval(){
 
-        for (int i = 1; i <31 ; i++) {
-            cardItem2.add(new CardBean(i, i+"天" ));
+    private void timeInterval() {
+
+        for (int i = 0; i < 3; i++) {
+            cardItem2.add(new CardBean(i, i + "天"));
         }
     }
-    private void times(){
-        cardItem3.add(new CardBean(0,"每日一次"));
-        cardItem3.add(new CardBean(1,"每日二次"));
-        cardItem3.add(new CardBean(2,"每日三次"));
+
+    private void times() {
+        for (int i = 1; i < 20; i++) {
+            cardItem3.add(new CardBean(i, i + "天"));
+        }
+
     }
-    private void Reminder(){
-        cardItem4.add(new CardBean(0,"联系人页面选择"));
-        cardItem4.add(new CardBean(1,"本人"));
+
+    private void Reminder() {
+        cardItem4.add(new CardBean(0, "联系人页面选择"));
+        cardItem4.add(new CardBean(1, "本人"));
     }
-    private void rReminderType(){
-        cardItem5.add(new CardBean(0,"铃声"));
-        cardItem5.add(new CardBean(1,"短信"));
-        cardItem5.add(new CardBean(2,"电话"));
-        cardItem5.add(new CardBean(3,"震动"));
+
+    private void rReminderType() {
+        cardItem5.add(new CardBean(0, "铃声"));
+        cardItem5.add(new CardBean(1, "震动"));
+        cardItem5.add(new CardBean(2, "短信"));
     }
+
+    private void DayCount() {
+        cardItem6.add(new CardBean(0, "每日一次"));
+        cardItem6.add(new CardBean(1, "每日二次"));
+        cardItem6.add(new CardBean(2, "每日三次"));
+        cardItem6.add(new CardBean(3, "每日四次"));
+    }
+
     @Event(R.id.editText3)
-    private void editText3(View view)
-    {
-        if (pvCustomOptions != null) {
-        pvCustomOptions.setPicker(cardItem);//添加数据
-        cardItem.get(0).setSetPicker(true);
-        pvCustomOptions.show();
-        MedicationHelper.hideInputMethod(view);
-
-    }else {
-        ToastUtils.showShortToast("选择框尚未初始化");
-    }
-
-    }
-    @Event(R.id.editText5)
-    private void editText5(View view)
-    {
+    private void editText3(View view) {
         if (pvCustomOptions != null) {
             pvCustomOptions.setPicker(cardItem);//添加数据
             cardItem.get(0).setSetPicker(true);
             pvCustomOptions.show();
             MedicationHelper.hideInputMethod(view);
 
-        }else {
+        } else {
             ToastUtils.showShortToast("选择框尚未初始化");
         }
 
     }
+
+    @Event(R.id.editText5)
+    private void editText5(View view) {
+        if (pvCustomOptions != null) {
+            pvCustomOptions.setPicker(cardItem);//添加数据
+            cardItem.get(0).setSetPicker(true);
+            pvCustomOptions.show();
+            MedicationHelper.hideInputMethod(view);
+
+        } else {
+            ToastUtils.showShortToast("选择框尚未初始化");
+        }
+
+    }
+
     @Event(R.id.editText41)
-    private void editText41(View view)
-    {
+    private void editText41(View view) {
         if (pvCustomOptions != null) {
             pvCustomOptions.setPicker(cardItem2);//添加数据
             cardItem2.get(0).setSetPicker(true);
             pvCustomOptions.show();
             MedicationHelper.hideInputMethod(view);
 
-        }else {
+        } else {
             ToastUtils.showShortToast("选择框尚未初始化");
         }
     }
+
     @Event(R.id.editText4)
-    private void editText4(View v)
-    {
+    private void editText4(View v) {
 
         if (pvCustomOptions != null) {
             pvCustomOptions.setPicker(cardItem3);//添加数据
@@ -343,73 +371,107 @@ public class MedicationReminderActivity extends EventbusActivity {
             pvCustomOptions.show();
             MedicationHelper.hideInputMethod(v);
 
-        }else {
+        } else {
             ToastUtils.showShortToast("选择框尚未初始化");
         }
     }
+
     @Event(R.id.Reminder)
-    private void Reminder(View v)
-    {
+    private void Reminder(View v) {
         if (pvCustomOptions != null) {
             pvCustomOptions.setPicker(cardItem4);//添加数据
             cardItem4.get(0).setSetPicker(true);
             pvCustomOptions.show();
             MedicationHelper.hideInputMethod(v);
 
-        }else {
+        } else {
             ToastUtils.showShortToast("选择框尚未初始化");
         }
     }
-    @Event(R.id.reduce)
-    private void reduce(View v)
-    {
-       int num=Integer.parseInt(textView4.getText().toString().trim());
-       if(num==1)
-           return;
-        else if(num>1)
-           textView4.setText(( num-1)+"");
-    }
-    @Event(R.id.add)
-    private void add(View view)
-    {
-        int num=Integer.parseInt(textView4.getText().toString().trim());
-        textView4.setText((num+1)+"");
-    }
-    @Event(R.id.offorno)
-    private void offorno(View v)
-    {
-        if(a==1) {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.slider_close, new BitmapFactory.Options());
-            offorno.setImageBitmap(bitmap);
-            a=0;
-        }else {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.slider_open, new BitmapFactory.Options());
-            offorno.setImageBitmap(bitmap);
-            a=1;
+
+
+    @Event(R.id.day_count)
+    private void day_count(View view) {
+        if (pvCustomOptions != null) {
+            pvCustomOptions.setPicker(cardItem6);//添加数据
+            cardItem6.get(0).setSetPicker(true);
+            pvCustomOptions.show();
+            MedicationHelper.hideInputMethod(view);
+
+        } else {
+            ToastUtils.showShortToast("选择框尚未初始化");
         }
 
     }
+
+    @Event(R.id.reduce)
+    private void reduce(View v) {
+        int num = Integer.parseInt(textView4.getText().toString().trim());
+        if (num == 1)
+            return;
+        else if (num > 1)
+            textView4.setText((num - 1) + "");
+    }
+
+    @Event(R.id.add)
+    private void add(View view) {
+        int num = Integer.parseInt(textView4.getText().toString().trim());
+        textView4.setText((num + 1) + "");
+    }
+
+    @Event(R.id.offorno)
+    private void offorno(View v) {
+        if (a == 1) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.slider_close, new BitmapFactory.Options());
+            offorno.setImageBitmap(bitmap);
+            a = 0;
+        } else {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.slider_open, new BitmapFactory.Options());
+            offorno.setImageBitmap(bitmap);
+            a = 1;
+        }
+
+    }
+
     @Event(R.id.reminderMode)
-    private void reminderMode(View v)
-    {
+    private void reminderMode(View v) {
         if (pvCustomOptions != null) {
+            cardItem5.clear();
+            rReminderType();
+            if(Reminder.getText().toString().trim().equals("")){
+                ToastUtils.showShortToast("请先选择被提醒人！");
+                return;
+
+
+            }
+            if(Reminder.getText().toString().trim().equals("本人")){
+                cardItem5.remove(2);
+
+
+            }else {
+                cardItem5.remove(0);
+                cardItem5.remove(1);
+            }
+
             pvCustomOptions.setPicker(cardItem5);//添加数据
             cardItem5.get(0).setSetPicker(true);
             pvCustomOptions.show();
             MedicationHelper.hideInputMethod(v);
 
-        }else {
+        } else {
             ToastUtils.showShortToast("选择框尚未初始化");
         }
     }
-    private String getApp_contactJsonParam(){
-        List<Add_App_contact> addApp_contactList =new ArrayList<>();
+
+    private String getApp_contactJsonParam() {
+        List<Add_App_contact> addApp_contactList = new ArrayList<>();
+        String str = Integer.parseInt(editText41.getText().toString().split("天")[0]) * 24 + "";
         addApp_contactList.add(
                 new Add_App_contact(
                         new Add_App_contact.app_drugremind(TakeMedicinApplication.testMacAdress,
-                                 medName.getText().toString().trim(),
-                                textView4.getText().toString().trim()+editText3.getText().toString().trim(),
-       reminderModeTyep,editText4.getText().toString(),selectTime.getText().toString().trim(),editText41.getText().toString().trim(),contactID))
+                                medName.getText().toString().trim(),
+                                textView4.getText().toString().trim(),
+                                reminderModeTyep, editText4.getText().toString(), selectTime.getText().toString().trim(), str, contactID))
         );
 
         try {
@@ -421,53 +483,52 @@ public class MedicationReminderActivity extends EventbusActivity {
 
         return "";
     }
-    @Event(R.id.iption)
-    private void ipition(View view)
-    {
 
-        if(MedicationHelper.isNullOrEmpty(medName.getText().toString().trim()))
-        {
+    @Event(R.id.iption)
+    private void ipition(View view) {
+
+        if (MedicationHelper.isNullOrEmpty(medName.getText().toString().trim())) {
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "药名").show();
             return;
         }
 
-        if(MedicationHelper.isNullOrEmpty(editText4.getText().toString().trim()))
-        {
+        if (MedicationHelper.isNullOrEmpty(editText4.getText().toString().trim())) {
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "服用次数").show();
             return;
         }
-        if(MedicationHelper.isNullOrEmpty(selectTime.getText().toString().trim()))
-        {
+        if (MedicationHelper.isNullOrEmpty(selectTime.getText().toString().trim())) {
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "服药起始时间").show();
             return;
         }
-        if(MedicationHelper.isNullOrEmpty(editText41.getText().toString().trim()))
-        {
+        if (MedicationHelper.isNullOrEmpty(editText41.getText().toString().trim())) {
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "服药间隔时间").show();
             return;
         }
-        if(MedicationHelper.isNullOrEmpty(Reminder.getText().toString().trim()))
-        {
+        if (MedicationHelper.isNullOrEmpty(Reminder.getText().toString().trim())) {
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "被提醒人").show();
             return;
         }
-        if(MedicationHelper.isNullOrEmpty(reminderMode.getText().toString().trim()))
-        {
+        if (MedicationHelper.isNullOrEmpty(reminderMode.getText().toString().trim())) {
             new ToastUtil(getApplicationContext(), R.layout.toast_center, "提醒方式").show();
             return;
         }
+        if (dayCountList.size()<dayCount) {
+            new ToastUtil(getApplicationContext(), R.layout.toast_center, "服用时间数量和每日次数不符，请重新选择每日次数").show();
+            return;
+        }
+
         medicationUpload = WeiboDialogUtils.createLoadingDialog(MedicationReminderActivity.this, "上传用药信息中...");
         medicationUpload.show();
-        RequestParams params=new RequestParams(AppConstants.BASE_ACTION+AppConstants.app_drugreminds);
+        RequestParams params = new RequestParams(AppConstants.BASE_ACTION + AppConstants.app_drugreminds);
         params.setAsJsonContent(true);
         params.setBodyContent(getApp_contactJsonParam());
-        Log.e("json",getApp_contactJsonParam());
+        Log.e("json", getApp_contactJsonParam());
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-             //   ToastUtils.showShortToast(result);
-                Log.e("result",result);
-               WeiboDialogUtils.closeDialog(medicationUpload);
+                //   ToastUtils.showShortToast(result);
+                Log.e("result", result);
+                WeiboDialogUtils.closeDialog(medicationUpload);
                 new ToastUtil(getApplicationContext(), R.layout.toast_complete, "添加提醒成功").show();
                 finish();
             }
@@ -489,28 +550,23 @@ public class MedicationReminderActivity extends EventbusActivity {
             }
         });
     }
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onEvent(BaseEvents.sendRemarks event) {
         // UI updates must run on MainThread
 
         if (event == BaseEvents.sendRemarks.SEND_REMARKS) {
 
-            Remarks.setText(  event.getObject().toString().trim());
+            Remarks.setText(event.getObject().toString().trim());
         }
 
     }
+
     @Event(R.id.medName)
-    private void medName(View view)
-    {
-        Intent intent=new Intent(MedicationReminderActivity.this,AssociativeSearchActivity.class);
-        startActivityForResult(intent,10);
+    private void medName(View view) {
+        Intent intent = new Intent(MedicationReminderActivity.this, AssociativeSearchActivity.class);
+        startActivityForResult(intent, 10);
     }
-
-
-
-
-
-
 
 
 }
